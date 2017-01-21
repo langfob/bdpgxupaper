@@ -9,24 +9,12 @@
 library (tzar)
 library (bdpgxupaper)
 
-    #  You can change any or all 3 of these variables if you need to
-    #  for your project.
-    #  However, you won't need to do that for most projects.
-
-main_function                 = tzar_main
-projectPath                   = "."
-tzarEmulation_scratchFileName = "~/tzar_emulation_scratch.yaml"
-
-cat ("\n\nIn model.R:  ABOUT TO call model_with_possible_tzar_emulation().\n")
-
-model_with_possible_tzar_emulation (parameters,
-                                    main_function,
-                                    projectPath,
-                                    tzarEmulation_scratchFileName
+model_with_possible_tzar_emulation (
+                parameters,
+                main_function = tzar_main,
+                projectPath   = ".",
+                emulation_scratch_file_path = "~/tzar_emulation_scratch.yaml"
                                     )
-
-cat ("\n\nIn model.R:  BACK FROM call model_with_possible_tzar_emulation().\n")
-
 
 #===============================================================================
 
