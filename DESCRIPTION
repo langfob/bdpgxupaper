@@ -1,10 +1,9 @@
 Package: bdpgxupaper
-Title: A Test Package For Initializing R Packages On Github
+Title: Package for experiments for Xu biodiversity problem generation paper
 Version: 0.0.0.9000
 Authors@R: 'Bill Langford <bill.langford@rmit.edu.au> [aut, cre]'
-Description: This package is a dummy placeholder generated to fill in
-    example values for what
-    would be generated for a new package.
+Description: This package bundles together the code for running experiments 
+    demonstrating the Xu biodiversity problem generator.
 Depends:
     R (>= 3.3.2)
 License: MIT + file LICENSE
