@@ -4,28 +4,11 @@
 
 #===============================================================================
 
-clean_up <- function (parameters,
-                      emulatingTzar,
-                      message="End of run..."
-                      )
+clean_up <- function ()
     {
     cat ("\n\n")
     sessionInfo()
     cat ("\n\n")
-
-    #===========================================================================
-                        #  START EMULATION CODE
-    #===========================================================================
-
-    if (emulatingTzar)
-        {
-        cat ("\n\nIn generateSetCoverProblem:  Cleaning up after running emulation...\n\n")
-        tzar::cleanUpAfterTzarEmulation (parameters)
-        }
-
-    #===========================================================================
-                        #  END EMULATION CODE
-    #===========================================================================
 
     cat ("\n\nALL DONE at ", date(), "\n\n")
     }
