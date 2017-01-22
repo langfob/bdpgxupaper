@@ -99,6 +99,8 @@ options (warn=2)
     #  I should add an issue for this in the github issue tracking.
 
 echoConsoleToTempFile = TRUE
+emulatingTzar = parameters$emulatingTzar
+
 if (emulatingTzar & echoConsoleToTempFile)
     {
         #  Open a file to echo console to.
@@ -185,7 +187,7 @@ prev_time = start_time = proc.time()
 
     #  Each time...
 
-timepoints_df = timepoint (timepoints_df, "start", "Run start...")
+#####timepoints_df = timepoint (timepoints_df, "start", "Run start...")
 
 #===============================================================================
 
@@ -195,8 +197,8 @@ set.seed (parameters$seed)
 
 #===============================================================================
 
-    clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
-              "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
+#####    clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
+#####              "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
 
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.
