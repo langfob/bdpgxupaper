@@ -156,8 +156,7 @@ set.seed (parameters$seed)
 
 #===============================================================================
 
-# clean_up (parameters, emulatingTzar,
-#           "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
+clean_up ()
 
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.

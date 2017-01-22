@@ -6,8 +6,8 @@
 
 clean_up <- function ()
     {
-    cat ("\n\n")
-    sessionInfo()
+    cat ("\n\nIn clean_up, sessionInfo() =\n\n")
+    print (sessionInfo())
     cat ("\n\n")
 
     cat ("\n\nALL DONE at ", date(), "\n\n")
