@@ -13,6 +13,10 @@
 
 #===============================================================================
 
+#####source (paste0 (sourceCodeLocationWithSlash, "external_startup_code.R"))
+
+#===============================================================================
+
 #' Mainline for experiments and data generation for Xu bdpg paper
 #'
 #' This is the top level function for running experiments and generating data for
@@ -22,12 +26,41 @@
 #' @param parameters List of parameters controlling the current run (usually
 #'   decoded from project.yaml by tzar)
 #'
-# '@return RETURN_DESCRIPTION
+#' @return RETURN_DESCRIPTION
+#'
+#' @export
+#'
 #' @examples \dontrun{
 #' xu_paper_main (parameters)
 #'}
-#'
+
 xu_paper_main = function (parameters)
+    {
+
+
+    clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
+              "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
+
+        #  If you were echoing console output to a temp file,
+        #  stop echoing and close the temp file.
+        #  That echoing is currently initiated by a sink() call in
+        #  external_startup_code.R (Dec 14, 2016).
+
+    if (echoConsoleToTempFile)
+        {
+        sink ()
+        close (tempConsoleOutFile)
+        }
+
+    }
+
+#===============================================================================
+
+    #  Holding spot for what used to be the guts of the mainline code.
+    #  Will start here when reinserting things in the mainline or
+    #  refactoring the code.
+
+dummy <- function (parameters)
 {
 #===============================================================================
 #       Initialize.
@@ -248,27 +281,7 @@ if (add_error)
 #     app_bpm                      = cor_bpm
 #     }
 
-
-#===============================================================================
-
-clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
-          "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
-
-#===============================================================================
-
-    #  If you were echoing console output to a temp file,
-    #  stop echoing and close the temp file.
-    #  That echoing is currently initiated by a sink() call in
-    #  external_startup_code.R (Dec 14, 2016).
-
-if (echoConsoleToTempFile)
-    {
-    sink ()
-    close (tempConsoleOutFile)
-    }
-
 }
 
 #===============================================================================
-
 
