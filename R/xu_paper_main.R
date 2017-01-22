@@ -13,10 +13,6 @@
 
 #===============================================================================
 
-#####source (paste0 (sourceCodeLocationWithSlash, "external_startup_code.R"))
-
-#===============================================================================
-
 #' Mainline for experiments and data generation for Xu bdpg paper
 #'
 #' This is the top level function for running experiments and generating data for
