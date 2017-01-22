@@ -101,7 +101,6 @@ runtop <- function ()
 
 #===============================================================================
 
-
 #' Wrapper function to call your application code from tzar
 #'
 #' @param parameters  list of parameters built by tzar from project.yaml
@@ -114,8 +113,6 @@ runtop <- function ()
 
 tzar_main <- function (parameters)
     {
-
-        #  REPLACE THIS EXAMPLE CODE WITH YOUR CODE THAT YOU WANT TZAR TO RUN.
     cat ("\n\nIn tzar_main now.\n\n")
 
 #    cat ("\n    parameters = \n\n")
