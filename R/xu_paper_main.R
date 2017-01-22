@@ -26,7 +26,7 @@
 #' @param parameters List of parameters controlling the current run (usually
 #'   decoded from project.yaml by tzar)
 #'
-#' @return RETURN_DESCRIPTION
+#' @return returns nothing
 #'
 #' @export
 #'
