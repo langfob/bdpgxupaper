@@ -41,7 +41,6 @@ xu_paper_main = function (parameters)
 #  running things as a package.  In particular, it includes:
 #
 #   - some global variables for debugging
-#   - code for controlling printing of timepoints
 #   - code related to using tzar and tzar emulation
 #
 #===============================================================================
@@ -146,48 +145,8 @@ if (emulatingTzar & echoConsoleToTempFile)
     #  into testing conventions.
 #===============================================================================
 
-    #--------------------------------------------------------------------
-    #  Set up to record timepoints during the run.
-    #
-    #  NOTE:  This has to come AFTER tzar emulation or other method of
-    #         creation of parameters variable since it uses parameters.
-    #--------------------------------------------------------------------
-
-        #  This variable could be specified somewhere else as well, e.g.,
-        #  in the tzar parameters file.
-timepoints_df_default_length = 20
-
 run_ID = parameters$run_id
 runset_name = parameters$runset_name
-
-timepoints_df =
-    data.frame (timepoint_num = 1:timepoints_df_default_length,
-                timepoint_name = rep (NA, timepoints_df_default_length),
-                prev_chunk_elapsed_user = rep (NA, timepoints_df_default_length),
-                tot_elapsed_user = rep (NA, timepoints_df_default_length),
-                prev_chunk_elapsed_system = rep (NA, timepoints_df_default_length),
-                tot_elapsed_system = rep (NA, timepoints_df_default_length),
-                cur_time_user = rep (NA, timepoints_df_default_length),
-                cur_time_system = rep (NA, timepoints_df_default_length),
-                cur_time_wall_clock = rep (NA, timepoints_df_default_length),
-                run_ID = run_ID,
-                runset_name = runset_name
-                )
-
-    #  First time, intialization.
-    #  NOTE that these two values are updated all over the place using the
-    #  global assignment operator "<<-" in the call to timepoint().
-    #  The timepoints dataframe is updated by returning it from the
-    #  timepoint() call.
-    #  *** However, does that still work when it's called inside of a function?
-    #  If it's not returned from the function, then I don't think it will get
-    #  updated.
-cur_timepoint_num = 0
-prev_time = start_time = proc.time()
-
-    #  Each time...
-
-#####timepoints_df = timepoint (timepoints_df, "start", "Run start...")
 
 #===============================================================================
 
@@ -197,8 +156,8 @@ set.seed (parameters$seed)
 
 #===============================================================================
 
-#####    clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
-#####              "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
+# clean_up (parameters, emulatingTzar,
+#           "\n\n>>>>>  Ran to completion.  <<<<<\n\n")
 
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.
@@ -261,7 +220,7 @@ bdprob = gen_bdprob (parameters, bdpg_error_codes,
 
 if (!bdprob@prob_is_ok)
     {
-    clean_up (timepoints_df, cur_timepoint_num, parameters, emulatingTzar,
+    clean_up (parameters, emulatingTzar,
               "\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
     stop ()
     }
