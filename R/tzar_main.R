@@ -115,8 +115,13 @@ tzar_main <- function (parameters)
     {
 
         #  REPLACE THIS EXAMPLE CODE WITH YOUR CODE THAT YOU WANT TZAR TO RUN.
-    cat ("\n\nIn tzar_main now.  parameters = \n\n")
-    print (parameters)
+    cat ("\n\nIn tzar_main now.\n\n")
+
+#    cat ("\n    parameters = \n\n")
+#    print (parameters)
+
+    xu_paper_main (parameters)
+
     cat ("\n\nAll done now...\n\n")
 
     }
