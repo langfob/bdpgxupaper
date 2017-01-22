@@ -120,6 +120,13 @@ if (emulatingTzar & echoConsoleToTempFile)
 #  tell what still needs doing to be able to finish conversion for a library.
 #===============================================================================
 
+
+        #  BTL - 2017 01 22
+        #  NOT SURE WHICH OF THESE ARE SPECIFIC TO THE PAPER AND WHICH ARE
+        #  SPECIFIC TO BDPG ITSELF.  WILL LEAVE THEM COMMENTED OUT HERE
+        #  TO HELP WITH IDENTIFYING WHICH PACKAGE THESE LIBRARIES NEED TO
+        #  END UP IN THE LIST OF DEPENDS AND/OR SUGGESTS.
+
 #####library (plyr)    #  For count() and arrange()
 #####library (marxan)
 
@@ -145,6 +152,10 @@ if (emulatingTzar & echoConsoleToTempFile)
     #  into testing conventions.
 #===============================================================================
 
+        #  2017 01 22 - BTL
+        #  Were these used for anything other than timepoints?
+        #  I ask because they were set in the section that set up timepoints.
+
 run_ID = parameters$run_id
 runset_name = parameters$runset_name
 
@@ -153,6 +164,12 @@ runset_name = parameters$runset_name
     #  Set random seed to help reproducibility.
     #  Has to be done after startup code that loads parameters structure.
 set.seed (parameters$seed)
+
+#===============================================================================
+
+
+#                       ...MAIN CODE GOES HERE...
+
 
 #===============================================================================
 
@@ -206,6 +223,7 @@ dummy <- function (parameters)
     #  from project.yaml).
 
 derived_bdpg_parameters = initialize_and_derive_parameters (parameters)   #  BUG?  UNKNOWN FOR XU FROM FILE?
+
 bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
 
 #===============================================================================
