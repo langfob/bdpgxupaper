@@ -3,3 +3,4 @@
 export(runtip)
 export(runtop)
 export(tzar_main)
+export(xu_paper_main)
