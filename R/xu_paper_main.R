@@ -166,11 +166,47 @@ runset_name = parameters$runset_name
 set.seed (parameters$seed)
 
 #===============================================================================
+#===============================================================================
+#===============================================================================
+#===============================================================================
+#===============================================================================
 
 
 #                       ...MAIN CODE GOES HERE...
 
+#===============================================================================
+#       Initialize.
+#===============================================================================
 
+    #  Initialize variables that have to be derived from values
+    #  set in the parameters structure (which is generally built
+    #  from project.yaml).
+
+derived_bdpg_parameters = bdpg::initialize_and_derive_parameters (parameters)   #  BUG?  UNKNOWN FOR XU FROM FILE?
+
+bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
+
+#===============================================================================
+#       Generate a problem, i.e, create the Xu graph nodes and edge_list.
+#===============================================================================
+
+EF_num <<- 0    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
+
+bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
+                           derived_bdpg_parameters$integerize)
+
+if (!bdprob@prob_is_ok)
+    {
+    cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
+    clean_up ()
+    stop ()
+    }
+
+
+#===============================================================================
+#===============================================================================
+#===============================================================================
+#===============================================================================
 #===============================================================================
 
 clean_up ()
@@ -214,34 +250,6 @@ clean_up ()
 
 dummy <- function (parameters)
 {
-#===============================================================================
-#       Initialize.
-#===============================================================================
-
-    #  Initialize variables that have to be derived from values
-    #  set in the parameters structure (which is generally built
-    #  from project.yaml).
-
-derived_bdpg_parameters = initialize_and_derive_parameters (parameters)   #  BUG?  UNKNOWN FOR XU FROM FILE?
-
-bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
-
-#===============================================================================
-#       Generate a problem, i.e, create the Xu graph nodes and edge_list.
-#===============================================================================
-
-EF_num <<- 0    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
-
-bdprob = gen_bdprob (parameters, bdpg_error_codes,
-                     derived_bdpg_parameters$integerize)
-
-if (!bdprob@prob_is_ok)
-    {
-    clean_up (parameters, emulatingTzar,
-              "\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
-    stop ()
-    }
-
 #===============================================================================
 #                   Save the values for the "correct" problem.
 #===============================================================================
