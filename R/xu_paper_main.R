@@ -193,7 +193,8 @@ bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
 EF_num <<- 0    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
 
 bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
-                           derived_bdpg_parameters$integerize)
+                           derived_bdpg_parameters$integerize,
+                           DEBUG_LEVEL)
 
 if (!bdprob@prob_is_ok)
     {
