@@ -203,7 +203,11 @@ if (bdprob@prob_is_ok)
         #  This particular bit of code will disappear later on, once I
         #  decide how to archive.
 
-    saved_bdprob_filename = "saved_bdprob.rds"
+#    parameters$fullOutputDirWithSlash: /Users/bill/tzar/outputdata/biodivprobgen/default_runset/1571_marxan_simulated_annealing.inprogress/
+
+    saved_bdprob_filename =
+                paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
+
     saveRDS (bdprob, saved_bdprob_filename)
     reloaded_bdprob = readRDS (saved_bdprob_filename)
     } else
