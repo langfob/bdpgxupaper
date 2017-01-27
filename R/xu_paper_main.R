@@ -196,7 +196,13 @@ bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
                            derived_bdpg_parameters$integerize,
                            DEBUG_LEVEL)
 
-if (!bdprob@prob_is_ok)
+if (bdprob@prob_is_ok)
+    {
+    saved_bdprob_filename = "saved_bdprob.rds"
+    saveRDS (bdprob, saved_bdprob_filename)
+
+    reloaded_bdprob = readRDS (saved_bdprob_filename)
+    } else
     {
     cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
     clean_up ()
