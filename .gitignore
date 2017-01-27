@@ -3,3 +3,4 @@
 .RData
 inst/doc
 consoleSinkOutput.temp.txt
+.Rapp.history
