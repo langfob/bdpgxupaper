@@ -194,7 +194,7 @@ bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
 #  IS THIS NOT EVEN NECESSARY AT ALL SINCE EF_NUM IS SET TO 0 AT START OF
 #  GEN_LOGNORMAL_OVERLAY()?
 #EF_num <<- 0    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
-options (bdpg.EF = 0)    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
+#options (bdpg.EF = 0)    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
 
 bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
                            derived_bdpg_parameters$integerize,
