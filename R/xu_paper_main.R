@@ -178,26 +178,22 @@ set.seed (parameters$seed)
 #       Initialize.
 #===============================================================================
 
-    #  Initialize variables that have to be derived from values
-    #  set in the parameters structure (which is generally built
+    #  Initialize non-problem-specific variables that have to be derived
+    #  from values set in the parameters structure (which is generally built
     #  from project.yaml).
 
-derived_bdpg_parameters = bdpg::initialize_and_derive_parameters (parameters)   #  BUG?  UNKNOWN FOR XU FROM FILE?
+#derived_bdpg_parameters = bdpg::initialize_and_derive_parameters (parameters)
 
-bdpg_error_codes = derived_bdpg_parameters$bdpg_error_codes
+#bdpg_error_codes        = derived_bdpg_parameters$bdpg_error_codes
+bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
 
 #===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
 #===============================================================================
 
-#  2017 01 28 - BTL
-#  IS THIS NOT EVEN NECESSARY AT ALL SINCE EF_NUM IS SET TO 0 AT START OF
-#  GEN_LOGNORMAL_OVERLAY()?
-#EF_num <<- 0    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
-#options (bdpg.EF = 0)    #  2016 06 12 - BTL - Only used for debugging in searching for a lognormal...  Can remove if that search gets axed.
-
 bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
-                           derived_bdpg_parameters$integerize,
+#                           derived_bdpg_parameters$integerize,
+                           bdpg::get_integerize_function (parameters$integerize_string),
                            DEBUG_LEVEL)
 
 if (bdprob@prob_is_ok)
@@ -211,9 +207,9 @@ if (bdprob@prob_is_ok)
 
     saved_bdprob_filename =
                 paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
-
     saveRDS (bdprob, saved_bdprob_filename)
-    reloaded_bdprob = readRDS (saved_bdprob_filename)
+#    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
+
     } else
     {
     cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
@@ -323,8 +319,10 @@ do_graph_and_marxan_analysis (cor_or_app_subdir_name,
                                           parameters,
                                           emulatingTzar,
                                           DEBUG_LEVEL,
+
                                           #derived_bdpg_parameters,   #  BUG?  UNKNOWN FOR XU FROM FILE?
-                                          derived_bdpg_parameters$current_os,
+                                          #derived_bdpg_parameters$current_os,
+                                          bdpg::get_current_os (),
 
                                             #  parameters from gen prob.
 #                                          bdprob$derived_Xu_params,
@@ -412,8 +410,10 @@ if (add_error)
                                               parameters,
                                               emulatingTzar,
                                               DEBUG_LEVEL,
+
                                               #derived_bdpg_parameters,   #  BUG?  UNKNOWN FOR XU FROM FILE?
-                                              derived_bdpg_parameters$current_os,
+                                              #derived_bdpg_parameters$current_os,
+                                              bdpg::get_current_os (),
 
                                                 #  parameters from gen prob.
 #                                              bdprob$derived_Xu_params,
