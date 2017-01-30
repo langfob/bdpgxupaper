@@ -178,21 +178,15 @@ set.seed (parameters$seed)
 #       Initialize.
 #===============================================================================
 
-    #  Initialize non-problem-specific variables that have to be derived
-    #  from values set in the parameters structure (which is generally built
-    #  from project.yaml).
-
-#derived_bdpg_parameters = bdpg::initialize_and_derive_parameters (parameters)
-
-#bdpg_error_codes        = derived_bdpg_parameters$bdpg_error_codes
+    #  Initialize error codes.
 bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
 
 #===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
 #===============================================================================
 
-bdprob = bdpg::gen_bdprob (parameters, bdpg_error_codes,
-#                           derived_bdpg_parameters$integerize,
+bdprob = bdpg::gen_bdprob (parameters,
+                           bdpg_error_codes,
                            bdpg::get_integerize_function (parameters$integerize_string),
                            DEBUG_LEVEL)
 
@@ -202,8 +196,6 @@ if (bdprob@prob_is_ok)
         #  and retrieve problems in general.
         #  This particular bit of code will disappear later on, once I
         #  decide how to archive.
-
-#    parameters$fullOutputDirWithSlash: /Users/bill/tzar/outputdata/biodivprobgen/default_runset/1571_marxan_simulated_annealing.inprogress/
 
     saved_bdprob_filename =
                 paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
@@ -320,12 +312,8 @@ do_graph_and_marxan_analysis (cor_or_app_subdir_name,
                                           emulatingTzar,
                                           DEBUG_LEVEL,
 
-                                          #derived_bdpg_parameters,   #  BUG?  UNKNOWN FOR XU FROM FILE?
-                                          #derived_bdpg_parameters$current_os,
                                           bdpg::get_current_os (),
 
-                                            #  parameters from gen prob.
-#                                          bdprob$derived_Xu_params,
                                           bdprob@Xu_parameters,
                                           bdprob@read_Xu_problem_from_Xu_file,
 
@@ -411,12 +399,8 @@ if (add_error)
                                               emulatingTzar,
                                               DEBUG_LEVEL,
 
-                                              #derived_bdpg_parameters,   #  BUG?  UNKNOWN FOR XU FROM FILE?
-                                              #derived_bdpg_parameters$current_os,
                                               bdpg::get_current_os (),
 
-                                                #  parameters from gen prob.
-#                                              bdprob$derived_Xu_params,
                                               bdprob@Xu_parameters,
                                               bdprob@read_Xu_problem_from_Xu_file,
 
