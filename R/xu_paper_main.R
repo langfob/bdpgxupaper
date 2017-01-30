@@ -91,6 +91,10 @@ xu_paper_main = function (parameters)
         sink (tempConsoleOutFile, split=TRUE)
         }
 
+        #  Sometimes, for debugging, bdpg needs to know if we're
+        #  emulating tzar, so record the value as a global option.
+    options (bdpg.emulatingTzar=emulatingTzar)
+
 #===============================================================================
 #                       Load class definitions.
 #===============================================================================
