@@ -104,13 +104,6 @@ if (emulatingTzar & echoConsoleToTempFile)
     #  into testing conventions.
 #===============================================================================
 
-        #  2017 01 22 - BTL
-        #  Were these used for anything other than timepoints?
-        #  I ask because they were set in the section that set up timepoints.
-
-#run_ID = parameters$run_id
-#runset_name = parameters$runset_name
-
     #  Set random seed to help reproducibility.
     #  Has to be done after startup code that loads parameters structure.
 set.seed (parameters$seed)
