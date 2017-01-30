@@ -54,7 +54,9 @@ xu_paper_main = function (parameters)
         #  debugging level: 0 means don't output debugging write statements.
         #  Having this as an integer instead of binary so that I can have
         #  multiple levels of detail if I want to.
-    DEBUG_LEVEL = 0
+#    DEBUG_LEVEL = 0
+    options (bdpg.DEBUG_LEVEL=0)
+    options (bdpgxupaper.DEBUG_LEVEL=0)
 
         #  Turn all R warnings into errors.
     options (warn=2)
@@ -121,8 +123,10 @@ xu_paper_main = function (parameters)
 
     bdprob = bdpg::gen_bdprob (parameters,
                                bdpg_error_codes,
-                               bdpg::get_integerize_function (parameters$integerize_string),
-                               DEBUG_LEVEL)
+                               bdpg::get_integerize_function (parameters$integerize_string)
+                               # ,
+                               # DEBUG_LEVEL
+                               )
 
     if (bdprob@prob_is_ok)
         {
