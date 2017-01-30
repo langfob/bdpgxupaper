@@ -47,49 +47,49 @@ xu_paper_main = function (parameters)
 #          Global variables not to be included in package.
 #===============================================================================
 
-cat ("\n\nSTARTING generateSetCoverProblem.R at ", date(), "\n\n")
+    cat ("\n\nSTARTING generateSetCoverProblem.R at ", date(), "\n\n")
 
 #===============================================================================
 
-    #  debugging level: 0 means don't output debugging write statements.
-    #  Having this as an integer instead of binary so that I can have
-    #  multiple levels of detail if I want to.
-DEBUG_LEVEL = 0
+        #  debugging level: 0 means don't output debugging write statements.
+        #  Having this as an integer instead of binary so that I can have
+        #  multiple levels of detail if I want to.
+    DEBUG_LEVEL = 0
 
-    #  Turn all R warnings into errors.
-options (warn=2)
+        #  Turn all R warnings into errors.
+    options (warn=2)
 
 #===============================================================================
                     #  START TZAR EMULATION CODE
 #===============================================================================
 
-    #  When using RStudio, the console output buffer is currently limited and
-    #  you can lose informative console output from bdprobdiff in a big run.
-    #  To capture that output, tee the output to a scratch sink file.
-    #
-    #  NOTE:  For some reason, this sink causes a warning message after
-    #  the code comes back from a marxan run:
-    #      unused connection
-    #  I have no idea why this happens, especially because it doesn't always
-    #  happen.  Since I have warnings set to generate errors rather than
-    #  warnings, it stops the program by calling browser().  If I just hit Q,
-    #  then the program continues from there without any problems.
-    #  At the moment, trapping all the output is more important than having
-    #  this annoying little hitch, so I'm leaving all this in.
-    #  At production time, I'll need to either remove it or fix it.
-    #  I should add an issue for this in the github issue tracking.
+        #  When using RStudio, the console output buffer is currently limited and
+        #  you can lose informative console output from bdprobdiff in a big run.
+        #  To capture that output, tee the output to a scratch sink file.
+        #
+        #  NOTE:  For some reason, this sink causes a warning message after
+        #  the code comes back from a marxan run:
+        #      unused connection
+        #  I have no idea why this happens, especially because it doesn't always
+        #  happen.  Since I have warnings set to generate errors rather than
+        #  warnings, it stops the program by calling browser().  If I just hit Q,
+        #  then the program continues from there without any problems.
+        #  At the moment, trapping all the output is more important than having
+        #  this annoying little hitch, so I'm leaving all this in.
+        #  At production time, I'll need to either remove it or fix it.
+        #  I should add an issue for this in the github issue tracking.
 
-echoConsoleToTempFile = TRUE
-emulatingTzar = parameters$emulatingTzar
+    echoConsoleToTempFile = TRUE
+    emulatingTzar = parameters$emulatingTzar
 
-if (emulatingTzar & echoConsoleToTempFile)
-    {
-        #  Open a file to echo console to.
-    tempConsoleOutFile <- file("consoleSinkOutput.temp.txt", open="wt")
+    if (emulatingTzar & echoConsoleToTempFile)
+        {
+            #  Open a file to echo console to.
+        tempConsoleOutFile <- file("consoleSinkOutput.temp.txt", open="wt")
 
-    	#  Redirect console output to the file.
-    sink (tempConsoleOutFile, split=TRUE)
-    }
+        	#  Redirect console output to the file.
+        sink (tempConsoleOutFile, split=TRUE)
+        }
 
 #===============================================================================
 #                       Load class definitions.
@@ -104,49 +104,45 @@ if (emulatingTzar & echoConsoleToTempFile)
     #  into testing conventions.
 #===============================================================================
 
-    #  Set random seed to help reproducibility.
-    #  Has to be done after startup code that loads parameters structure.
-set.seed (parameters$seed)
+        #  Set random seed to help reproducibility.
+        #  Has to be done after startup code that loads parameters structure.
+    set.seed (parameters$seed)
 
-    #  Initialize error codes.
-bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
+        #  Initialize error codes.
+    bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
 
 #===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
 #===============================================================================
 
-bdprob = bdpg::gen_bdprob (parameters,
-                           bdpg_error_codes,
-                           bdpg::get_integerize_function (parameters$integerize_string),
-                           DEBUG_LEVEL)
+    bdprob = bdpg::gen_bdprob (parameters,
+                               bdpg_error_codes,
+                               bdpg::get_integerize_function (parameters$integerize_string),
+                               DEBUG_LEVEL)
 
-if (bdprob@prob_is_ok)
-    {
-        #  Save the bdprob to disk as a test for how I might archive
-        #  and retrieve problems in general.
-        #  This particular bit of code will disappear later on, once I
-        #  decide how to archive.
+    if (bdprob@prob_is_ok)
+        {
+            #  Save the bdprob to disk as a test for how I might archive
+            #  and retrieve problems in general.
+            #  This particular bit of code will disappear later on, once I
+            #  decide how to archive.
 
-    saved_bdprob_filename =
-                paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
-    saveRDS (bdprob, saved_bdprob_filename)
-#    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
+        saved_bdprob_filename =
+                    paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
+        saveRDS (bdprob, saved_bdprob_filename)
+    #    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
 
-    } else
-    {
-    cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
+        } else
+        {
+        cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
+        clean_up ()
+        stop ()
+        }
+
+#===============================================================================
+#               Clean up tzar, console sink, etc.
+#===============================================================================
     clean_up ()
-    stop ()
-    }
-
-
-#===============================================================================
-#===============================================================================
-#===============================================================================
-#===============================================================================
-#===============================================================================
-
-clean_up ()
 
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.
@@ -162,24 +158,11 @@ clean_up ()
     }
 
 #===============================================================================
-
-
-
-
-
-
-
 #===============================================================================
 #===============================================================================
 #===============================================================================
 #===============================================================================
 #===============================================================================
-#===============================================================================
-
-
-
-
-
 
     #  Holding spot for what used to be the guts of the mainline code.
     #  Will start here when reinserting things in the mainline or
