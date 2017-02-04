@@ -118,6 +118,12 @@ xu_paper_main = function (parameters)
     bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
 
 #===============================================================================
+#       Echo experiment sets for prototyping.
+#===============================================================================
+
+#echo_work_chunks_for_prototyping()
+
+#===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
 #===============================================================================
 
