@@ -83,19 +83,6 @@ round_2_wrapped_cor_Xu = function ()
     cat ("\n            - Apply the same analyze_and_archive procedure applied to single Xu problems in Round 1.")
     }
 
-round_3_combined_cor_Xu = function ()
-    {
-    cat ("\n\n================================================================================")
-    cat ("\n\nRound 3:  Re-use Rounds 1 & 2 results to generate base set of combined Xu problems")
-    cat ("\n\n    - Premise: We can generate problems that match all Round 1 qualities:")
-    cat ("\n            - with arbitrarily more complex and realistic species distributions")
-    cat ("\n            - and can re-use existing archived results to do it")
-    cat ("\n\n    - Procedure:  Generate N problems by combining  2 (or more?) single and/or wrapped Xu problems from the Round 1 and Round 2 sets.")
-    cat ("\n        - For each problem:")
-    cat ("\n            - Randomly choose existing problems to combine.")
-    cat ("\n            - Apply the same analyze_and_archive procedure applied to single Xu problems in Round 1.")
-    }
-
 round_4_app_Xu = function ()
     {
     cat ("\n\n================================================================================")
