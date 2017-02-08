@@ -4,3 +4,6 @@
 inst/doc
 consoleSinkOutput.temp.txt
 .Rapp.history
+pu.dat
+puvspr.dat
+spec.dat
