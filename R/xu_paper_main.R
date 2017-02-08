@@ -134,28 +134,77 @@ xu_paper_main = function (parameters)
                                # DEBUG_LEVEL
                                )
 
-    if (bdprob@prob_is_ok)
-        {
-            #  Save the bdprob to disk as a test for how I might archive
-            #  and retrieve problems in general.
-            #  This particular bit of code will disappear later on, once I
-            #  decide how to archive.
+    # if (bdprob@prob_is_ok)
+    #     {
+    #         #  Save the bdprob to disk as a test for how I might archive
+    #         #  and retrieve problems in general.
+    #         #  This particular bit of code will disappear later on, once I
+    #         #  decide how to archive.
+    #
+    #     saved_bdprob_filename =
+    #                 paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
+    #     saveRDS (bdprob, saved_bdprob_filename)
+    # #    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
+    #
+    #     } else
+    #     {
+    #     cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
+    #     clean_up ()
+    #     stop ()
+    #     }
 
-        saved_bdprob_filename =
-                    paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
-        saveRDS (bdprob, saved_bdprob_filename)
-    #    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
+#===============================================================================
+#                   Save the values for the "correct" problem.
+#===============================================================================
 
-        } else
-        {
-        cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
-        clean_up ()
-        stop ()
-        }
+        #  The problem structures built so far represent the correct values.
+        #  Adding error to the problem structure will create an apparent
+        #  problem structure that is probably different from the correct
+        #  structure.
+        #  When we compute scores at the end of all this, we need to compute
+        #  them with respect to the correct problem rather than the apparent.
+        #  So, before we add error, we need to save the values defining the
+        #  correct structure.
+
+    cor_PU_spp_pair_indices = bdprob@PU_spp_pair_indices
+app_PU_spp_pair_indices = cor_PU_spp_pair_indices
+
+    cor_PU_IDs              = bdprob@all_PU_IDs
+    cor_spp_IDs             = bdprob@all_spp_IDs
+    PU_col_name             = bdprob@PU_col_name
+    spp_col_name            = bdprob@spp_col_name
+
+derived_bdpg_dir_names  = bdprob@derived_bdpg_dir_names
+
+                                # cor_bpm                 = bdprob@bpm
+                                # cor_num_PUs             = bdprob@num_PUs
+                                # cor_num_spp             = bdprob@num_spp
+                                # cor_nodes               = bdprob@nodes
+                                # cor_optimum_cost        = bdprob@cor_optimum_cost  #  BUG?  HOW IS THIS LOADED FOR XU FROM FILE?
+                                # cor_PU_costs            = bdprob@PU_costs
+                                #
+                                # cor_PU_IDs              = bdprob@all_PU_IDs
+                                # cor_spp_IDs             = bdprob@all_spp_IDs
+
+    set_up_and_run_return_values =
+        bdpg::set_up_for_and_run_marxan (app_PU_spp_pair_indices,
+                                            cor_PU_IDs, #####!!!!!#####
+                                            cor_spp_IDs,  #####!!!!!#####
+                                            PU_col_name,
+                                            spp_col_name,
+                                            derived_bdpg_dir_names,
+                                            parameters
+                                            )
+
+    marxan_control_values  = set_up_and_run_return_values$marxan_control_values
+    derived_bdpg_dir_names = set_up_and_run_return_values$bdpg_dir_names
+
+    cat("\n\njust after set_up_for_and_run_marxan()")
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
 #===============================================================================
+
     clean_up ()
 
         #  If you were echoing console output to a temp file,
@@ -184,43 +233,6 @@ xu_paper_main = function (parameters)
 
 dummy <- function (parameters)
 {
-#===============================================================================
-#                   Save the values for the "correct" problem.
-#===============================================================================
-
-    #  The problem structures built so far represent the correct values.
-    #  Adding error to the problem structure will create an apparent
-    #  problem structure that is probably different from the correct
-    #  structure.
-    #  When we compute scores at the end of all this, we need to compute
-    #  them with respect to the correct problem rather than the apparent.
-    #  So, before we add error, we need to save the values defining the
-    #  correct structure.
-
-cor_PU_spp_pair_indices = bdprob@PU_spp_pair_indices
-cor_bpm                 = bdprob@bpm
-cor_num_PUs             = bdprob@num_PUs
-cor_num_spp             = bdprob@num_spp
-cor_nodes               = bdprob@nodes
-cor_optimum_cost        = bdprob@cor_optimum_cost  #  BUG?  HOW IS THIS LOADED FOR XU FROM FILE?
-cor_PU_costs            = bdprob@PU_costs
-PU_col_name             = bdprob@PU_col_name
-spp_col_name            = bdprob@spp_col_name
-
-cor_PU_IDs              = bdprob@all_PU_IDs
-cor_spp_IDs             = bdprob@all_spp_IDs
-
-cat ("\n\nAbout to set all_correct_node_IDs.\n")
-#browser()
-    #  Some nodes may be unusued in cor_nodes, particularly if building a
-    #  compound problem, e.g., if wrapping a distribution around a Xu problem.
-    #  Need to add them into this list since it will be used to index array
-    #  entries, you can't have any missing indices.
-#all_correct_node_IDs = cor_nodes$node_ID
-all_correct_node_IDs = 1:max(cor_nodes$node_ID)
-
-presences_col_name = "freq"
-
 #===============================================================================
 
 cor_or_app_subdir_name = "cor"
