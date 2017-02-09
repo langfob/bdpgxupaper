@@ -186,18 +186,23 @@ derived_bdpg_dir_names  = bdprob@derived_bdpg_dir_names
                                 # cor_PU_IDs              = bdprob@all_PU_IDs
                                 # cor_spp_IDs             = bdprob@all_spp_IDs
 
-    set_up_and_run_return_values =
-        bdpg::set_up_for_and_run_marxan (app_PU_spp_pair_indices,
-                                            cor_PU_IDs, #####!!!!!#####
-                                            cor_spp_IDs,  #####!!!!!#####
-                                            PU_col_name,
-                                            spp_col_name,
-                                            derived_bdpg_dir_names,
-                                            parameters
-                                            )
+    # set_up_and_run_return_values =
+    #     bdpg::set_up_for_and_run_marxan (app_PU_spp_pair_indices,
+    #                                         cor_PU_IDs, #####!!!!!#####
+    #                                         cor_spp_IDs,  #####!!!!!#####
+    #                                         PU_col_name,
+    #                                         spp_col_name,
+    #                                         derived_bdpg_dir_names,
+    #                                         parameters
+    #                                         )
+    #
+    # marxan_control_values  = set_up_and_run_return_values$marxan_control_values
+    # derived_bdpg_dir_names = set_up_and_run_return_values$bdpg_dir_names
 
-    marxan_control_values  = set_up_and_run_return_values$marxan_control_values
-    derived_bdpg_dir_names = set_up_and_run_return_values$bdpg_dir_names
+    COR_values = bdpg::set_up_for_and_run_marxan_COR (bdprob, parameters)
+
+    marxan_control_values  = COR_values$marxan_control_values
+    bdprob                 = COR_values$COR_bd_prob  #  COR_bd_prob has new dirs
 
     cat("\n\njust after set_up_for_and_run_marxan()")
 
