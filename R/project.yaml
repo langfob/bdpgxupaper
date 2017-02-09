@@ -265,7 +265,7 @@ base_params:
 
         #  Error models.
 
-    add_error_to_spp_occupancy_data: FALSE
+    apply_error_to_spp_occupancy_data: FALSE
     match_error_counts: TRUE
 
     #--------------------
@@ -430,7 +430,7 @@ scenarios:
 
             #--------------------
 
-            add_error_to_spp_occupancy_data: TRUE
+            apply_error_to_spp_occupancy_data: TRUE
             match_error_counts: TRUE
 #            match_error_counts: FALSE
 
@@ -529,7 +529,7 @@ repetitions:
 
 #repetitions:
 #    generators:
-#        - key: add_error_to_spp_occupancy_data
+#        - key: apply_error_to_spp_occupancy_data
 #          generator_type: linear_step
 #          start: 0
 #          step_size: 1

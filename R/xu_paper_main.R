@@ -288,7 +288,7 @@ do_graph_and_marxan_analysis (cor_or_app_subdir_name,
                                           cor_bpm,
 
                                             #  input parameters for error model.
-                                          add_error=FALSE,
+                                          apply_error=FALSE,
                                           match_error_counts=FALSE,
                                           FP_const_rate=0,
                                           FN_const_rate=0,
@@ -300,30 +300,30 @@ do_graph_and_marxan_analysis (cor_or_app_subdir_name,
 #                   Add error to the species occupancy data.
 #===============================================================================
 
-add_error = FALSE
-if (! is.null (parameters$add_error_to_spp_occupancy_data))
-    add_error = parameters$add_error_to_spp_occupancy_data
+apply_error = FALSE
+if (! is.null (parameters$apply_error_to_spp_occupancy_data))
+    apply_error = parameters$apply_error_to_spp_occupancy_data
 
-if (add_error)
+if (apply_error)
     {
-    ret_vals_from_add_errors =
-        add_error_to_spp_occupancy_data (parameters, cor_bpm,
+    ret_vals_from_apply_errors =
+        apply_error_to_spp_occupancy_data (parameters, cor_bpm,
                                          cor_num_PU_spp_pairs,
                                          cor_num_PUs, cor_num_spp,
                                          bdpg_error_codes)
 
         #  Save the chosen error parameters to output later with results.
-    original_FP_const_rate = ret_vals_from_add_errors$original_FP_const_rate
-    original_FN_const_rate = ret_vals_from_add_errors$original_FN_const_rate
-    match_error_counts     = ret_vals_from_add_errors$match_error_counts
-    FP_const_rate          = ret_vals_from_add_errors$FP_const_rate
-    FN_const_rate          = ret_vals_from_add_errors$FN_const_rate
-    app_num_spp            = ret_vals_from_add_errors$app_num_spp
-    app_num_PUs            = ret_vals_from_add_errors$app_num_PUs
+    original_FP_const_rate = ret_vals_from_apply_errors$original_FP_const_rate
+    original_FN_const_rate = ret_vals_from_apply_errors$original_FN_const_rate
+    match_error_counts     = ret_vals_from_apply_errors$match_error_counts
+    FP_const_rate          = ret_vals_from_apply_errors$FP_const_rate
+    FN_const_rate          = ret_vals_from_apply_errors$FN_const_rate
+    app_num_spp            = ret_vals_from_apply_errors$app_num_spp
+    app_num_PUs            = ret_vals_from_apply_errors$app_num_PUs
 
         #  Set the values for the apparent problem structure.
-    app_PU_spp_pair_indices      = ret_vals_from_add_errors$app_PU_spp_pair_indices
-    app_bpm                      = ret_vals_from_add_errors$app_spp_occupancy_data
+    app_PU_spp_pair_indices      = ret_vals_from_apply_errors$app_PU_spp_pair_indices
+    app_bpm                      = ret_vals_from_apply_errors$app_spp_occupancy_data
 
 #=================================
 
@@ -375,7 +375,7 @@ if (add_error)
                                               app_bpm,
 
                                                 #  input parameters for error model.
-                                              add_error,
+                                              apply_error,
                                               match_error_counts,
                                               FP_const_rate,
                                               FN_const_rate,
