@@ -127,7 +127,7 @@ xu_paper_main = function (parameters)
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
 #===============================================================================
 
-    bdprob = bdpg::gen_bdprob (parameters,
+    COR_bd_prob = bdpg::gen_bdprob (parameters,
                                bdpg_error_codes,
                                bdpg::get_integerize_function (parameters$integerize_string)
                                # ,
@@ -166,25 +166,26 @@ xu_paper_main = function (parameters)
         #  So, before we add error, we need to save the values defining the
         #  correct structure.
 
-    cor_PU_spp_pair_indices = bdprob@PU_spp_pair_indices
-app_PU_spp_pair_indices = cor_PU_spp_pair_indices
+    # cor_PU_spp_pair_indices = COR_bdprob@PU_spp_pair_indices
+# app_PU_spp_pair_indices = cor_PU_spp_pair_indices
+#
+#     cor_PU_IDs              = COR_bdprob@all_PU_IDs
+#     cor_spp_IDs             = COR_bdprob@all_spp_IDs
+#     PU_col_name             = COR_bdprob@PU_col_name
+#     spp_col_name            = COR_bdprob@spp_col_name
+#
+# derived_bdpg_dir_names  = COR_bdprob@derived_bdpg_dir_names
+#browser()
 
-    cor_PU_IDs              = bdprob@all_PU_IDs
-    cor_spp_IDs             = bdprob@all_spp_IDs
-    PU_col_name             = bdprob@PU_col_name
-    spp_col_name            = bdprob@spp_col_name
-
-derived_bdpg_dir_names  = bdprob@derived_bdpg_dir_names
-
-                                # cor_bpm                 = bdprob@bpm
-                                # cor_num_PUs             = bdprob@num_PUs
-                                # cor_num_spp             = bdprob@num_spp
-                                # cor_nodes               = bdprob@nodes
-                                # cor_optimum_cost        = bdprob@cor_optimum_cost  #  BUG?  HOW IS THIS LOADED FOR XU FROM FILE?
-                                # cor_PU_costs            = bdprob@PU_costs
+                                # cor_bpm                 = COR_bdprob@bpm
+                                # cor_num_PUs             = COR_bdprob@num_PUs
+                                # cor_num_spp             = COR_bdprob@num_spp
+                                # cor_nodes               = COR_bdprob@nodes
+                                # cor_optimum_cost        = COR_bdprob@cor_optimum_cost  #  BUG?  HOW IS THIS LOADED FOR XU FROM FILE?
+                                # cor_PU_costs            = COR_bdprob@PU_costs
                                 #
-                                # cor_PU_IDs              = bdprob@all_PU_IDs
-                                # cor_spp_IDs             = bdprob@all_spp_IDs
+                                # cor_PU_IDs              = COR_bdprob@all_PU_IDs
+                                # cor_spp_IDs             = COR_bdprob@all_spp_IDs
 
     # set_up_and_run_return_values =
     #     bdpg::set_up_for_and_run_marxan (app_PU_spp_pair_indices,
@@ -199,12 +200,58 @@ derived_bdpg_dir_names  = bdprob@derived_bdpg_dir_names
     # marxan_control_values  = set_up_and_run_return_values$marxan_control_values
     # derived_bdpg_dir_names = set_up_and_run_return_values$bdpg_dir_names
 
-    COR_values = bdpg::set_up_for_and_run_marxan_COR (bdprob, parameters)
+    COR_marxan_ret_values = bdpg::set_up_for_and_run_marxan_COR (COR_bd_prob, parameters)
 
-    marxan_control_values  = COR_values$marxan_control_values
-    bdprob                 = COR_values$COR_bd_prob  #  COR_bd_prob has new dirs
+    marxan_control_values  = COR_marxan_ret_values$marxan_control_values
+    COR_bd_prob             = COR_marxan_ret_values$COR_bd_prob  #  COR_bd_prob has new dirs
 
-    cat("\n\njust after set_up_for_and_run_marxan()")
+    cat("\n\njust after set_up_for_and_run_marxan() for wrapped problem")
+
+#-------------------------------------------------------------------------------
+
+    #     #  Try running marxan on the base cor problem since we know that
+    #     #  this particular test has created a wrapped problem.
+    #     #
+    #     #  Note that a different way around this issue is to create the
+    #     #  cor base problem and do the analysis on it before creating
+    #     #  the wrapped problem, but creating the wrap by directly passing
+    #     #  the cor to it without going through gen_bdprob's superstructure.
+    #
+    # get_base_cor_prob_of_wrap_prob <- function ()
+    #     {
+    #     cat ("not implemented yet""
+    #     }
+    # base_COR_bd_prob = get_base_cor_prob_of_wrap_prob (COR_bd_prob)
+    #
+    # base_COR_marxan_ret_values = bdpg::set_up_for_and_run_marxan_COR (base_COR_bd_prob, parameters)
+    #
+    # marxan_control_values  = base_COR_marxan_ret_values$marxan_control_values
+    # base_COR_bd_prob       = base_COR_marxan_ret_values$base_COR_bd_prob  #  COR_bd_prob has new dirs
+    #
+    # cat("\n\njust after set_up_for_and_run_marxan() for base cor problem")
+
+#===============================================================================
+#  Generate an APPARENT problem from the correct problem, i.e., apply errors.
+#===============================================================================
+
+    APP_bd_prob = bdpg::gen_single_bdprob_APP (COR_bd_prob,
+                                            #COR_bd_prob@top_outdir,
+                                            parameters,
+                                            bdpg_error_codes,
+                                            bdpg::get_integerize_function (parameters$integerize_string)
+                                            )
+
+
+
+    APP_marxan_ret_values = bdpg::set_up_for_and_run_marxan_APP (APP_bd_prob,
+                                                                   COR_bd_prob,
+                                                                   parameters)
+
+    marxan_control_values  = APP_marxan_ret_values$marxan_control_values
+    APP_bd_prob            = APP_marxan_ret_values$APP_bd_prob  #  APP_bd_prob has new dirs
+
+
+    cat("\n\njust after set_up_for_and_run_marxan() for app wrapped problem")
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
