@@ -101,9 +101,6 @@ xu_paper_main = function (parameters)
 #                       Load class definitions.
 #===============================================================================
 
-#####source (paste0 (sourceCodeLocationWithSlash, "BDProb.R"))
-
-#===============================================================================
     #  Code in this section is not just function definitions.
     #  It contains code that will have to either be incorporated in the
     #  mainline function or further abstracted into functions or
@@ -117,11 +114,8 @@ xu_paper_main = function (parameters)
         #  Initialize error codes.
     bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
 
-#===============================================================================
-#       Echo experiment sets for prototyping.
-#===============================================================================
-
-#echo_work_chunks_for_prototyping()
+    cat ("\n\n================================================================================")
+    cat ("\n================================================================================\n\n")
 
 #===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
@@ -134,78 +128,11 @@ xu_paper_main = function (parameters)
                                # DEBUG_LEVEL
                                )
 
-    # if (bdprob@prob_is_ok)
-    #     {
-    #         #  Save the bdprob to disk as a test for how I might archive
-    #         #  and retrieve problems in general.
-    #         #  This particular bit of code will disappear later on, once I
-    #         #  decide how to archive.
-    #
-    #     saved_bdprob_filename =
-    #                 paste0 (parameters$fullOutputDirWithSlash, "saved_bdprob.rds")
-    #     saveRDS (bdprob, saved_bdprob_filename)
-    # #    reloaded_bdprob = readRDS (saved_bdprob_filename)    #  testing only
-    #
-    #     } else
-    #     {
-    #     cat ("\n\n>>>>>  gen_bdprob() failed.  <<<<<\n\n")
-    #     clean_up ()
-    #     stop ()
-    #     }
+    bdpg::do_COR_marxan_analysis_and_output (COR_bd_prob, parameters)
 
-#===============================================================================
-#                   Save the values for the "correct" problem.
-#===============================================================================
-
-        #  The problem structures built so far represent the correct values.
-        #  Adding error to the problem structure will create an apparent
-        #  problem structure that is probably different from the correct
-        #  structure.
-        #  When we compute scores at the end of all this, we need to compute
-        #  them with respect to the correct problem rather than the apparent.
-        #  So, before we add error, we need to save the values defining the
-        #  correct structure.
-
-    # cor_PU_spp_pair_indices = COR_bdprob@PU_spp_pair_indices
-# app_PU_spp_pair_indices = cor_PU_spp_pair_indices
-#
-#     cor_PU_IDs              = COR_bdprob@all_PU_IDs
-#     cor_spp_IDs             = COR_bdprob@all_spp_IDs
-#     PU_col_name             = COR_bdprob@PU_col_name
-#     spp_col_name            = COR_bdprob@spp_col_name
-#
-# derived_bdpg_dir_names  = COR_bdprob@derived_bdpg_dir_names
-#browser()
-
-                                # cor_bpm                 = COR_bdprob@bpm
-                                # cor_num_PUs             = COR_bdprob@num_PUs
-                                # cor_num_spp             = COR_bdprob@num_spp
-                                # cor_nodes               = COR_bdprob@nodes
-                                # cor_optimum_cost        = COR_bdprob@cor_optimum_cost  #  BUG?  HOW IS THIS LOADED FOR XU FROM FILE?
-                                # cor_PU_costs            = COR_bdprob@PU_costs
-                                #
-                                # cor_PU_IDs              = COR_bdprob@all_PU_IDs
-                                # cor_spp_IDs             = COR_bdprob@all_spp_IDs
-
-    # set_up_and_run_return_values =
-    #     bdpg::set_up_for_and_run_marxan (app_PU_spp_pair_indices,
-    #                                         cor_PU_IDs, #####!!!!!#####
-    #                                         cor_spp_IDs,  #####!!!!!#####
-    #                                         PU_col_name,
-    #                                         spp_col_name,
-    #                                         derived_bdpg_dir_names,
-    #                                         parameters
-    #                                         )
-    #
-    # marxan_control_values  = set_up_and_run_return_values$marxan_control_values
-    # derived_bdpg_dir_names = set_up_and_run_return_values$bdpg_dir_names
-
-    COR_marxan_ret_values = bdpg::set_up_for_and_run_marxan_COR (COR_bd_prob, parameters)
-
-    marxan_control_values  = COR_marxan_ret_values$marxan_control_values
-    COR_bd_prob             = COR_marxan_ret_values$COR_bd_prob  #  COR_bd_prob has new dirs
-
-    cat("\n\njust after set_up_for_and_run_marxan() for wrapped problem")
+    cat("\n\njust after set_up_for_and_run_marxan() for cor problem")
+    cat ("\n\n================================================================================")
+    cat ("\n================================================================================\n\n")
 
 #-------------------------------------------------------------------------------
 
@@ -241,17 +168,11 @@ xu_paper_main = function (parameters)
                                             bdpg::get_integerize_function (parameters$integerize_string)
                                             )
 
+    bdpg::do_APP_marxan_analysis_and_output (APP_bd_prob, COR_bd_prob, parameters)
 
-
-    APP_marxan_ret_values = bdpg::set_up_for_and_run_marxan_APP (APP_bd_prob,
-                                                                   COR_bd_prob,
-                                                                   parameters)
-
-    marxan_control_values  = APP_marxan_ret_values$marxan_control_values
-    APP_bd_prob            = APP_marxan_ret_values$APP_bd_prob  #  APP_bd_prob has new dirs
-
-
-    cat("\n\njust after set_up_for_and_run_marxan() for app wrapped problem")
+    cat("\n\njust after set_up_for_and_run_marxan() for app problem")
+    cat ("\n\n================================================================================")
+    cat ("\n================================================================================\n\n")
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
@@ -270,173 +191,9 @@ xu_paper_main = function (parameters)
         close (tempConsoleOutFile)
         }
 
+    cat ("\n\n================================================================================")
+    cat ("\n================================================================================\n\n")
     }
-
-#===============================================================================
-#===============================================================================
-#===============================================================================
-#===============================================================================
-#===============================================================================
-#===============================================================================
-
-    #  Holding spot for what used to be the guts of the mainline code.
-    #  Will start here when reinserting things in the mainline or
-    #  refactoring the code.
-
-dummy <- function (parameters)
-{
-#===============================================================================
-
-cor_or_app_subdir_name = "cor"
-
-        #  NOTE:  2016 06 12 - Need to add writing of flags resulting from
-        #                       reading Xu file, e.g., prob_generator_params_known.
-        #                       This is because learning alg downstream needs to
-        #                       know things like whether the generator's params
-        #                       are even known, so that it doesn't try to learn
-        #                       something from missing data.
-
-do_graph_and_marxan_analysis (cor_or_app_subdir_name,
-
-                                            #  input parameters
-                                          parameters,
-                                          emulatingTzar,
-                                          DEBUG_LEVEL,
-
-                                          bdpg::get_current_os (),
-
-                                          bdprob@Xu_parameters,
-                                          bdprob@read_Xu_problem_from_Xu_file,
-
-#            PU_spp_pair_names,  #NO
-
-                                            #  From bdprob structure, i.e., results of gen prob routine
-                                          cor_num_spp,
-                                          cor_num_PUs,
-                                          cor_PU_spp_pair_indices,
-    cor_PU_IDs, #####!!!!!#####
-    cor_spp_IDs,  #####!!!!!#####
-                                          cor_bpm,
-
-                            cor_PU_costs,
-                                          cor_optimum_cost,
-                                          cor_nodes,
-                                          spp_col_name,
-                                          PU_col_name,
-
-                                            #  Immediately after bdprob struct vars above.
-                                          presences_col_name, #  hard-coded as "freq"
-#####!!!!!#####                                          all_correct_node_IDs,
-
-                                            #  Results of adding error.
-                                            cor_num_spp,
-                                            cor_num_PUs,
-                                          cor_PU_spp_pair_indices,
-                                          cor_bpm,
-
-                                            #  input parameters for error model.
-                                          apply_error=FALSE,
-                                          match_error_counts=FALSE,
-                                          FP_const_rate=0,
-                                          FN_const_rate=0,
-                                          original_FP_const_rate=0,
-                                          original_FN_const_rate=0
-                                          )
-
-#===============================================================================
-#                   Add error to the species occupancy data.
-#===============================================================================
-
-apply_error = FALSE
-if (! is.null (parameters$apply_error_to_spp_occupancy_data))
-    apply_error = parameters$apply_error_to_spp_occupancy_data
-
-if (apply_error)
-    {
-    ret_vals_from_apply_errors =
-        apply_error_to_spp_occupancy_data (parameters, cor_bpm,
-                                         cor_num_PU_spp_pairs,
-                                         cor_num_PUs, cor_num_spp,
-                                         bdpg_error_codes)
-
-        #  Save the chosen error parameters to output later with results.
-    original_FP_const_rate = ret_vals_from_apply_errors$original_FP_const_rate
-    original_FN_const_rate = ret_vals_from_apply_errors$original_FN_const_rate
-    match_error_counts     = ret_vals_from_apply_errors$match_error_counts
-    FP_const_rate          = ret_vals_from_apply_errors$FP_const_rate
-    FN_const_rate          = ret_vals_from_apply_errors$FN_const_rate
-    app_num_spp            = ret_vals_from_apply_errors$app_num_spp
-    app_num_PUs            = ret_vals_from_apply_errors$app_num_PUs
-
-        #  Set the values for the apparent problem structure.
-    app_PU_spp_pair_indices      = ret_vals_from_apply_errors$app_PU_spp_pair_indices
-    app_bpm                      = ret_vals_from_apply_errors$app_spp_occupancy_data
-
-#=================================
-
-        #  Create subdirectory name for this apparent problem.
-        #  In the future, we may allow more than 1 app per cor, so
-        #  I'll add an app count to the end of the subdirectory name and
-        #  nest it under a more general "app" directory that corresponds to
-        #  the "cor" directory.
-
-    cur_app_num = 1
-    cor_or_app_subdir_name = paste0 ("app", .Platform$file.sep, "app.", cur_app_num)
-
-    do_graph_and_marxan_analysis (cor_or_app_subdir_name,
-
-                                                #  input parameters
-                                              parameters,
-                                              emulatingTzar,
-                                              DEBUG_LEVEL,
-
-                                              bdpg::get_current_os (),
-
-                                              bdprob@Xu_parameters,
-                                              bdprob@read_Xu_problem_from_Xu_file,
-
-    #            PU_spp_pair_names,  #NO
-
-                                                #  From bdprob structure, i.e., results of gen prob routine
-                                              cor_num_spp,
-                                              cor_num_PUs,
-                                              cor_PU_spp_pair_indices,
-    cor_PU_IDs, #####!!!!!#####
-    cor_spp_IDs,  #####!!!!!#####
-                                              cor_bpm,
-
-                            cor_PU_costs,
-                                              cor_optimum_cost,
-                                              cor_nodes,
-                                              spp_col_name,
-                                              PU_col_name,
-
-                                                #  Immediately after bdprob struct vars above.
-                                              presences_col_name, #  hard-coded as "freq"
-#####!!!!!#####                                              all_correct_node_IDs,
-
-                                                #  Results of adding error.
-                                                app_num_spp,
-                                                app_num_PUs,
-                                              app_PU_spp_pair_indices,
-                                              app_bpm,
-
-                                                #  input parameters for error model.
-                                              apply_error,
-                                              match_error_counts,
-                                              FP_const_rate,
-                                              FN_const_rate,
-                                              original_FP_const_rate,
-                                              original_FN_const_rate
-                                              )
-    } #####else    #  Don't add error.
-#     {         #  Since no error is being added, correct and apparent are the same.
-#
-#     app_PU_spp_pair_indices      = cor_PU_spp_pair_indices
-#     app_bpm                      = cor_bpm
-#     }
-
-}
 
 #===============================================================================
 
