@@ -98,24 +98,13 @@ xu_paper_main = function (parameters)
     options (bdpg.emulatingTzar=emulatingTzar)
 
 #===============================================================================
-#                       Load class definitions.
+#                   Initialize for use of bdpg package.
 #===============================================================================
 
-    #  Code in this section is not just function definitions.
-    #  It contains code that will have to either be incorporated in the
-    #  mainline function or further abstracted into functions or
-    #  into testing conventions.
-#===============================================================================
+    params_and_error_codes <- init_for_bdpg (parameters)
 
-        #  Set random seed to help reproducibility.
-        #  Has to be done after startup code that loads parameters structure.
-    set.seed (parameters$seed)
-
-        #  Initialize error codes.
-    bdpg_error_codes        = bdpg::get_bdpg_error_codes ()
-
-    cat ("\n\n================================================================================")
-    cat ("\n================================================================================\n\n")
+    parameters             <- params_and_error_codes$parameters
+    bdpg_error_codes       <- params_and_error_codes$bdpg_error_codes
 
 #===============================================================================
 #       Generate a problem, i.e, create the Xu graph nodes and edge_list.
