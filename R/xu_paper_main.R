@@ -101,7 +101,7 @@ xu_paper_main = function (parameters)
 #                   Initialize for use of bdpg package.
 #===============================================================================
 
-    params_and_error_codes <- init_for_bdpg (parameters)
+    params_and_error_codes <- bdpg::init_for_bdpg (parameters)
 
     parameters             <- params_and_error_codes$parameters
     bdpg_error_codes       <- params_and_error_codes$bdpg_error_codes
