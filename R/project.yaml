@@ -259,7 +259,10 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: FALSE
+#    compute_network_metrics: TRUE
+    compute_network_metrics_COR: FALSE
+    compute_network_metrics_APP: TRUE
+    compute_network_metrics_wrapped: FALSE
 
     #---------------------------------------------------------------------------
 
