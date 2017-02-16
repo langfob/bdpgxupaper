@@ -260,9 +260,15 @@ base_params:
     #---------------------------------------------------------------------------
 
 #    compute_network_metrics: TRUE
-    compute_network_metrics_COR: FALSE
-    compute_network_metrics_APP: TRUE
+    compute_network_metrics_COR: TRUE
+    compute_network_metrics_APP: FALSE
     compute_network_metrics_wrapped: FALSE
+
+    use_igraph_metrics:    FALSE
+
+    use_bipartite_metrics: TRUE
+    #bipartite_metrics_to_use:     "ALLBUTDD"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
 
     #---------------------------------------------------------------------------
 
