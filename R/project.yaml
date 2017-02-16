@@ -268,7 +268,8 @@ base_params:
 
     use_bipartite_metrics: TRUE
     #bipartite_metrics_to_use:     "ALLBUTDD"
-    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "all_except_slow_indices"
+    bipartite_metrics_to_use:     "quick_test"
 
     #---------------------------------------------------------------------------
 
