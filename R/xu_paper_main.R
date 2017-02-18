@@ -51,6 +51,25 @@ xu_paper_main = function (parameters)
 
 #===============================================================================
 
+        #  There are a bunch of constant strings used for things like
+        #  directory and column names that are a pain in the ass to pass
+        #  all up and down the call tree or to duplicate in every copy of
+        #  all class objects, so I'm going to do the evil thing and create
+        #  a global variable to store these global constants.
+        #
+        #  When I don't do it this way and I pass these variables all over,
+        #  they make the code harder to read because they're fairly meaningless
+        #  variables handed all over the place for little utility.
+        #  The only reasons for having these values as variables at all
+        #  (as opposed to hard-coding the strings), is to make sure they're
+        #  consistent in all occurrences of various structures and to make
+        #  it easy to change their values everywhere at once on the rare
+        #  occasions when I want to do that.
+
+    bdpg::create_global_constants()
+
+#===============================================================================
+
         #  debugging level: 0 means don't output debugging write statements.
         #  Having this as an integer instead of binary so that I can have
         #  multiple levels of detail if I want to.
