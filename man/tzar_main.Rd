@@ -17,4 +17,3 @@ Wrapper function to call your application code from tzar
 tzar_main (parameters)
 }
 }
-

@@ -23,4 +23,3 @@ generator.
 xu_paper_main (parameters)
 }
 }
-

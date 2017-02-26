@@ -21,4 +21,3 @@ set inside the function to correspond to your situation.
 runtip ()
 }
 }
-

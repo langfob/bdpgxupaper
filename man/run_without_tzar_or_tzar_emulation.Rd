@@ -27,4 +27,3 @@ described in this package, but both functions are provided here as examples.
 run_without_tzar_or_tzar_emulation (parameters)
 }
 }
-
