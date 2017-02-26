@@ -105,8 +105,11 @@ xu_paper_main = function (parameters)
 
     if (emulatingTzar & echoConsoleToTempFile)
         {
+        sinkFilePath = paste0 (parameters$fullOutputDirWithSlash,
+                               "consoleSinkOutput.temp.txt")
+
             #  Open a file to echo console to.
-        tempConsoleOutFile <- file("consoleSinkOutput.temp.txt", open="wt")
+        tempConsoleOutFile <- file (sinkFilePath, open="wt")
 
         	#  Redirect console output to the file.
         sink (tempConsoleOutFile, split=TRUE)
@@ -190,8 +193,6 @@ xu_paper_main = function (parameters)
 
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.
-        #  That echoing is currently initiated by a sink() call in
-        #  external_startup_code.R (Dec 14, 2016).
 
     if (echoConsoleToTempFile)
         {
