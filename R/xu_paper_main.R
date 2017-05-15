@@ -172,18 +172,21 @@ xu_paper_main = function (parameters)
 #  Generate an APPARENT problem from the correct problem, i.e., apply errors.
 #===============================================================================
 
-    APP_bd_prob = bdpg::gen_single_bdprob_APP (COR_bd_prob,
-                                            #COR_bd_prob@top_outdir,
-                                            parameters,
-                                            bdpg_error_codes,
-                                            bdpg::get_integerize_function (parameters$integerize_string)
-                                            )
+    if (parameters$apply_error_to_spp_occupancy_data)
+        {
+        APP_bd_prob = bdpg::gen_single_bdprob_APP (COR_bd_prob,
+                                                #COR_bd_prob@top_outdir,
+                                                parameters,
+                                                bdpg_error_codes,
+                                                bdpg::get_integerize_function (parameters$integerize_string)
+                                                )
 
-    bdpg::do_APP_marxan_analysis_and_output (APP_bd_prob, COR_bd_prob, parameters)
+        bdpg::do_APP_marxan_analysis_and_output (APP_bd_prob, COR_bd_prob, parameters)
 
-    cat("\n\njust after set_up_for_and_run_marxan() for app problem")
-    cat ("\n\n================================================================================")
-    cat ("\n================================================================================\n\n")
+        cat("\n\njust after set_up_for_and_run_marxan() for app problem")
+        cat ("\n\n================================================================================")
+        cat ("\n================================================================================\n\n")
+        }
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
