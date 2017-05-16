@@ -219,12 +219,13 @@ xu_paper_main = function (parameters)
         if (parameters$apply_error_to_spp_occupancy_data)
             {
             wrapped_APP_bd_prob = bdpg::gen_single_bdprob_APP (wrapped_COR_bd_prob,
-                                                                #COR_bd_prob@top_outdir,
                                                                 parameters,
                                                                 bdpg_error_codes,
                                                                 integerize)
 
-            bdpg::do_APP_marxan_analysis_and_output (APP_bd_prob, COR_bd_prob, parameters)
+            bdpg::do_APP_marxan_analysis_and_output (wrapped_APP_bd_prob,
+                                                     wrapped_COR_bd_prob,
+                                                     parameters)
 
             cat("\n\njust after set_up_for_and_run_marxan() for app problem")
             cat ("\n\n================================================================================")
