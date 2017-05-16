@@ -152,6 +152,12 @@ xu_paper_main = function (parameters)
                                                       bdpg_error_codes,
                                                       integerize)
 
+    bdpg::do_COR_marxan_analysis_and_output (base_COR_bd_prob, parameters)
+
+    cat("\n\njust after set_up_for_and_run_marxan() for Base COR problem")
+    cat ("\n\n================================================================================")
+    cat ("\n================================================================================\n\n")
+
 #===============================================================================
 #  Generate an APPARENT problem from the base problem, i.e., apply errors.
 #===============================================================================
@@ -167,7 +173,7 @@ xu_paper_main = function (parameters)
                                                  base_COR_bd_prob,
                                                  parameters)
 
-        cat("\n\njust after set_up_for_and_run_marxan() for base app problem")
+        cat("\n\njust after set_up_for_and_run_marxan() for Base APP problem")
         cat ("\n\n================================================================================")
         cat ("\n================================================================================\n\n")
         }
@@ -185,7 +191,7 @@ xu_paper_main = function (parameters)
 
         bdpg::do_COR_marxan_analysis_and_output (wrapped_COR_bd_prob, parameters)
 
-        cat("\n\njust after set_up_for_and_run_marxan() for wrapped cor problem")
+        cat("\n\njust after set_up_for_and_run_marxan() for Wrapped COR problem")
         cat ("\n\n================================================================================")
         cat ("\n================================================================================\n\n")
 
@@ -227,7 +233,7 @@ xu_paper_main = function (parameters)
                                                      wrapped_COR_bd_prob,
                                                      parameters)
 
-            cat("\n\njust after set_up_for_and_run_marxan() for app problem")
+            cat("\n\njust after set_up_for_and_run_marxan() for Wrapped APP problem")
             cat ("\n\n================================================================================")
             cat ("\n================================================================================\n\n")
             }
