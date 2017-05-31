@@ -144,6 +144,7 @@ xu_paper_main = function (parameters)
     starting_dir = file.path (normalizePath (parameters$fullOutputDirWithSlash))
 
     base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
+                                                    parameters$compute_network_metrics_COR,
                                                       parameters,
                                                       parameters$read_Xu_problem_from_Xu_file,
                                                       infile_name,
@@ -165,6 +166,7 @@ xu_paper_main = function (parameters)
     if (parameters$apply_error_to_spp_occupancy_data)
         {
         base_APP_bd_prob = bdpg::gen_single_bdprob_APP (base_COR_bd_prob,
+                                                        parameters$compute_network_metrics_APP,
                                                         parameters,
                                                         bdpg_error_codes,
                                                         integerize)
@@ -185,6 +187,7 @@ xu_paper_main = function (parameters)
     if (parameters$wrap_lognormal_dist_around_Xu)
         {
         wrapped_COR_bd_prob = bdpg::gen_bdprob (parameters,
+                                                parameters$compute_network_metrics_wrapped_COR,
                                                 bdpg_error_codes,
                                                 integerize,
                                                 base_COR_bd_prob)
@@ -225,6 +228,7 @@ xu_paper_main = function (parameters)
         if (parameters$apply_error_to_spp_occupancy_data)
             {
             wrapped_APP_bd_prob = bdpg::gen_single_bdprob_APP (wrapped_COR_bd_prob,
+                                                               parameters$compute_network_metrics_wrapped_APP,
                                                                 parameters,
                                                                 bdpg_error_codes,
                                                                 integerize)
