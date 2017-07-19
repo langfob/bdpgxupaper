@@ -20,11 +20,48 @@ This package bundles together the code for running experiments demonstrating the
 Explaining, demonstrating, and using the Xu biodiversity problem generator is more than easily fits in a single understandable paper.  This package encapsulates the code used for just the first paper, which explains and demonstrates the generator.  The package is intended to document what is done in the paper and is not likely to be used by anyone other than the authors, though nothing prevents that use.
 
 ## Installation  
-You can install bdpgxupaper from github with:  
+You can install bdpgxupaper from github using devtools::install_github().  
+
+However, 
+the repo is currently private, which means that you have to be listed on github 
+as a collaborator and pass a github personal access token to see it. 
+If you don't have a token yet, you can get one by following the instructions at:  
+
+[Personal access tokens](https://github.com/settings/tokens)  
+
+or  
+
+[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)  
+
+You can store this token in an environment variable called GITHUB_PAT on your 
+machine.  This allows future use of the personal access token without having 
+to hard-code it into functions calls. 
+You can then retrieve it in a devtools::install_github() call's "auth" argument 
+by using devtools::github_pat() as shown below.  
+
+While the repo is still private, the devtools call looks like:  
 ```R
-# install.packages ("devtools")  
+devtools::install_github ("langfob/bdpgxupaper", auth_token = "INSERT YOUR TOKEN STRING HERE")
+```
+or
+```R
+devtools::install_github ("langfob/bdpgxupaper", auth_token = devtools::github_pat())
+```
+If and when the repo becomes public, the call is simply:
+```R
 devtools::install_github ("langfob/bdpgxupaper")
 ```
+
+So, assuming that the repo is still private and you've stored a token in the 
+GITHUB_PAT environment variable, you can download the package as follows:  
+```R
+install.packages ("devtools")    #  if devtools not installed already
+devtools::install_github ("langfob/bdpgxupaper", auth_token = devtools::github_pat())
+```
+
+Note that install_github() also has an optional "ref" argument that allows 
+you to specify a particular 'commit, tag, or branch name, or a call to github_pull. Defaults to "master"'.  
+
 
 ## Debugging  
 No matter what problem you're having while using tzar emulation, look first to see if R/model.R exists.  If it does, then delete it and retry whatever you're doing (e.g., running runtip() or doing a Build, etc.)  The presence of model.R (instead of having it built automatically from model.R.tzar) seems to cause all kinds of strange errors whose messages make no mention at all of model.R and lead you astray.
@@ -46,7 +83,11 @@ Exited with status 1.
 Just deleting model.R and starting the build again makes the error disappear.
 
 ## Example  
-There are no examples yet.
+- To call the mainline code for bdpgxupaper using tzar emulation:
+```R
+library(bdpgxupaper)
+runtip()
+```
 
 ## Overview  
 There is no overview yet.

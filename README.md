@@ -9,12 +9,44 @@ Explaining, demonstrating, and using the Xu biodiversity problem generator is mo
 Installation
 ------------
 
-You can install bdpgxupaper from github with:
+You can install bdpgxupaper from github using devtools::install\_github().
+
+However, the repo is currently private, which means that you have to be listed on github as a collaborator and pass a github personal access token to see it. If you don't have a token yet, you can get one by following the instructions at:
+
+[Personal access tokens](https://github.com/settings/tokens)
+
+or
+
+[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
+
+You can store this token in an environment variable called GITHUB\_PAT on your machine. This allows future use of the personal access token without having to hard-code it into functions calls. You can then retrieve it in a devtools::install\_github() call's "auth" argument by using devtools::github\_pat() as shown below.
+
+While the repo is still private, the devtools call looks like:
 
 ``` r
-# install.packages ("devtools")  
+devtools::install_github ("langfob/bdpgxupaper", auth_token = "INSERT YOUR TOKEN STRING HERE")
+```
+
+or
+
+``` r
+devtools::install_github ("langfob/bdpgxupaper", auth_token = devtools::github_pat())
+```
+
+If and when the repo becomes public, the call is simply:
+
+``` r
 devtools::install_github ("langfob/bdpgxupaper")
 ```
+
+So, assuming that the repo is still private and you've stored a token in the GITHUB\_PAT environment variable, you can download the package as follows:
+
+``` r
+install.packages ("devtools")    #  if devtools not installed already
+devtools::install_github ("langfob/bdpgxupaper", auth_token = devtools::github_pat())
+```
+
+Note that install\_github() also has an optional "ref" argument that allows you to specify a particular 'commit, tag, or branch name, or a call to github\_pull. Defaults to "master"'.
 
 Debugging
 ---------
@@ -38,7 +70,12 @@ Just deleting model.R and starting the build again makes the error disappear.
 Example
 -------
 
-There are no examples yet.
+-   To call the mainline code for bdpgxupaper using tzar emulation:
+
+    ``` r
+    library(bdpgxupaper)
+    runtip()
+    ```
 
 Overview
 --------
