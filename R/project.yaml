@@ -201,7 +201,7 @@ base_params:
         #  converted to scientific notation, so I'm putting them in
         #  quotes so that they are written out to marxan's liking.
 
-    marxan_num_reps: 100
+#    marxan_num_reps: 100
     marxan_num_iterations: "1000000"
 
 #    marxan_num_reps: 1
@@ -240,7 +240,7 @@ base_params:
             #  4  Use only Iterative Improvement
             #  5  Use a Heuristic followed by Iterative Improvement
             #  6  Use only Simulated Annealing
-    marxan_runmode: 1
+#    marxan_runmode: 1
 
         #  If the runmode specifies to use a heuristic, then this specifies
         #  which of the 8 heuristics to use.
@@ -255,39 +255,40 @@ base_params:
             #  5  Sum Rarity
             #  6  Product Irreplaceability
             #  7  Summation Irreplaceability
-    marxan_heurtype: -1
+#    marxan_heurtype: -1
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: TRUE
-    compute_network_metrics_COR: FALSE
+    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
+
+    compute_network_metrics_COR: TRUE
     compute_network_metrics_APP: TRUE
     compute_network_metrics_wrapped_COR: TRUE
-    compute_network_metrics_wrapped_APP: FALSE
+    compute_network_metrics_wrapped_APP: TRUE
 
     use_igraph_metrics:    TRUE
 
-    use_bipartite_metrics: FALSE
+    use_bipartite_metrics: TRUE
     #bipartite_metrics_to_use:     "ALLBUTDD"
-#    bipartite_metrics_to_use:     "all_except_slow_indices"
-    bipartite_metrics_to_use:     "quick_test"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "quick_test"
 
     #---------------------------------------------------------------------------
 
         #  Error models.
 
-    apply_error_to_spp_occupancy_data: FALSE
-    match_error_counts: TRUE
+#    apply_error_to_spp_occupancy_data: FALSE
+#    match_error_counts: TRUE
 
     #--------------------
 
         #  Constant errors
 
-    spp_occ_FP_error_type: "CONSTANT"
-    spp_occ_FP_const_rate: 0.1
+#    spp_occ_FP_error_type: "CONSTANT"
+#    spp_occ_FP_const_rate: 0.1
 
-    spp_occ_FN_error_type: "CONSTANT"
-    spp_occ_FN_const_rate: 0.1
+#    spp_occ_FN_error_type: "CONSTANT"
+#    spp_occ_FN_const_rate: 0.1
 
     #--------------------
 
@@ -321,7 +322,7 @@ base_params:
 
         # Outputs
 
-    timepoints_filename: $$output_path$$timepoints.csv
+#    timepoints_filename: $$output_path$$timepoints.csv
 
 #    summary_filename: $$output_path$$prob_diff_results.csv
 #    summary_without_run_id_filename: $$output_path$$prob_diff_results_with_0_run_id.csv
@@ -385,16 +386,16 @@ base_params:
             #    alpha:  Don't derive from n__num_groups
             #--------------------------------------------------------
 
-    use_unif_rand_p__prop_of_links_between_groups: TRUE
-    p__prop_of_links_between_groups_lower_bound: 0.14    #  0
-    p__prop_of_links_between_groups_upper_bound: 0.36    #  1
+#    use_unif_rand_p__prop_of_links_between_groups: TRUE
+#    p__prop_of_links_between_groups_lower_bound: 0.14    #  0
+#    p__prop_of_links_between_groups_upper_bound: 0.36    #  1
 
             #------------------------------------------------------------------
             #  Will set the alpha values explicitly in each scenario,
             #  so turn off the computing alpha to match n and opt frac = 0.5.
             #------------------------------------------------------------------
 
-    derive_alpha_from_n__num_groups_and_opt_frac_0.5: FALSE
+#    derive_alpha_from_n__num_groups_and_opt_frac_0.5: FALSE
 
     #---------------------------------------------------------------------------
 
@@ -412,8 +413,8 @@ scenarios:
       parameters:
             marxan_runmode: 1
             marxan_heurtype: -1
-            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
-#            marxan_num_reps: 100
+#            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
+            marxan_num_reps: 100
 
             #--------------------
 
