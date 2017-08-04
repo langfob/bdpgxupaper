@@ -117,6 +117,7 @@ xu_paper_main = function (parameters)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
+
     options (bdpg.emulatingTzar=emulatingTzar)
 
 #===============================================================================
@@ -252,7 +253,7 @@ xu_paper_main = function (parameters)
         #  If you were echoing console output to a temp file,
         #  stop echoing and close the temp file.
 
-    if (echoConsoleToTempFile)
+    if (emulatingTzar & echoConsoleToTempFile)
         {
         sink ()
         close (tempConsoleOutFile)
