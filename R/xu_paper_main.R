@@ -278,16 +278,8 @@ xu_paper_main = function (parameters)
 #               Clean up tzar, console sink, etc.
 #===============================================================================
 
+    clean_up_tzar_emulation (tzar_emulation_flag_and_console_sink_information)
     clean_up ()
-
-        #  If you were echoing console output to a temp file,
-        #  stop echoing and close the temp file.
-
-    if (emulatingTzar & echoConsoleToTempFile)
-        {
-        sink ()
-        close (tempConsoleOutFile)
-        }
 
     cat ("\n\n================================================================================")
     cat ("\n================================================================================\n\n")
