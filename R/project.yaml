@@ -32,7 +32,7 @@ libraries:
 
 base_params:
 
-        #  These 2 variables are necessary for the current version of
+        #  These 3 variables are necessary for the current version of
         #  tzar emulation, but they might go away in the future if River
         #  adds emulation directly inside of tzar with a "dry run" command.
         #  Note that I had forgotten to add these variables to any of the
@@ -46,7 +46,16 @@ base_params:
         #  This variable is now required to be set to TRUE or FALSE here
         #  to control whether tzar emulation is done.
         #  It used to be set in the R code.
-    emulatingTzar: TRUE
+    emulatingTzar:                      FALSE
+    echoConsoleToTempFile:              TRUE
+
+    project_path:                       "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"
+    tzar_jar_path:                      "~/D/rdv-framework-latest-work/tzar.jar"
+    emulation_scratch_file_path:        "~/tzar_emulation_scratch.yaml"
+    model_R_tzar_src_dir:               "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"    #"."    #system.file("templates", package="bdpgxupaper")
+    model_R_tzar_disguised_filename:    "model.R.tzar"
+    overwrite_existing_model_R_dest:    TRUE
+    required_model_R_filename_for_tzar: "model.R"
 
         #  BTL - 2014 12 28
         #  This variable captures the tzar output path to hand it to the
@@ -202,10 +211,10 @@ base_params:
         #  quotes so that they are written out to marxan's liking.
 
 #    marxan_num_reps: 100
-    marxan_num_iterations: "1000000"
+#    marxan_num_iterations: "1000000"
 
-#    marxan_num_reps: 1
-#    marxan_num_iterations: "10000"
+    marxan_num_reps: 1
+    marxan_num_iterations: "10000"
 
 #---------------------------------------------------------------------------
         #  marxan spf value
@@ -413,8 +422,8 @@ scenarios:
       parameters:
             marxan_runmode: 1
             marxan_heurtype: -1
-#            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
-            marxan_num_reps: 100
+            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
+#            marxan_num_reps: 100
 
             #--------------------
 

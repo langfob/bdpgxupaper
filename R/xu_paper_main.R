@@ -142,7 +142,7 @@ xu_paper_main = function (parameters)
         #  I should add an issue for this in the github issue tracking.
 
     tzar_emulation_flag_and_console_sink_information =
-        get_tzar_emulation_flag_and_console_sink_if_necessary (parameters)
+        get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
