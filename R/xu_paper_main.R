@@ -13,6 +13,47 @@
 
 #===============================================================================
 
+open_sink_file_if_requested <-
+    function (emulatingTzar, echoConsoleToTempFile, fullOutputDirWithSlash,
+              consoleOutputFileName = "consoleSinkOutput.temp.txt")
+    {
+    tempConsoleOutFile = NULL
+
+    if (emulatingTzar & echoConsoleToTempFile)
+        {
+        sinkFilePath = paste0 (fullOutputDirWithSlash, consoleOutputFileName)
+
+            #  Open a file to echo console to.
+        tempConsoleOutFile <- file (sinkFilePath, open="wt")
+
+        	#  Redirect console output to the file.
+        sink (tempConsoleOutFile, split=TRUE)
+        }
+
+    return (list (emulatingTzar=emulatingTzar,
+                  echoConsoleToTempFile=echoConsoleToTempFile,
+                  tempConsoleOutFile=tempConsoleOutFile))
+    }
+
+#-------------------------------------------------------------------------------
+
+get_tzar_emulation_flag_and_console_sink_if_requested <- function (parameters)
+    {
+    echoConsoleToTempFile = TRUE
+    if (! is.null (parameters$echoConsoleToTempFile))
+        echoConsoleToTempFile = parameters$echoConsoleToTempFile
+
+    emulatingTzar = FALSE
+    if (! is.null (parameters$emulatingTzar))
+        emulatingTzar = parameters$emulatingTzar
+
+    return (open_sink_file_if_requested (emulatingTzar,
+                                         echoConsoleToTempFile,
+                                         parameters$fullOutputDirWithSlash))
+    }
+
+#===============================================================================
+
 #' Mainline for experiments and data generation for Xu bdpg paper
 #'
 #' This is the top level function for running experiments and generating data for
@@ -100,25 +141,14 @@ xu_paper_main = function (parameters)
         #  At production time, I'll need to either remove it or fix it.
         #  I should add an issue for this in the github issue tracking.
 
-    echoConsoleToTempFile = TRUE
-    emulatingTzar = parameters$emulatingTzar
-
-    if (emulatingTzar & echoConsoleToTempFile)
-        {
-        sinkFilePath = paste0 (parameters$fullOutputDirWithSlash,
-                               "consoleSinkOutput.temp.txt")
-
-            #  Open a file to echo console to.
-        tempConsoleOutFile <- file (sinkFilePath, open="wt")
-
-        	#  Redirect console output to the file.
-        sink (tempConsoleOutFile, split=TRUE)
-        }
+    tzar_emulation_flag_and_console_sink_information =
+        get_tzar_emulation_flag_and_console_sink_if_necessary (parameters)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
 
-    options (bdpg.emulatingTzar=emulatingTzar)
+    options (bdpg.emulatingTzar =
+             tzar_emulation_flag_and_console_sink_information$emulatingTzar)
 
 #===============================================================================
 #                   Initialize for use of bdpg package.
