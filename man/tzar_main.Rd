@@ -7,7 +7,11 @@
 tzar_main(parameters)
 }
 \arguments{
-\item{parameters}{list of parameters built by tzar from project.yaml}
+\item{parameters}{List of parameters controlling the current run (usually
+decoded from project.yaml by tzar)}
+}
+\value{
+Returns nothing
 }
 \description{
 Wrapper function to call your application code from tzar
