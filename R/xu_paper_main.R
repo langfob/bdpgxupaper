@@ -14,42 +14,45 @@
 #===============================================================================
 
 open_sink_file_if_requested <-
-    function (emulatingTzar, echoConsoleToTempFile, fullOutputDirWithSlash,
-              consoleOutputFileName = "consoleSinkOutput.temp.txt")
+    function (emulating_tzar, echo_console_to_temp_file,
+              full_output_dir_with_slash,
+              console_output_file_name = "consoleSinkOutput.temp.txt")
     {
-    tempConsoleOutFile = NULL
+    temp_console_out_file = NULL
 
-    if (emulatingTzar & echoConsoleToTempFile)
+    if (emulating_tzar & echo_console_to_temp_file)
         {
-        sinkFilePath = paste0 (fullOutputDirWithSlash, consoleOutputFileName)
+        sinkFilePath = paste0 (full_output_dir_with_slash, console_output_file_name)
 
             #  Open a file to echo console to.
-        tempConsoleOutFile <- file (sinkFilePath, open="wt")
+        temp_console_out_file <- file (sinkFilePath, open="wt")
 
         	#  Redirect console output to the file.
-        sink (tempConsoleOutFile, split=TRUE)
+        sink (temp_console_out_file, split=TRUE)
         }
 
-    return (list (emulatingTzar=emulatingTzar,
-                  echoConsoleToTempFile=echoConsoleToTempFile,
-                  tempConsoleOutFile=tempConsoleOutFile))
+    return (list (emulating_tzar=emulating_tzar,
+                  echo_console_to_temp_file=echo_console_to_temp_file,
+                  temp_console_out_file=temp_console_out_file))
     }
 
 #-------------------------------------------------------------------------------
 
 get_tzar_emulation_flag_and_console_sink_if_requested <- function (parameters)
     {
-    echoConsoleToTempFile = TRUE
-    if (! is.null (parameters$echoConsoleToTempFile))
-        echoConsoleToTempFile = parameters$echoConsoleToTempFile
+    # echo_console_to_temp_file = TRUE
+    # if (! is.null (parameters$echo_console_to_temp_file))
+    #     echo_console_to_temp_file = parameters$echo_console_to_temp_file
+    echo_console_to_temp_file = tzar::as_boolean (parameters$echo_console_to_temp_file)
 
-    emulatingTzar = FALSE
-    if (! is.null (parameters$emulatingTzar))
-        emulatingTzar = parameters$emulatingTzar
+    # emulating_tzar = FALSE
+    # if (! is.null (parameters$emulating_tzar))
+    #     emulating_tzar = parameters$emulating_tzar
+    emulating_tzar = tzar::as_boolean (parameters$emulating_tzar)
 
-    return (open_sink_file_if_requested (emulatingTzar,
-                                         echoConsoleToTempFile,
-                                         parameters$fullOutputDirWithSlash))
+    return (open_sink_file_if_requested (emulating_tzar,
+                                         echo_console_to_temp_file,
+                                         parameters$full_output_dir_with_slash))
     }
 
 #===============================================================================
@@ -147,8 +150,8 @@ xu_paper_main = function (parameters)
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
 
-    options (bdpg.emulatingTzar =
-             tzar_emulation_flag_and_console_sink_information$emulatingTzar)
+    options (bdpg.emulating_tzar =
+             tzar_emulation_flag_and_console_sink_information$emulating_tzar)
 
 #===============================================================================
 #                   Initialize for use of bdpg package.
@@ -172,7 +175,7 @@ xu_paper_main = function (parameters)
     infile_name = parameters$infile_name
     if (is.null (infile_name)) infile_name = ""
 
-    starting_dir = file.path (normalizePath (parameters$fullOutputDirWithSlash))
+    starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
 
     base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
                                                     parameters$compute_network_metrics_COR,
@@ -278,8 +281,7 @@ xu_paper_main = function (parameters)
 #               Clean up tzar, console sink, etc.
 #===============================================================================
 
-    clean_up_tzar_emulation (tzar_emulation_flag_and_console_sink_information)
-    clean_up ()
+    clean_up (tzar_emulation_flag_and_console_sink_information)
 
     cat ("\n\n================================================================================")
     cat ("\n================================================================================\n\n")

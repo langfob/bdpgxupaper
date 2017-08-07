@@ -32,36 +32,33 @@ libraries:
 
 base_params:
 
-        #  These 3 variables are necessary for the current version of
-        #  tzar emulation, but they might go away in the future if River
-        #  adds emulation directly inside of tzar with a "dry run" command.
-        #  Note that I had forgotten to add these variables to any of the
-        #  project.yaml files used in biodivprobgen runs before today, so
-        #  you need to add it back into any of those that you re-use under
-        #  emulation.  That's not so likely though, since they're generally
-        #  doing zillions of runs and you don't generally do that under
-        #  emulation.  Currently limiting number of species to 1500.
+    #-------------------------------------
+    #  Tzar emulation control parameters
+    #-------------------------------------
 
-        #  BTL 2016 02 11
-        #  This variable is now required to be set to TRUE or FALSE here
-        #  to control whether tzar emulation is done.
-        #  It used to be set in the R code.
-    emulatingTzar:                      FALSE
-    echoConsoleToTempFile:              TRUE
+        #  These might go away in the future if River adds emulation
+        #  directly inside of tzar with a "dry run" command.
 
-    project_path:                       "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"
-    tzar_jar_path:                      "~/D/rdv-framework-latest-work/tzar.jar"
-    emulation_scratch_file_path:        "~/tzar_emulation_scratch.yaml"
-    model_R_tzar_src_dir:               "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"    #"."    #system.file("templates", package="bdpgxupaper")
-    model_R_tzar_disguised_filename:    "model.R.tzar"
-    overwrite_existing_model_R_dest:    TRUE
-    required_model_R_filename_for_tzar: "model.R"
+    emulating_tzar:                         TRUE
+    echoConsoleToTempFile:                  TRUE
+
+    project_path:                           "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"
+    tzar_jar_path:                          "~/D/rdv-framework-latest-work/tzar.jar"
+    emulation_scratch_file_path:            "~/tzar/tzar_emulation_scratch_area/tzar_emulation_scratch.yaml"
+
+    copy_model_dot_R_tzar_file:             TRUE
+    model_dot_R_tzar_SRC_dir:               "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R"    #"."    #system.file("templates", package="bdpgxupaper")
+    model_dot_R_tzar_disguised_filename:    "model.R.tzar"
+    required_model_dot_R_filename_for_tzar: "model.R"
+    overwrite_existing_model_dot_R_DEST:    TRUE
+
 
         #  BTL - 2014 12 28
         #  This variable captures the tzar output path to hand it to the
         #  tzar emulation code.
     fullOutputDirWithSlash: $$output_path$$
 
+    #--------------------
     #--------------------
 
         #  SET THIS VALUE EVERY TIME...
