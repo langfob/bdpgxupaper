@@ -9,13 +9,8 @@
 library (tzar)
 library (bdpgxupaper)
 
-tzar::model_with_possible_tzar_emulation (
-                parameters,
-                main_function = tzar_main
-#                ,
-#                projectPath   = ".",
-#                emulation_scratch_file_path = "~/tzar_emulation_scratch.yaml"
-                                    )
+tzar::model_with_possible_tzar_emulation (parameters,
+                                          main_function = tzar_main)
 
 #===============================================================================
 
