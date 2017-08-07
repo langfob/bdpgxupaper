@@ -4,7 +4,7 @@
 
 #===============================================================================
 
-clean_up_tzar_emulation <-
+clean_up_console_sink_if_necessary <-
     function (tzar_emulation_flag_and_console_sink_information)
     {
     emulatingTzar =
@@ -36,8 +36,11 @@ clean_up_tzar_emulation <-
 
 #===============================================================================
 
-clean_up <- function ()
+clean_up <- function (tzar_emulation_flag_and_console_sink_information)
     {
+    clean_up_console_sink_if_necessary (
+                            tzar_emulation_flag_and_console_sink_information)
+
     cat ("\n\nIn clean_up, sessionInfo() =\n\n")
     print (sessionInfo())
     cat ("\n\n")
