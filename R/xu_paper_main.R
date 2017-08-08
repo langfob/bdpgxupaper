@@ -13,50 +13,6 @@
 
 #===============================================================================
 
-open_sink_file_if_requested <-
-    function (emulating_tzar, echo_console_to_temp_file,
-              full_output_dir_with_slash,
-              console_output_file_name = "consoleSinkOutput.temp.txt")
-    {
-    temp_console_out_file = NULL
-
-    if (emulating_tzar & echo_console_to_temp_file)
-        {
-        sinkFilePath = paste0 (full_output_dir_with_slash, console_output_file_name)
-
-            #  Open a file to echo console to.
-        temp_console_out_file <- file (sinkFilePath, open="wt")
-
-        	#  Redirect console output to the file.
-        sink (temp_console_out_file, split=TRUE)
-        }
-
-    return (list (emulating_tzar=emulating_tzar,
-                  echo_console_to_temp_file=echo_console_to_temp_file,
-                  temp_console_out_file=temp_console_out_file))
-    }
-
-#-------------------------------------------------------------------------------
-
-get_tzar_emulation_flag_and_console_sink_if_requested <- function (parameters)
-    {
-    # echo_console_to_temp_file = TRUE
-    # if (! is.null (parameters$echo_console_to_temp_file))
-    #     echo_console_to_temp_file = parameters$echo_console_to_temp_file
-    echo_console_to_temp_file = tzar::as_boolean (parameters$echo_console_to_temp_file)
-
-    # emulating_tzar = FALSE
-    # if (! is.null (parameters$emulating_tzar))
-    #     emulating_tzar = parameters$emulating_tzar
-    emulating_tzar = tzar::as_boolean (parameters$emulating_tzar)
-
-    return (open_sink_file_if_requested (emulating_tzar,
-                                         echo_console_to_temp_file,
-                                         parameters$full_output_dir_with_slash))
-    }
-
-#===============================================================================
-
 #' Mainline for experiments and data generation for Xu bdpg paper
 #'
 #' This is the top level function for running experiments and generating data for
@@ -145,7 +101,7 @@ xu_paper_main = function (parameters)
         #  I should add an issue for this in the github issue tracking.
 
     tzar_emulation_flag_and_console_sink_information =
-        get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
+        tzar::get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
