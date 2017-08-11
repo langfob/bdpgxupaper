@@ -1,6 +1,12 @@
 #===============================================================================
 #
 #                               non_tzar_main.R
+
+#       NOTE:  THIS HAS NOT BEEN TESTED YET BECAUSE THE PARAMETERS LIST
+#               THAT IT BUILDS NEEDS A LOT MORE ELEMENTS.
+#               AT THE MOMENT, IT'S ONLY HERE TO SHOW WHAT IT WOULD
+#               LOOK LIKE.
+#               BTL - 2017 08 11
 #
 # This is a standalone file with everything someone would need to run the
 # paper's code without using tzar or tzar emulation.
@@ -105,6 +111,9 @@ local_build_parameters_list = function ()
 
 run_without_tzar_or_tzar_emulation <- function ()
     {
+
+stop ("\n\nNOT TESTED YET.  2017 08 17.  NEEDS MANY MORE PARAMETERS.\n\n")
+
     parameters = local_build_parameters_list ()
     xu_paper_main (parameters)
     }
