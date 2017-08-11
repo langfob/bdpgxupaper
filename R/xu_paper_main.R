@@ -30,7 +30,7 @@
 #' xu_paper_main (parameters)
 #'}
 
-xu_paper_main = function (parameters)
+xu_paper_main = function (parameters, emulating_tzar=FALSE)
     {
 
 #===============================================================================
@@ -100,14 +100,14 @@ xu_paper_main = function (parameters)
         #  At production time, I'll need to either remove it or fix it.
         #  I should add an issue for this in the github issue tracking.
 
-    tzar_emulation_flag_and_console_sink_information =
-        tzar::get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
+    #  2017 08 10 - BTL - Moving this into the tzar package.
+    # tzar_emulation_flag_and_console_sink_information =
+    #     tzar::get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
 
-    options (bdpg.emulating_tzar =
-             tzar_emulation_flag_and_console_sink_information$emulating_tzar)
+    options (bdpg.emulating_tzar = emulating_tzar)
 
 #===============================================================================
 #                   Initialize for use of bdpg package.

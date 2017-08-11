@@ -16,14 +16,14 @@
 #' tzar_main (parameters)
 #'}
 
-tzar_main <- function (parameters)
+tzar_main <- function (parameters, emulating_tzar=FALSE)
     {
     cat ("\n\nIn tzar_main now.\n\n")
 
 #    cat ("\n    parameters = \n\n")
 #    print (parameters)
 
-    xu_paper_main (parameters)
+    xu_paper_main (parameters, emulating_tzar)
 
     cat ("\n\nAll done now...\n\n")
     }
@@ -49,7 +49,8 @@ runt <- function ()
     {
     tzar::run_tzar (main_function = tzar_main,
               parameters_yaml_file_path = "./R/project.yaml",
-              tzar_emulation_yaml_file_path = "./R/tzar_emulation.yaml")
+#              tzar_emulation_yaml_file_path = "./R/tzar_emulation.yaml")
+              tzar_emulation_yaml_file_path = "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/R/tzar_emulation.yaml")
     }
 
 #===============================================================================
