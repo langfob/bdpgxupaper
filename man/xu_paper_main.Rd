@@ -4,7 +4,7 @@
 \alias{xu_paper_main}
 \title{Mainline for experiments and data generation for Xu bdpg paper}
 \usage{
-xu_paper_main(parameters)
+xu_paper_main(parameters, emulating_tzar = FALSE)
 }
 \arguments{
 \item{parameters}{List of parameters controlling the current run (usually

@@ -4,7 +4,7 @@
 \alias{tzar_main}
 \title{Wrapper function to call your application code from tzar}
 \usage{
-tzar_main(parameters)
+tzar_main(parameters, emulating_tzar = FALSE)
 }
 \arguments{
 \item{parameters}{List of parameters controlling the current run (usually
