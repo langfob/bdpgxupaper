@@ -80,30 +80,6 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
         #  Turn all R warnings into errors.
     options (warn=2)
 
-#===============================================================================
-                    #  START TZAR EMULATION CODE
-#===============================================================================
-
-        #  When using RStudio, the console output buffer is currently limited and
-        #  you can lose informative console output from bdprobdiff in a big run.
-        #  To capture that output, tee the output to a scratch sink file.
-        #
-        #  NOTE:  For some reason, this sink causes a warning message after
-        #  the code comes back from a marxan run:
-        #      unused connection
-        #  I have no idea why this happens, especially because it doesn't always
-        #  happen.  Since I have warnings set to generate errors rather than
-        #  warnings, it stops the program by calling browser().  If I just hit Q,
-        #  then the program continues from there without any problems.
-        #  At the moment, trapping all the output is more important than having
-        #  this annoying little hitch, so I'm leaving all this in.
-        #  At production time, I'll need to either remove it or fix it.
-        #  I should add an issue for this in the github issue tracking.
-
-    #  2017 08 10 - BTL - Moving this into the tzar package.
-    # tzar_emulation_flag_and_console_sink_information =
-    #     tzar::get_tzar_emulation_flag_and_console_sink_if_requested (parameters)
-
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.
 
