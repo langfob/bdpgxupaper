@@ -72,11 +72,12 @@ base_params:
 
     #--------------------
 
-        #  If you're reading the Xu problem from a file instead of
+        #  If you're reading the Xu problem from a file in Xu's benchmark
+        #  problem file format instead of
         #  generating it, you need to give the input file name and the
         #  cost of the correct solution (since it's not specified in the file).
 
-    read_Xu_problem_from_Xu_file: FALSE
+    read_Xu_problem_from_Xu_bench_file: FALSE
 
     Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
     given_correct_solution_cost: 420

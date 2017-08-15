@@ -112,7 +112,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
                                                     parameters$compute_network_metrics_COR,
                                                       parameters,
-                                                      parameters$read_Xu_problem_from_Xu_file,
+                                                      parameters$read_Xu_problem_from_Xu_bench_file,
                                                       infile_name,
                                                       parameters$given_correct_solution_cost,
                                                       parameters$max_allowed_num_spp,
