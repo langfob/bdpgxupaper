@@ -34,16 +34,6 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     {
 
 #===============================================================================
-#                       external_startup_code.R
-#===============================================================================
-#
-#  This file contains all of the startup code that will not be part of
-#  running things as a package.  In particular, it includes:
-#
-#   - some global variables for debugging
-#   - code related to using tzar and tzar emulation
-#
-#===============================================================================
 #          Global variables not to be included in package.
 #===============================================================================
 
@@ -100,7 +90,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #                       Do the main work.
 #===============================================================================
 
-gen_4_basic_variants (parameters, bdpg_error_codes, integerize)
+    gen_4_basic_variants (parameters, bdpg_error_codes, integerize)
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
