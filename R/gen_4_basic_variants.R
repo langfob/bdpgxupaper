@@ -21,7 +21,22 @@ gen_4_basic_variants <- function (parameters,
 
     starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
 
-    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
+prob_from_generator       = "generator"
+prob_from_rds_file        = "rds_file"
+prob_from_Xu_bench_file   = "Xu_bench_file"
+
+#COR_prob_src = prob_from_rds_file    #prob_from_generator
+COR_prob_src = parameters$COR_prob_src
+
+rds_file_path = parameters$rds_file_path
+#NULL
+#"/Users/bill/tzar/default_runset/1866_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.90d9c6a5-19f2-42dd-9d31-7464770f34c9/saved.RSprob-COR-Base.90d9c6a5-19f2-42dd-9d31-7464770f34c9.rds"
+#"/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+
+    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (COR_prob_src,
+                                                    rds_file_path,
+
+                                                    starting_dir,
                                                   parameters$compute_network_metrics_COR,
                                                     parameters,
                                                     parameters$read_Xu_problem_from_Xu_bench_file,
@@ -31,6 +46,12 @@ gen_4_basic_variants <- function (parameters,
                                                     bdpg_error_codes,
                                                     integerize)
 
+# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@alpha___lower_bound)
+# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@alpha___upper_bound)
+# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@use_unif_rand_alpha__)
+# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@n__num_groups)
+# browser()
+if (COR_prob_src != prob_from_rds_file)
     bdpg::do_COR_marxan_analysis_and_output (base_COR_bd_prob, parameters)
 
     cat("\n\njust after set_up_for_and_run_marxan() for Base COR problem")
