@@ -20,13 +20,10 @@ libraries:
 
 #===============================================================================
 
-#####
-#####  2014 12 11 - BTL
-#####  Note that all variables containing the word "clique" have been
-#####  changed to use the word "group" instead.
-#####
-
-    #  Cloned from project.yaml in example-R-pop-model.
+    #  Cloned from:
+    #  project.2017_08_16_09_51_am.original_full.yaml
+    #  in:
+    #  /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/yamlFiles
 
     #--------------------
 
@@ -112,52 +109,11 @@ base_params:
 
     num_independent_nodes_per_group: 1
 
-#    n__num_groups: 10
-#    use_unif_rand_n__num_groups: FALSE
-#    n__num_groups_lower_bound: 20
-#    n__num_groups_upper_bound: 40
-
-    #--------------------
-
-            #  Drives the number of PUs per group and so, tot num PUs
-            #  Increase alpha to increase num of PUs.
-            #      tot_num_nodes = n__num_groups * num_nodes_per_group
-#    alpha__: 0.25
-#    use_unif_rand_alpha__: FALSE
-#    alpha___lower_bound: 0
-#    alpha___upper_bound: 1
-
-    #--------------------
-
-            #  p and r drive num of spp (increase p to increase num of spp)
-            #     target_num_links_between_2_groups_per_round =
-            #         integerize (p__prop_of_links_between_groups * num_nodes_per_group)
-            #     num_rounds_of_linking_between_groups = integerize (r__density * n__num_groups * log (n__num_groups))
-            #     max_possible_num_links_between_groups =
-            #         integerize (target_num_links_between_2_groups_per_round * num_rounds_of_linking_between_groups)
-            #     max_possible_tot_num_links = integerize (tot_num_links_inside_groups + max_possible_num_links_between_groups)
-
-#    use_unif_rand_p__prop_of_links_between_groups: TRUE
-#    p__prop_of_links_between_groups_lower_bound: 0.20
-#    p__prop_of_links_between_groups_upper_bound: 0.36
-
-#    r__density: 0.8
-#    use_unif_rand_r__density: FALSE
-#    p__r__density_lower_bound: 2
-#    p__r__density_upper_bound: 5
-
     #--------------------
 
     integerize_string: "round"
 
     base_for_target_num_links_between_2_groups_per_round: "num_nodes_per_group"
-#    base_for_target_num_links_between_2_groups_per_round: "num_dependent_nodes_per_group"
-
-        #  BTL - 2015 04 08
-        #  Is this variable still used somewhere?
-        #  Can't find it appearing when I grep all of the R files right now...
-
-    at_least_1_for_target_num_links_between_2_groups_per_round: FALSE
 
     #---------------------------------------------------------------------------
         #  marxan control parameters
@@ -180,12 +136,6 @@ base_params:
     marxan_spec_file_name: "spec.dat"
     marxan_puvspr_file_name: "puvspr.dat"
 
-        #  It looks like Marxan chokes if input.dat has the number of
-        #  iterations expressed in scientific notation (e.g., 2e+06).
-        #  Somewhere along the path between here and writing the value
-        #  out to the input.dat file, values around 1 million do get
-        #  converted to scientific notation, so I'm putting them in
-        #  quotes so that they are written out to marxan's liking.
 
 #    marxan_num_reps: 100
 #    marxan_num_iterations: "1000000"
@@ -193,55 +143,7 @@ base_params:
     marxan_num_reps: 1
     marxan_num_iterations: "10000"
 
-#---------------------------------------------------------------------------
-        #  marxan spf value
-        #
-        #  Flag what rule to use for setting the spf value for all species.
-        #  Right now, legal values are just CONSTANT or POWER_OF_10.
-        #  If you choose CONSTANT, you need to also set the value of
-        #  marxan_spf_const and that value is assigned to all species.
-        #  If you choose POWER_OF_10, then every species is assigned the
-        #  same spf value and that value is chosen using the heuristic
-        #  given in the marxan documentation, i.e., the power of 10 that
-        #  corresponds to the number of species, e.g., if 632 species,
-        #  then spf is set to 100.  If a value is assigned to marxan_spf_const
-        #  here, it is ignored.
-
     marxan_spf_rule: "POWER_OF_10"
-#    marxan_spf_rule: "CONSTANT"
-#    marxan_spf_const: 10
-
-    #---------------------------------------------------------------------------
-
-        #  Specify which algorithm for marxan to use.
-
-        #  Default runmode is 1, which specifies simulated annealing
-        #  followed by iterative improvement.
-        #  There are 7 different runmode options:
-            #  0  Apply Simulated Annealing followed by a Heuristic
-            #  1  Apply Simulated Annealing followed by Iterative Improvement
-            #  2  Apply Simulated Annealing followed by a Heuristic, followed
-            #     by Iterative Improvement
-            #  3  Use only a Heuristic
-            #  4  Use only Iterative Improvement
-            #  5  Use a Heuristic followed by Iterative Improvement
-            #  6  Use only Simulated Annealing
-#    marxan_runmode: 1
-
-        #  If the runmode specifies to use a heuristic, then this specifies
-        #  which of the 8 heuristics to use.
-        #  Default is to set it to -1, meaning no heuristic.
-        #  Details of the different Heuristics listed below are given
-        #  in Marxan manual v. 1.8.10 Appendix B-2 .3.
-            #  0  Richness
-            #  1  Greedy
-            #  2  Max Rarity
-            #  3  Best Rarity
-            #  4  Average Rarity
-            #  5  Sum Rarity
-            #  6  Product Irreplaceability
-            #  7  Summation Irreplaceability
-#    marxan_heurtype: -1
 
     #---------------------------------------------------------------------------
 
@@ -261,127 +163,31 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-        #  Error models.
-
-#    apply_error_to_spp_occupancy_data: FALSE
-#    match_error_counts: TRUE
-
-    #--------------------
-
-        #  Constant errors
-
-#    spp_occ_FP_error_type: "CONSTANT"
-#    spp_occ_FP_const_rate: 0.1
-
-#    spp_occ_FN_error_type: "CONSTANT"
-#    spp_occ_FN_const_rate: 0.1
-
-    #--------------------
-
-        #  Uniform random errors.
-
-#    spp_occ_FP_error_type: "RANDOM_UNIFORM_CONSTANT"
-#    spp_occ_FP_rate_lower_bound: 0
-#    spp_occ_FP_rate_upper_bound: 0.1
-
-#    spp_occ_FN_error_type: "RANDOM_UNIFORM_CONSTANT"
-#    spp_occ_FN_rate_lower_bound: 0
-#    spp_occ_FN_rate_upper_bound: 0.1
-
-    #--------------------
-
-        #  Truncated normal errors.
-
-#    spp_occ_FP_error_type: "RANDOM_TRUNCATED_NORMAL"
-#    spp_occ_FP_rate_lower_bound: 0
-#    spp_occ_FP_rate_upper_bound: 1.0
-#    spp_occ_FP_rate_mean: 0.1
-#    spp_occ_FP_rate_sd: 1.0
-
-#    spp_occ_FN_error_type: "RANDOM_TRUNCATED_NORMAL"
-#    spp_occ_FN_rate_lower_bound: 0
-#    spp_occ_FN_rate_upper_bound: 0.1
-#    spp_occ_FN_rate_mean: 0.1
-#    spp_occ_FN_rate_sd: 1.0
-
-    #---------------------------------------------------------------------------
-
         # Outputs
 
-#    timepoints_filename: $$output_path$$timepoints.csv
-
-#    summary_filename: $$output_path$$prob_diff_results.csv
-#    summary_without_run_id_filename: $$output_path$$prob_diff_results_with_0_run_id.csv
     summary_filename: prob_diff_results.csv
     summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
 
     too_many_possible_links_error_flag_file_name: $$output_path$$too_many_possible_links_error_flag_file.txt
 
     #---------------------------------------------------------------------------
-
-#scenarios:
-#    - name: easy
-#        parameters:
-#            variables:
-#                n__num_cliques: 5
-#                alpha__: 0.8
-#                p__prop_of_links_between_cliques: 0.5
-#                r__density: 0.5
-
-#    - name: harder
-#        parameters:
-#            variables:
-#                n__num_cliques: 12
-#                alpha__: 1.5
-#                p__prop_of_links_between_cliques: 0.3
-#                r__density: 0.8
-
-#    - name: hardest
-#        parameters:
-#            variables:
-#                n__num_cliques: 20
-#                alpha__: 0.1
-#                p__prop_of_links_between_cliques: 0.8
-#                r__density: 0.8
-
-#-------------------------------------------------------------------------------
-
-    #  3 hard cases from Xu "simple model" paper.
-    #  Parameterize each case as a scenario, but use the same parameterization
-    #  for p__prop_of_links_between_groups in all 3 scenarios, so set that
-    #  first.
-
-        #  In "simple model ..." paper, they use:
-        #       n in [8..100] while alpha = 0.52, r = 1
-        #       r in [0.8..2.5] while n = 20, alpha = 0.77
-        #       alpha in [0.2..1] while n = 20, r = 2.5
-        #  In all 3 cases, best fit to the theory was when the parameter
-        #  was at the top of its range.  See figure 1 in the paper.
-        #
-        #  Values in the paper for propOfLinksBetweenGroups were more variable.
-        #  See figures 2 and 3 and text in column 2 of page 4.
-        #  In those examples, they had:
-        #       Figure 2:   k=2, alpha=0.8, r=3, n in {20,30,40}
-        #                   p in [0.14..0.36] w/ critical value Pcr ~ 0.23
-
     #---------------------------------------------------------------------------
 
-            #--------------------------------------------------------
-            #  Xu simple model - all 3 hard cases:
-            #    p: [0.14..0.36]    #  w/ critical value Pcr ~ 0.23
-            #    alpha:  Don't derive from n__num_groups
-            #--------------------------------------------------------
+    #COR_prob_src: "generator"
+    COR_prob_src: "rds_file"
+    #COR_prob_src: "Xu_bench_file"
 
-#    use_unif_rand_p__prop_of_links_between_groups: TRUE
-#    p__prop_of_links_between_groups_lower_bound: 0.14    #  0
-#    p__prop_of_links_between_groups_upper_bound: 0.36    #  1
+    rds_file_path: "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
 
-            #------------------------------------------------------------------
-            #  Will set the alpha values explicitly in each scenario,
-            #  so turn off the computing alpha to match n and opt frac = 0.5.
-            #------------------------------------------------------------------
 
-#    derive_alpha_from_n__num_groups_and_opt_frac_0.5: FALSE
+#    COR_prob_src: "rds_file_set_from_file"
+#    rds_file_set_path: "~/COR_rds_input_file_paths.txt"
+
+#    COR_prob_src: "rds_file_set_from_yaml_array"
+#    COR_rds_file_set_yaml_array:
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
 
     #---------------------------------------------------------------------------
 
@@ -418,16 +224,6 @@ scenarios:
             p__prop_of_links_between_groups_lower_bound: 0.01
             p__prop_of_links_between_groups_upper_bound: 0.99
 
-#            use_unif_rand_alpha__: FALSE
-#            alpha__: 0.52
-
-#            use_unif_rand_n__num_groups: TRUE
-#            n__num_groups_lower_bound: 8
-#            n__num_groups_upper_bound: 100
-
-#            use_unif_rand_r__density: FALSE
-#            r__density: 0.8
-
             #--------------------
 
             apply_error_to_spp_occupancy_data: TRUE
@@ -444,77 +240,6 @@ scenarios:
             spp_occ_FN_error_type: "CONSTANT"
             spp_occ_FN_const_rate: 0.1  #0.1
 
-            #--------------------
-
-                #  Uniform random errors.
-
-#            spp_occ_FP_error_type: "RANDOM_UNIFORM_CONSTANT"
-#            spp_occ_FP_rate_lower_bound: 0
-#            spp_occ_FP_rate_upper_bound: 0.1
-
-#            spp_occ_FN_error_type: "RANDOM_UNIFORM_CONSTANT"
-#            spp_occ_FN_rate_lower_bound: 0
-#            spp_occ_FN_rate_upper_bound: 0.1
-
-
-#    - name: scen_rand_61_to_80_PUs_0.5_optFrac_random_r_and_p
-#      parameters:
-#            derive_alpha_from_n__num_groups_and_opt_frac_0.5: TRUE
-#
-#            use_unif_rand_n__num_groups: TRUE
-#            n__num_groups_lower_bound: 61
-#            n__num_groups_upper_bound: 80
-#
-#            use_unif_rand_r__density: TRUE
-#            r__density_lower_bound: 0.01
-#            r__density_upper_bound: 5.0
-#
-#            use_unif_rand_p__prop_of_links_between_groups: TRUE
-#            p__prop_of_links_between_groups_lower_bound: 0.01
-#            p__prop_of_links_between_groups_upper_bound: 0.99
-
-###    - name: marxan_simulated_annealing
-###      parameters:
-###            read_Xu_problem_from_Xu_file: TRUE
-
-###            given_correct_solution_cost: 420
-
-###            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-2.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-3.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-4.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-5.msc"
-
-
-#            given_correct_solution_cost: 560
-
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb35-17-msc with MSC 560/frb35-17-1.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb35-17-msc with MSC 560/frb35-17-2.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb35-17-msc with MSC 560/frb35-17-3.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb35-17-msc with MSC 560/frb35-17-4.msc"
-#            Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb35-17-msc with MSC 560/frb35-17-5.msc"
-
-###            marxan_runmode: 1
-###            marxan_heurtype: -1
-###            marxan_num_reps: 100
-
-
-#    - name: marxan_heuristic_richness
-#      parameters:
-#            marxan_runmode: 3
-#            marxan_heurtype: 0
-#            marxan_num_reps: 100
-
-#            use_unif_rand_alpha__: FALSE
-#            alpha__: 0.52
-
-#            use_unif_rand_n__num_groups: TRUE
-#            n__num_groups_lower_bound: 8
-#            n__num_groups_upper_bound: 100
-
-#            use_unif_rand_r__density: FALSE
-#            r__density: 0.8
-
     #---------------------------------------------------------------------------
 
 repetitions:
@@ -524,23 +249,6 @@ repetitions:
           start: 10102
           step_size: 1
           count: 1
-
-    #---------------------------------------------------------------------------
-
-#repetitions:
-#    generators:
-#        - key: apply_error_to_spp_occupancy_data
-#          generator_type: linear_step
-#          start: 0
-#          step_size: 1
-#          count: 2
-
-    #---------------------------------------------------------------------------
-
-#concatenate:
-#    heading_row: true
-#    input_filename: prob_diff_results.csv
-#    output_filename: all_results_prob_diff.csv
 
     #---------------------------------------------------------------------------
 
