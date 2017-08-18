@@ -59,6 +59,11 @@ get_bdprob_from_rds_file <- function (prob_src,
 
 single_action_using_tzar_reps <- function (parameters)
     {
+        #------------------------------------------------------
+        #  Make sure that exactly one action has been chosen.
+        #  Quit if none or more than one chosen.
+        #------------------------------------------------------
+
     gen_COR_prob  = value_or_FALSE_if_null (parameters$gen_COR_prob)
     gen_WRAP_prob = value_or_FALSE_if_null (parameters$gen_WRAP_prob)
     gen_APP_prob  = value_or_FALSE_if_null (parameters$gen_APP_prob)
@@ -77,6 +82,10 @@ single_action_using_tzar_reps <- function (parameters)
 
     #---------------------------------------------------------------------------
 
+        #--------------------------------------------
+        #  Generate a correct problem if requested.
+        #--------------------------------------------
+
     if (gen_COR_prob)
         {
         bdpg::gen_single_bdprob_COR (parameters,
@@ -87,6 +96,10 @@ single_action_using_tzar_reps <- function (parameters)
         }
 
     #---------------------------------------------------------------------------
+
+        #--------------------------------------------
+        #  Generate a wrapped problem if requested.
+        #--------------------------------------------
 
     if (gen_WRAP_prob)
         {
@@ -104,6 +117,11 @@ single_action_using_tzar_reps <- function (parameters)
         }
 
     #---------------------------------------------------------------------------
+
+        #----------------------------------------------
+        #  Generate an apparent problem if requested,
+        #  i.e., add error to a correct problem.
+        #----------------------------------------------
 
     if (gen_APP_prob)
         {
@@ -124,6 +142,10 @@ single_action_using_tzar_reps <- function (parameters)
         }
 
     #---------------------------------------------------------------------------
+
+        #----------------------------------------
+        #  Run a reserve selector if requested.
+        #----------------------------------------
 
     if (do_rsrun)
         {
