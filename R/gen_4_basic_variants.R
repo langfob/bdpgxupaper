@@ -18,20 +18,26 @@ cat ("\n\nAT START OF gen_4_basic_variants().\n\n")
         #  and if they don't for this particular run, then set them to
         #  something like NULL.
 
-    Xu_bench_file_name = parameters$Xu_bench_file_name
-    if (is.null (Xu_bench_file_name)) Xu_bench_file_name = ""
+    # Xu_bench_file_name = parameters$Xu_bench_file_name
+    # if (is.null (Xu_bench_file_name)) Xu_bench_file_name = ""
 
-    starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
+#    starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
 
-    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
-                                                  parameters$compute_network_metrics_COR,
-                                                    parameters,
-                                                    parameters$read_Xu_problem_from_Xu_bench_file,
-                                                    Xu_bench_file_name,
-                                                    parameters$given_correct_solution_cost,
-                                                    parameters$max_allowed_num_spp,
+    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (parameters,
                                                     bdpg_error_codes,
-                                                    integerize)
+                                                    integerize,
+                                                    base_prob_name_stem = "base_prob",
+                                                    cor_dir_name_stem = "cor"
+                                                    )
+    # base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
+    #                                               parameters$compute_network_metrics_COR,
+    #                                                 parameters,
+    #                                                 parameters$read_Xu_problem_from_Xu_bench_file,
+    #                                                 Xu_bench_file_name,
+    #                                                 parameters$given_correct_solution_cost,
+    #                                                 parameters$max_allowed_num_spp,
+    #                                                 bdpg_error_codes,
+    #                                                 integerize)
 
 cat ("\n\n-----  base_COR_bd_prob@UUID = '", base_COR_bd_prob@UUID,
      "', checksum = '", base_COR_bd_prob@checksum, "'  -----\n\n")
