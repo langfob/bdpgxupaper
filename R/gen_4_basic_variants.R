@@ -14,37 +14,16 @@ cat ("\n\nAT START OF gen_4_basic_variants().\n\n")
     #       Generate a base problem, i.e, create the Xu graph nodes and edge_list.
     #===============================================================================
 
-        #  May need to test these parameters to see if they even exist
-        #  and if they don't for this particular run, then set them to
-        #  something like NULL.
-
-    # Xu_bench_file_name = parameters$Xu_bench_file_name
-    # if (is.null (Xu_bench_file_name)) Xu_bench_file_name = ""
-
-#    starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
-
     base_COR_bd_prob = bdpg::gen_single_bdprob_COR (parameters,
                                                     bdpg_error_codes,
                                                     integerize,
                                                     base_prob_name_stem = "base_prob",
                                                     cor_dir_name_stem = "cor"
                                                     )
-    # base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
-    #                                               parameters$compute_network_metrics_COR,
-    #                                                 parameters,
-    #                                                 parameters$read_Xu_problem_from_Xu_bench_file,
-    #                                                 Xu_bench_file_name,
-    #                                                 parameters$given_correct_solution_cost,
-    #                                                 parameters$max_allowed_num_spp,
-    #                                                 bdpg_error_codes,
-    #                                                 integerize)
 
 cat ("\n\n-----  base_COR_bd_prob@UUID = '", base_COR_bd_prob@UUID,
      "', checksum = '", base_COR_bd_prob@checksum, "'  -----\n\n")
 
-if(FALSE)
-{
-#####if (COR_prob_src != prob_from_rds_file)
     bdpg::do_COR_marxan_analysis_and_output (base_COR_bd_prob, parameters)
 
     cat("\n\njust after set_up_for_and_run_marxan() for Base COR problem")
@@ -134,8 +113,6 @@ if(FALSE)
             cat ("\n================================================================================\n\n")
             }
         }  #  end if - wrap_lognormal_dist_around_Xu
-
-}  #  end if - FALSE
 
     }  #  end function - gen_4_basic_variants()
 
