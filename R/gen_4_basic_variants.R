@@ -4,10 +4,233 @@
 
 #===============================================================================
 
+#  MOVE TO BDPG AND EXPORT
+
+value_or_1_if_null <- function (value)
+    {
+    if (is.null (value)) 1 else value
+    }
+
+value_or_FALSE_if_null <- function (value)
+    {
+    if (is.null (value)) FALSE else value
+    }
+
+#===============================================================================
+
+#  MOVE TO BDPG AND EXPORT
+
+gen_single_bdprob_COR <- function (parameters,
+                                   bdpg_error_codes,
+                                   integerize,
+                                   base_prob_name_stem = "base_prob",
+                                   cor_dir_name_stem = "cor"
+                                   )
+    {
+    exp_root_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
+    Xu_bench_infile_name = parameters$infile_name
+    if (is.null (Xu_bench_infile_name)) Xu_bench_infile_name = ""
+
+    COR_Xu_bdprob =
+        gen_single_bdprob_COR_from_scratch_or_Xu_bench_file (
+                                exp_root_dir,
+                                parameters$compute_network_metrics_COR,
+                                parameters,
+                                parameters$read_Xu_problem_from_Xu_bench_file,
+                                Xu_bench_infile_name,
+                                parameters$given_correct_solution_cost,
+                                parameters$max_allowed_num_spp,
+                                bdpg_error_codes,
+                                integerize,
+                                base_prob_name_stem = "base_prob",
+                                cor_dir_name_stem = "cor"
+                                )
+
+    return (COR_Xu_bdprob)
+    }
+
+#===============================================================================
+
+#  MOVE TO BDPG AND EXPORT
+
+gen_single_bdprob_WRAP <- function (bdprob_to_wrap,
+                                    parameters,
+                                    bdpg_error_codes)
+    {
+    wrap_lognormal_dist_around_Xu =
+        value_or_FALSE_if_null (parameters$wrap_lognormal_dist_around_Xu)
+
+    read_Xu_problem_from_Xu_bench_file =
+        value_or_FALSE_if_null (parameters$read_Xu_problem_from_Xu_bench_file)
+
+    #---------------------------------------------------------------------------
+
+        #----------------------------------------------------------------------
+        #  Make sure that the base problem for the multiproblem is not one of
+        #  Xu's benchmark problems read in from a file, since they do not
+        #  contain the correct solution set.  They only contain the correct
+        #  solution cost.
+        #----------------------------------------------------------------------
+
+    if (wrap_lognormal_dist_around_Xu &   #(parameters$wrap_lognormal_around_Xu &
+        read_Xu_problem_from_Xu_bench_file)   # parameters$read_Xu_problem_from_Xu_file)
+        {
+        stop (paste0 ("\n\nParameters wrap_lognormal_dist_around_Xu and ",
+                    "read_Xu_problem_from_Xu_file ",
+                    "\nare both true.",
+                    "\nCannot wrap around Xu problem read from file ",
+                    "because dependent node IDs ",
+                    "\nare never given with the file.",
+                    "\nQuitting.\n\n")
+            )
+        }
+
+    #---------------------------------------------------------------------------
+
+    if (wrap_lognormal_dist_around_Xu)  #parameters$wrap_lognormal_around_Xu)
+        {
+        starting_dir =
+            file.path (normalizePath (parameters$full_output_dir_with_slash))
+            # ,
+            # "wrap_prob.1")
+
+        compute_network_metrics_for_this_prob =
+            value_or_FALSE_if_null (parameters$compute_network_metrics_for_this_prob)
+
+        WRAP_prob =
+            bdpg::gen_wrapped_bdprob_COR (starting_dir,
+                                          compute_network_metrics_for_this_prob,
+                                          parameters,
+                                          bdprob_to_wrap,
+                                          bdpg_error_codes)
+        } else
+        {
+        stop (paste0 ("\n\nwrap_lognormal_dist_around_Xu is not set to TRUE.  ",
+                    "\n    It is currently the only defined wrap function.\n")
+            )
+        }
+
+    return (WRAP_prob)
+    }
+
+#===============================================================================
+
+get_bdprob_from_rds_file <- function (prob_src,
+                                      cur_input_prob_idx,
+                                      rds_file_set_path,
+                                      rds_file_set_yaml_array,
+                                      rds_file_path
+                                      )
+    {
+    prob_src = parameters$prob_src
+
+    if (is.null (prob_src))
+        {
+        cat ("\n\nERROR: no prob_src given.\n", sep='')
+        quit (save="no", bdpg_error_codes$ERROR_STATUS_no_prob_src_given)
+
+        } else if (prob_src == prob_from_rds_file)
+        {
+            rds_file_path = parameters$rds_file_path
+
+            Xu_bdprob =
+                load_saved_obj_from_file (normalizePath (rds_file_path))
+
+        } else if (prob_src == prob_from_rds_file_set_from_file)
+        {
+            rds_file_set_path = parameters$rds_file_set_path
+            rds_file_set = readLines (rds_file_set_path)
+
+            cur_input_prob_idx = parameters$cur_input_prob_idx
+            rds_file_path = rds_file_set [cur_input_prob_idx]
+
+            Xu_bdprob =
+                load_saved_obj_from_file (normalizePath (rds_file_path))
+
+        } else if (prob_src == prob_from_rds_file_set_from_yaml_array)
+        {
+            rds_file_set = parameters$rds_file_set_yaml_array
+
+            cur_input_prob_idx = parameters$cur_input_prob_idx
+            rds_file_path = rds_file_set [cur_input_prob_idx]
+
+            Xu_bdprob =
+                load_saved_obj_from_file (normalizePath (rds_file_path))
+
+        } else
+        {
+        cat ("\n\nERROR: unknown prob_src = '", prob_src, "'.\n", sep='')
+        quit (save="no", bdpg_error_codes$ERROR_STATUS_unknown_prob_src)
+        }
+
+    return (Xu_bdprob)
+    }
+
+#===============================================================================
+
+single_action_using_tzar_reps <- function (parameters)
+    {
+    gen_COR_prob  = value_or_FALSE_if_null (parameters$gen_COR_prob)
+    gen_WRAP_prob = value_or_FALSE_if_null (parameters$gen_WRAP_prob)
+    gen_APP_prob  = value_or_FALSE_if_null (parameters$gen_APP_prob)
+    do_rsrun      = value_or_FALSE_if_null (parameters$do_rsrun)
+
+    num_actions_chosen = gen_COR_prob + gen_WRAP_prob + gen_APP_prob +
+                         do_rsrun
+
+    if (num_actions_chosen != 1)
+        stop (paste0 ("\nMust set 1 and only 1 of these variables to TRUE: ",
+                      "gen_COR_prob (", gen_COR_prob, "), ",
+                      "gen_WRAP_prob (", gen_WRAP_prob, "), ",
+                      "gen_APP_prob (", gen_APP_prob, "), ",
+                      "do_rsrun (", do_rsrun, "), ",
+                      "\n"))
+
+    #---------------------------------------------------------------------------
+
+    if (gen_COR_prob)
+        {
+        bdpg::gen_single_bdprob_COR (parameters,
+                                     bdpg_error_codes,
+                                     integerize,
+                                     base_prob_name_stem = "base_prob",
+                                     cor_dir_name_stem = "cor")
+        }
+
+    #---------------------------------------------------------------------------
+
+    if (gen_WRAP_prob)
+        {
+        bdprob_to_wrap =
+            get_bdprob_from_rds_file (parameters$WRAP_input_prob_src,
+                                      parameters$cur_input_prob_idx,
+                                      parameters$WRAP_input_rds_file_set_path,
+                                      parameters$WRAP_input_rds_file_set_yaml_array,
+                                      parameters$WRAP_rds_file_path
+                                     )
+
+        bdpg::gen_single_bdprob_WRAP (bdprob_to_wrap,
+                                      parameters,
+                                      bdpg_error_codes)
+        }
+
+    #---------------------------------------------------------------------------
+
+NEED TO DO APP NOW...
+
+    #---------------------------------------------------------------------------
+
+    return()
+    }
+
+#===============================================================================
+
 gen_4_basic_variants <- function (parameters,
                                   bdpg_error_codes,
                                   integerize)
     {
+cat ("\n\nAT START OF gen_4_basic_variants().\n\n")
+
     #===============================================================================
     #       Generate a base problem, i.e, create the Xu graph nodes and edge_list.
     #===============================================================================
@@ -16,42 +239,27 @@ gen_4_basic_variants <- function (parameters,
         #  and if they don't for this particular run, then set them to
         #  something like NULL.
 
-    infile_name = parameters$infile_name
-    if (is.null (infile_name)) infile_name = ""
+    Xu_bench_file_name = parameters$Xu_bench_file_name
+    if (is.null (Xu_bench_file_name)) Xu_bench_file_name = ""
 
     starting_dir = file.path (normalizePath (parameters$full_output_dir_with_slash))
 
-prob_from_generator       = "generator"
-prob_from_rds_file        = "rds_file"
-prob_from_Xu_bench_file   = "Xu_bench_file"
-
-#COR_prob_src = prob_from_rds_file    #prob_from_generator
-COR_prob_src = parameters$COR_prob_src
-
-rds_file_path = parameters$rds_file_path
-#NULL
-#"/Users/bill/tzar/default_runset/1866_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.90d9c6a5-19f2-42dd-9d31-7464770f34c9/saved.RSprob-COR-Base.90d9c6a5-19f2-42dd-9d31-7464770f34c9.rds"
-#"/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
-
-    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (COR_prob_src,
-                                                    rds_file_path,
-
-                                                    starting_dir,
+    base_COR_bd_prob = bdpg::gen_single_bdprob_COR (starting_dir,
                                                   parameters$compute_network_metrics_COR,
                                                     parameters,
                                                     parameters$read_Xu_problem_from_Xu_bench_file,
-                                                    infile_name,
+                                                    Xu_bench_file_name,
                                                     parameters$given_correct_solution_cost,
                                                     parameters$max_allowed_num_spp,
                                                     bdpg_error_codes,
                                                     integerize)
 
-# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@alpha___lower_bound)
-# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@alpha___upper_bound)
-# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@use_unif_rand_alpha__)
-# print (base_COR_bd_prob@prob_gen_info@Xu_parameters@bdpg_extended_params@n__num_groups)
-# browser()
-if (COR_prob_src != prob_from_rds_file)
+cat ("\n\n-----  base_COR_bd_prob@UUID = '", base_COR_bd_prob@UUID,
+     "', checksum = '", base_COR_bd_prob@checksum, "'  -----\n\n")
+
+if(FALSE)
+{
+#####if (COR_prob_src != prob_from_rds_file)
     bdpg::do_COR_marxan_analysis_and_output (base_COR_bd_prob, parameters)
 
     cat("\n\njust after set_up_for_and_run_marxan() for Base COR problem")
@@ -141,6 +349,8 @@ if (COR_prob_src != prob_from_rds_file)
             cat ("\n================================================================================\n\n")
             }
         }  #  end if - wrap_lognormal_dist_around_Xu
+
+}  #  end if - FALSE
 
     }  #  end function - gen_4_basic_variants()
 

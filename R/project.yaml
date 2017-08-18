@@ -173,21 +173,42 @@ base_params:
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
-    #COR_prob_src: "generator"
-    COR_prob_src: "rds_file"
-    #COR_prob_src: "Xu_bench_file"
+#    prob_src_type: "ANY"
 
-    rds_file_path: "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+#    prob_src_type: "COR"
+#    prob_src_type: "APP"
+#    prob_src_type: "WRAP"
+
+    prob_src_type: "COR_base"
+#    prob_src_type: "COR_wrap"
+
+#    prob_src_type: "APP_base"
+#    prob_src_type: "APP_wrap"
+
+#    prob_src_type: "ANY_base"
+#    prob_src_type: "ANY_wrap"
 
 
-#    COR_prob_src: "rds_file_set_from_file"
-#    rds_file_set_path: "~/COR_rds_input_file_paths.txt"
+#    prob_src: "generator"
+#    prob_src: "Xu_bench_file"
 
-#    COR_prob_src: "rds_file_set_from_yaml_array"
-#    COR_rds_file_set_yaml_array:
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+#    prob_src: "rds_file"
+#    rds_file_path: "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
+
+        #  NOTE that the file names in this file can't have quotes around them,
+        #  e.g., if you had copied them from the yaml array below and stripped
+        #  off the leading blanks and dash, they would fail in this txt file
+        #  unless you removed the double quotes.
+    seed: 1010
+    prob_src: "rds_file_set_from_file"
+    rds_file_set_path: "~/COR_rds_input_file_paths.txt"
+
+#    seed: 1010
+#    prob_src: "rds_file_set_from_yaml_array"
+#    rds_file_set_yaml_array:
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/49_marxan_simulated_annealing/RSprob-COR-Base.fb9e78fc-5a6d-49b7-b8a9-74e918a86c92/saved.RSprob-COR-Base.fb9e78fc-5a6d-49b7-b8a9-74e918a86c92.rds"
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/51_marxan_simulated_annealing/RSprob-COR-Base.7151efe2-e13b-428b-ac76-62edc3b6b6a5/saved.RSprob-COR-Base.7151efe2-e13b-428b-ac76-62edc3b6b6a5.rds"
+#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/50_marxan_simulated_annealing/RSprob-COR-Base.0881452f-709a-4a4e-bd4c-9f502e1306c5/saved.RSprob-COR-Base.0881452f-709a-4a4e-bd4c-9f502e1306c5.rds"
 
     #---------------------------------------------------------------------------
 
@@ -244,11 +265,11 @@ scenarios:
 
 repetitions:
     generators:
-        - key: seed
+        - key: rds_file_set_element_idx         #seed
           generator_type: linear_step
-          start: 10102
+          start: 1                                  #1010
           step_size: 1
-          count: 1
+          count: 3
 
     #---------------------------------------------------------------------------
 
