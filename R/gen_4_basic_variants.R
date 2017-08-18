@@ -216,7 +216,66 @@ single_action_using_tzar_reps <- function (parameters)
 
     #---------------------------------------------------------------------------
 
-NEED TO DO APP NOW...
+    if (gen_APP_prob)
+        {
+        bdprob_to_add_error_to =
+            get_bdprob_from_rds_file (parameters$APP_input_prob_src,
+                                      parameters$cur_input_prob_idx,
+                                      parameters$APP_input_rds_file_set_path,
+                                      parameters$APP_input_rds_file_set_yaml_array,
+                                      parameters$APP_rds_file_path
+                                      )
+
+        bdpg::gen_single_bdprob_APP (bdprob_to_add_error_to,
+                                     parameters$compute_network_metrics_APP,
+                                     parameters,
+                                     bdpg_error_codes,
+                                     integerize
+                                     )
+        }
+
+    #---------------------------------------------------------------------------
+
+    if (do_rsrun)
+        {
+        num_actions_chosen = run_rs_on_COR_prob + run_rs_on_APP_prob
+
+        if (num_actions_chosen != 1)
+            stop (paste0 ("\nMust set 1 and only 1 of these variables to TRUE: ",
+                          "run_rs_on_COR_prob (", run_rs_on_COR_prob, "), ",
+                          "run_rs_on_APP_prob (", run_rs_on_APP_prob, "), ",
+                          "\n"))
+
+        #-----------------------------------------------------------------------
+
+        cor_bdprob =
+            get_bdprob_from_rds_file (parameters$RS_cor_input_prob_src,
+                                      parameters$cur_input_prob_idx,
+                                      parameters$RS_cor_input_rds_file_set_path,
+                                      parameters$RS_cor_input_rds_file_set_yaml_array,
+                                      parameters$RS_cor_rds_file_path
+                                      )
+
+        if (run_rs_on_COR_prob)
+            {
+            bdpg::do_COR_marxan_analysis_and_output (cor_bdprob,
+                                                     parameters)
+
+            } else if (run_rs_on_APP_prob)
+            {
+            app_bdprob =
+                get_bdprob_from_rds_file (parameters$RS_app_input_prob_src,
+                                          parameters$cur_input_prob_idx,
+                                          parameters$RS_app_input_rds_file_set_path,
+                                          parameters$RS_app_input_rds_file_set_yaml_array,
+                                          parameters$RS_app_rds_file_path
+                                          )
+
+            bdpg::do_APP_marxan_analysis_and_output (app_bdprob,
+                                                     cor_bdprob,
+                                                     parameters)
+            }
+        }
 
     #---------------------------------------------------------------------------
 
