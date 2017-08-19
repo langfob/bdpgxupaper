@@ -173,6 +173,10 @@ base_params:
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
+    gen_4_basic_variants: TRUE
+    single_action: FALSE
+
+
 #    prob_src_type: "ANY"
 
 #    prob_src_type: "COR"
@@ -269,7 +273,7 @@ repetitions:
           generator_type: linear_step
           start: 1                                  #1010
           step_size: 1
-          count: 3
+          count: 1
 
     #---------------------------------------------------------------------------
 

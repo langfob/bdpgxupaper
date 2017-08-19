@@ -90,7 +90,23 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #                       Do the main work.
 #===============================================================================
 
-    gen_4_basic_variants (parameters, bdpg_error_codes, integerize)
+    gen_4_variants =
+        bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
+
+    if (gen_4_variants)
+        {
+        bdpg::gen_4_basic_variants (parameters, bdpg_error_codes, integerize)
+
+        } else
+        {
+        single_action =
+            bdpg::value_or_FALSE_if_null (parameters$single_action_using_tzar_reps)
+
+        if (single_action)
+            {
+            bdpg::single_action_using_tzar_reps (parameters)
+            }
+        }
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
