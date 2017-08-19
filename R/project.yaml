@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpgxupaper
+project_name: bdpgxupaper_single_action_MARXAN_on_COR_WRAP_prob
 runner_class: RRunner
 
 #===============================================================================
@@ -173,39 +173,40 @@ base_params:
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
-    gen_4_basic_variants: TRUE
-    single_action: FALSE
+    gen_4_basic_variants: FALSE
+
+    single_action_using_tzar_reps: TRUE
+
+#    seed: 1000
+    gen_COR_prob: FALSE
+
+#    seed: 1100
+    gen_WRAP_prob: FALSE
+#    WRAP_input_prob_src: "rds_file_set_from_file"
+#    WRAP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+
+#    seed: 1200
+    gen_APP_prob: FALSE
+#    APP_input_prob_src: "rds_file_set_from_file"
+#    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+
+#    seed: 1300
+    gen_APP_prob: FALSE
+#    APP_input_prob_src: "rds_file_set_from_file"
+#    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
+
+#    seed: 1400
+    run_rs_on_COR_prob: TRUE
+#    RS_cor_input_prob_src: "rds_file_set_from_file"
+#    RS_cor_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+
+    seed: 1500
+    run_rs_on_COR_prob: TRUE
+    RS_cor_input_prob_src: "rds_file_set_from_file"
+    RS_cor_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
 
 
-#    prob_src_type: "ANY"
 
-#    prob_src_type: "COR"
-#    prob_src_type: "APP"
-#    prob_src_type: "WRAP"
-
-    prob_src_type: "COR_base"
-#    prob_src_type: "COR_wrap"
-
-#    prob_src_type: "APP_base"
-#    prob_src_type: "APP_wrap"
-
-#    prob_src_type: "ANY_base"
-#    prob_src_type: "ANY_wrap"
-
-
-#    prob_src: "generator"
-#    prob_src: "Xu_bench_file"
-
-#    prob_src: "rds_file"
-#    rds_file_path: "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/29_marxan_simulated_annealing.completedTzarEmulation/RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251/saved.RSprob-COR-Base.d6ef52ad-4e76-4e98-a40b-99b0fb709251.rds"
-
-        #  NOTE that the file names in this file can't have quotes around them,
-        #  e.g., if you had copied them from the yaml array below and stripped
-        #  off the leading blanks and dash, they would fail in this txt file
-        #  unless you removed the double quotes.
-    seed: 1010
-    prob_src: "rds_file_set_from_file"
-    rds_file_set_path: "~/COR_rds_input_file_paths.txt"
 
 #    seed: 1010
 #    prob_src: "rds_file_set_from_yaml_array"
@@ -267,13 +268,84 @@ scenarios:
 
     #---------------------------------------------------------------------------
 
+#  COR prob generation
+#repetitions:
+#    generators:
+#        - key: seed        #rds_file_set_element_idx         #seed
+#          generator_type: linear_step
+#          start: 1020        #1                                  #1010
+#          step_size: 1
+#          count: 5
+
+    #---------------------------------------------------------------------------
+
+#  WRAP prob generation
+#repetitions:
+#    generators:
+#        - key: rds_file_set_element_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 5
+#        - key: cur_input_prob_idx        #rds_file_set_element_idx         #seed
+#          generator_type: linear_step
+#          start: 1                                  #1010
+#          step_size: 1
+#          count: 3
+
+    #---------------------------------------------------------------------------
+
+#  APP (of COR base) prob generation
+#repetitions:
+#    generators:
+#        - key: cur_input_prob_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 5
+#        - key: rds_file_set_element_idx         #seed
+#          generator_type: linear_step
+#          start: 1                                  #1010
+#          step_size: 1
+#          count: 2
+
+    #---------------------------------------------------------------------------
+
+#  APP (of COR base) prob generation
+#repetitions:
+#    generators:
+#        - key: cur_input_prob_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 15
+#        - key: rds_file_set_element_idx         #seed
+#          generator_type: linear_step
+#          start: 1                                  #1010
+#          step_size: 1
+#          count: 2
+
+    #---------------------------------------------------------------------------
+
+#  Run marxan on COR base
 repetitions:
     generators:
-        - key: rds_file_set_element_idx         #seed
+        - key: cur_input_prob_idx         #seed
           generator_type: linear_step
-          start: 1                                  #1010
+          start: 1        #1020        #1                                  #1010
           step_size: 1
-          count: 1
+          count: 5
+
+    #---------------------------------------------------------------------------
+
+#  Run marxan on COR WRAP
+repetitions:
+    generators:
+        - key: cur_input_prob_idx         #seed
+          generator_type: linear_step
+          start: 1        #1020        #1                                  #1010
+          step_size: 1
+          count: 15
 
     #---------------------------------------------------------------------------
 
