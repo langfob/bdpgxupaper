@@ -104,7 +104,14 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
         if (single_action)
             {
-            bdpg::single_action_using_tzar_reps (parameters)
+            bdpg::single_action_using_tzar_reps (parameters,
+                                                 bdpg_error_codes,
+                                                 integerize)
+
+            } else
+            {
+            cat ("\n\nIn xu_paper_main.R, no matching actions found, ",
+                 "so, doing nothing...\n\n")
             }
         }
 
