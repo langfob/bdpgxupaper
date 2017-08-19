@@ -37,7 +37,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #          Global variables not to be included in package.
 #===============================================================================
 
-    cat ("\n\nSTARTING generateSetCoverProblem.R at ", date(), "\n\n")
+    cat ("\n\nSTARTING xu_paper_main.R at ", date(), "\n\n")
 
 #===============================================================================
 
