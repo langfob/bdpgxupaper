@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpgxupaper_single_action_MARXAN_on_COR_WRAP_prob
+project_name: bdpgxupaper_single_action_MARXAN_on_APP_WRAP_prob
 runner_class: RRunner
 
 #===============================================================================
@@ -178,34 +178,42 @@ base_params:
     single_action_using_tzar_reps: TRUE
 
 #    seed: 1000
-    gen_COR_prob: FALSE
+#    gen_COR_prob: TRUE
 
 #    seed: 1100
-    gen_WRAP_prob: FALSE
+#    gen_WRAP_prob: TRUE
 #    WRAP_input_prob_src: "rds_file_set_from_file"
 #    WRAP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
 
 #    seed: 1200
-    gen_APP_prob: FALSE
+#    gen_APP_prob: TRUE
 #    APP_input_prob_src: "rds_file_set_from_file"
 #    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
 
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_WRAP_prob/default_runset | grep saved > WRAP_rds_input_file_paths.txt
 #    seed: 1300
-    gen_APP_prob: FALSE
+#    gen_APP_prob: TRUE
 #    APP_input_prob_src: "rds_file_set_from_file"
 #    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
 
 #    seed: 1400
-    run_rs_on_COR_prob: TRUE
+#    run_rs_on_COR_prob: TRUE
 #    RS_cor_input_prob_src: "rds_file_set_from_file"
 #    RS_cor_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
 
-    seed: 1500
-    run_rs_on_COR_prob: TRUE
-    RS_cor_input_prob_src: "rds_file_set_from_file"
-    RS_cor_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_APP_of_cor_base_prob/default_runset | grep saved > /Users/bill/Downloads/Tzar_input_files/APP_cor_rds_input_file_paths.txt
+#    seed: 1500
+#    run_rs_on_APP_prob: TRUE
+#    RS_app_input_prob_src: "rds_file_set_from_file"
+#    RS_app_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/APP_cor_rds_input_file_paths.txt"
+#    RS_app_base_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
 
-
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_APP_of_cor_WRAP_prob/default_runset | grep saved > /Users/bill/Downloads/Tzar_input_files/APP_wrap_rds_input_file_paths.txt
+    seed: 1600
+    run_rs_on_APP_prob: TRUE
+    RS_app_input_prob_src: "rds_file_set_from_file"
+    RS_app_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/APP_wrap_rds_input_file_paths.txt"
+    RS_app_base_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
 
 
 #    seed: 1010
@@ -328,24 +336,46 @@ scenarios:
     #---------------------------------------------------------------------------
 
 #  Run marxan on COR base
-repetitions:
-    generators:
-        - key: cur_input_prob_idx         #seed
-          generator_type: linear_step
-          start: 1        #1020        #1                                  #1010
-          step_size: 1
-          count: 5
+#repetitions:
+#    generators:
+#        - key: cur_input_prob_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 5
 
     #---------------------------------------------------------------------------
 
 #  Run marxan on COR WRAP
+#repetitions:
+#    generators:
+#        - key: cur_input_prob_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 15
+
+    #---------------------------------------------------------------------------
+
+#  Run marxan on APP of COR base
+#repetitions:
+#    generators:
+#        - key: cur_input_prob_idx         #seed
+#          generator_type: linear_step
+#          start: 1        #1020        #1                                  #1010
+#          step_size: 1
+#          count: 10
+
+    #---------------------------------------------------------------------------
+
+#  Run marxan on APP of WRAP base
 repetitions:
     generators:
         - key: cur_input_prob_idx         #seed
           generator_type: linear_step
           start: 1        #1020        #1                                  #1010
           step_size: 1
-          count: 15
+          count: 30
 
     #---------------------------------------------------------------------------
 
