@@ -1,0 +1,136 @@
+#===============================================================================
+
+project_name: bdpgxupaper_single_action_COR_prob
+runner_class: RRunner
+
+#===============================================================================
+
+    #  Cloned from:
+    #  project.2017_08_24_09_11_am.full_with_section_for_each_action_type.yaml
+    #  in:
+    #  /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/yamlFiles
+
+    #--------------------
+
+base_params:
+
+        #  BTL - 2014 12 28
+        #  This variable captures the tzar output path to hand it to the
+        #  tzar emulation code.
+    full_output_dir_with_slash: $$output_path$$
+
+    #--------------------
+    #--------------------
+
+        #  SET THIS VALUE EVERY TIME...
+            #  Runset description to print in output since the runset name has
+            #  to be short and tends to be cryptic.  The "|" should force the
+            #  saved description string to include newlines in the string.
+            #  If you don't want the newlines (i.e., you want one long string),
+            #  then use a ">" in place of the "|".
+    runset_description: |
+        Stepping up from 10 runs to 90 runs of a Xu hard scenario to
+        extend check whether single_action_COR is working properly.
+
+    runset_name: $$runset$$
+    runset_abbrev: "bdpg_single_action_COR"
+
+    run_id: $$run_id$$
+
+    #--------------------
+
+    max_allowed_possible_tot_num_links: 1500
+    max_allowed_num_spp: 2000
+
+    #--------------------
+
+            #  1 - num_groups = tot cost
+            #                   (when num_independent_nodes_per_group = 1),
+            #  so increase n to reduce cost
+            #      num_nodes_per_group = integerize (n__num_groups ^ alpha__)
+
+    num_independent_nodes_per_group: 1
+
+    #--------------------
+
+    integerize_string: "round"
+
+    base_for_target_num_links_between_2_groups_per_round: "num_nodes_per_group"
+
+    #---------------------------------------------------------------------------
+
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
+
+    compute_network_metrics_COR: TRUE
+    compute_network_metrics_APP: TRUE
+    compute_network_metrics_wrapped_COR: TRUE
+    compute_network_metrics_wrapped_APP: TRUE
+
+    use_igraph_metrics:    TRUE
+
+    use_bipartite_metrics: TRUE
+    #bipartite_metrics_to_use:     "ALLBUTDD"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "quick_test"
+
+    #---------------------------------------------------------------------------
+
+        # Outputs
+
+#    summary_filename: prob_diff_results.csv
+#    summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
+
+    too_many_possible_links_error_flag_file_name: $$output_path$$too_many_possible_links_error_flag_file.txt
+
+    #---------------------------------------------------------------------------
+    #---------------------------------------------------------------------------
+
+    gen_4_basic_variants: FALSE
+    single_action_using_tzar_reps: TRUE
+
+    gen_COR_prob: TRUE
+
+    #---------------------------------------------------------------------------
+
+scenarios:
+
+            #-----------------------------------------------
+            #  Xu simple model hard case:
+            #      n in [8..100] while alpha = 0.52, r = 1
+            #-----------------------------------------------
+
+        #  Taken from v700 project.yaml scenario:
+        #  scen_Xu_simple_model_hard_case_1__based_on_N
+
+    - name: Xu_simple_model_hard_case
+      parameters:
+            derive_alpha_from_n__num_groups_and_opt_frac_0.5: TRUE
+
+            use_unif_rand_n__num_groups: TRUE
+            n__num_groups_lower_bound: 61
+            n__num_groups_upper_bound: 80
+
+            use_unif_rand_r__density: TRUE
+            r__density_lower_bound: 0.01
+            r__density_upper_bound: 5.0
+
+            use_unif_rand_p__prop_of_links_between_groups: TRUE
+            p__prop_of_links_between_groups_lower_bound: 0.01
+            p__prop_of_links_between_groups_upper_bound: 0.99
+
+    #---------------------------------------------------------------------------
+
+            #-----------------------
+            #  COR prob generation
+            #-----------------------
+
+repetitions:
+    generators:
+        - key: cur_input_prob_idx         #seed
+          generator_type: linear_step
+          start: 1                                  #1010
+          step_size: 1
+          count: 90
+
+    #---------------------------------------------------------------------------
+
