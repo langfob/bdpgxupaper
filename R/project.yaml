@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpgxupaper_single_action_MARXAN_on_APP_WRAP_prob
+project_name: bdpgxupaper_single_action_MARXAN_on_COR_BASE_prob
 runner_class: RRunner
 
 #===============================================================================
@@ -44,76 +44,14 @@ base_params:
             #  If you don't want the newlines (i.e., you want one long string),
             #  then use a ">" in place of the "|".
     runset_description: |
-        Small set of runs of a Xu hard scenario with error generation both
-        on and off plus running simulated annealing and richness heuristic.
+        Running full marxan simulated annealing on COR problems.
 
     runset_name: $$runset$$
-    runset_abbrev: "bdpgSingleRunForTestAndDebug"
+    runset_abbrev: "bdpg_marxan_COR"
 
     run_id: $$run_id$$
 
-    #--------------------
-
-        #  Parameters for building a multi-problem by wrapping a lognormal
-        #  distribution around a base Xu problem.
-
-    gen_multi_bdproblem: TRUE
-    wrap_lognormal_dist_around_Xu: TRUE
-    desired_Xu_spp_frac_of_all_spp: 0.5
-    solution_frac_of_landscape: 0.3
-    desired_max_abundance_frac: 0.7
-    dep_set_PUs_eligible: FALSE
-    add_one_to_lognormal_abundances: FALSE
-    seed_value_for_search: 11
-    max_search_iterations: 500
-
-    #--------------------
-
-        #  If you're reading the Xu problem from a file in Xu's benchmark
-        #  problem file format instead of
-        #  generating it, you need to give the input file name and the
-        #  cost of the correct solution (since it's not specified in the file).
-
-    read_Xu_problem_from_Xu_bench_file: FALSE
-
-    Xu_problem_input_file_name: "/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
-    given_correct_solution_cost: 420
-
-    #--------------------
-
-    max_allowed_possible_tot_num_links: 1500
-    max_allowed_num_spp: 2000
-
-    #--------------------
-
-        #  NOTE that the choice of random seed in the yaml file is important
-        #  for this single run test because the example creates a test problem
-        #  based on drawing the control parameters from a random distribution.
-        #  When the seed was 111, the test crashed with the message below.
-        #  When I changed it to 701, it ran to completion.
-        #       Failing:  max_possible_tot_num_links ( 3291 ) > maximum allowed ( 2000 ).
-        #       Save workspace image to ~/D/rdv-framework/projects/rdvPackages/biodivprobgen/.RData? [y/n/c]:
-        #  However, the fail was just what it was supposed to do when those
-        #  parameters came up, so the yaml file could be changed to use 111
-        #  instead of 701 if you want to induce a crash to test that error
-        #  trapping.
-
-#    seed: 701
-
-    #--------------------
-
-            #  1 - num_groups = tot cost
-            #                   (when num_independent_nodes_per_group = 1),
-            #  so increase n to reduce cost
-            #      num_nodes_per_group = integerize (n__num_groups ^ alpha__)
-
-    num_independent_nodes_per_group: 1
-
-    #--------------------
-
     integerize_string: "round"
-
-    base_for_target_num_links_between_2_groups_per_round: "num_nodes_per_group"
 
     #---------------------------------------------------------------------------
         #  marxan control parameters
@@ -136,39 +74,15 @@ base_params:
     marxan_spec_file_name: "spec.dat"
     marxan_puvspr_file_name: "puvspr.dat"
 
+        #  Settings for full marxan run
+    marxan_num_reps: 100
+    marxan_num_iterations: "1000000"
 
-#    marxan_num_reps: 100
-#    marxan_num_iterations: "1000000"
-
-    marxan_num_reps: 1
-    marxan_num_iterations: "10000"
+        #  Settings for brief marxan run for quick testing of logic.
+#    marxan_num_reps: 1
+#    marxan_num_iterations: "10000"
 
     marxan_spf_rule: "POWER_OF_10"
-
-    #---------------------------------------------------------------------------
-
-    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
-
-    compute_network_metrics_COR: TRUE
-    compute_network_metrics_APP: TRUE
-    compute_network_metrics_wrapped_COR: TRUE
-    compute_network_metrics_wrapped_APP: TRUE
-
-    use_igraph_metrics:    TRUE
-
-    use_bipartite_metrics: TRUE
-    #bipartite_metrics_to_use:     "ALLBUTDD"
-    bipartite_metrics_to_use:     "all_except_slow_indices"
-#    bipartite_metrics_to_use:     "quick_test"
-
-    #---------------------------------------------------------------------------
-
-        # Outputs
-
-    summary_filename: prob_diff_results.csv
-    summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
-
-    too_many_possible_links_error_flag_file_name: $$output_path$$too_many_possible_links_error_flag_file.txt
 
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
@@ -177,51 +91,16 @@ base_params:
 
     single_action_using_tzar_reps: TRUE
 
-#    seed: 1000
-#    gen_COR_prob: TRUE
+    #---------------------------------------------------------------------------
 
-#    seed: 1100
-#    gen_WRAP_prob: TRUE
-#    WRAP_input_prob_src: "rds_file_set_from_file"
-#    WRAP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+        #  bash command to find the COR file paths and save to input file.
+        #  This command can be run from any directory.
+        #  Note that the resulting input file is not sorted in any useful way.
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_COR_prob/default_runset | grep saved > /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt
 
-#    seed: 1200
-#    gen_APP_prob: TRUE
-#    APP_input_prob_src: "rds_file_set_from_file"
-#    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
-
-#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_WRAP_prob/default_runset | grep saved > WRAP_rds_input_file_paths.txt
-#    seed: 1300
-#    gen_APP_prob: TRUE
-#    APP_input_prob_src: "rds_file_set_from_file"
-#    APP_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
-
-#    seed: 1400
-#    run_rs_on_COR_prob: TRUE
-#    RS_cor_input_prob_src: "rds_file_set_from_file"
-#    RS_cor_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
-
-#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_APP_of_cor_base_prob/default_runset | grep saved > /Users/bill/Downloads/Tzar_input_files/APP_cor_rds_input_file_paths.txt
-#    seed: 1500
-#    run_rs_on_APP_prob: TRUE
-#    RS_app_input_prob_src: "rds_file_set_from_file"
-#    RS_app_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/APP_cor_rds_input_file_paths.txt"
-#    RS_app_base_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
-
-#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_APP_of_cor_WRAP_prob/default_runset | grep saved > /Users/bill/Downloads/Tzar_input_files/APP_wrap_rds_input_file_paths.txt
-    seed: 1600
-    run_rs_on_APP_prob: TRUE
-    RS_app_input_prob_src: "rds_file_set_from_file"
-    RS_app_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/APP_wrap_rds_input_file_paths.txt"
-    RS_app_base_input_rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/WRAP_rds_input_file_paths.txt"
-
-
-#    seed: 1010
-#    prob_src: "rds_file_set_from_yaml_array"
-#    rds_file_set_yaml_array:
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/49_marxan_simulated_annealing/RSprob-COR-Base.fb9e78fc-5a6d-49b7-b8a9-74e918a86c92/saved.RSprob-COR-Base.fb9e78fc-5a6d-49b7-b8a9-74e918a86c92.rds"
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/51_marxan_simulated_annealing/RSprob-COR-Base.7151efe2-e13b-428b-ac76-62edc3b6b6a5/saved.RSprob-COR-Base.7151efe2-e13b-428b-ac76-62edc3b6b6a5.rds"
-#        - "/Users/bill/tzar/outputdata/bdpgxupaper/default_runset/50_marxan_simulated_annealing/RSprob-COR-Base.0881452f-709a-4a4e-bd4c-9f502e1306c5/saved.RSprob-COR-Base.0881452f-709a-4a4e-bd4c-9f502e1306c5.rds"
+    run_rs_on_COR_prob: TRUE
+    RS_cor_input_prob_src: "rds_file_set_from_file"
+    RS_cor_input_rds_file_set_path: "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt"
 
     #---------------------------------------------------------------------------
 
@@ -239,143 +118,19 @@ scenarios:
       parameters:
             marxan_runmode: 1
             marxan_heurtype: -1
-            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
+#            marxan_num_reps: 4        #  TO SPEED UP SOME CURRENT TESTING
 #            marxan_num_reps: 100
 
-            #--------------------
-
-            derive_alpha_from_n__num_groups_and_opt_frac_0.5: TRUE
-
-            use_unif_rand_n__num_groups: TRUE
-            n__num_groups_lower_bound: 61
-            n__num_groups_upper_bound: 80
-
-            use_unif_rand_r__density: TRUE
-            r__density_lower_bound: 0.01
-            r__density_upper_bound: 5.0
-
-            use_unif_rand_p__prop_of_links_between_groups: TRUE
-            p__prop_of_links_between_groups_lower_bound: 0.01
-            p__prop_of_links_between_groups_upper_bound: 0.99
-
-            #--------------------
-
-            apply_error_to_spp_occupancy_data: TRUE
-            match_error_counts: TRUE
-#            match_error_counts: FALSE
-
-            #--------------------
-
-                #  Constant errors
-
-            spp_occ_FP_error_type: "CONSTANT"
-            spp_occ_FP_const_rate: 0.1  #0.1
-
-            spp_occ_FN_error_type: "CONSTANT"
-            spp_occ_FN_const_rate: 0.1  #0.1
-
     #---------------------------------------------------------------------------
 
-#  COR prob generation
-#repetitions:
-#    generators:
-#        - key: seed        #rds_file_set_element_idx         #seed
-#          generator_type: linear_step
-#          start: 1020        #1                                  #1010
-#          step_size: 1
-#          count: 5
-
-    #---------------------------------------------------------------------------
-
-#  WRAP prob generation
-#repetitions:
-#    generators:
-#        - key: rds_file_set_element_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 5
-#        - key: cur_input_prob_idx        #rds_file_set_element_idx         #seed
-#          generator_type: linear_step
-#          start: 1                                  #1010
-#          step_size: 1
-#          count: 3
-
-    #---------------------------------------------------------------------------
-
-#  APP (of COR base) prob generation
-#repetitions:
-#    generators:
-#        - key: cur_input_prob_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 5
-#        - key: rds_file_set_element_idx         #seed
-#          generator_type: linear_step
-#          start: 1                                  #1010
-#          step_size: 1
-#          count: 2
-
-    #---------------------------------------------------------------------------
-
-#  APP (of COR base) prob generation
-#repetitions:
-#    generators:
-#        - key: cur_input_prob_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 15
-#        - key: rds_file_set_element_idx         #seed
-#          generator_type: linear_step
-#          start: 1                                  #1010
-#          step_size: 1
-#          count: 2
-
-    #---------------------------------------------------------------------------
-
-#  Run marxan on COR base
-#repetitions:
-#    generators:
-#        - key: cur_input_prob_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 5
-
-    #---------------------------------------------------------------------------
-
-#  Run marxan on COR WRAP
-#repetitions:
-#    generators:
-#        - key: cur_input_prob_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 15
-
-    #---------------------------------------------------------------------------
-
-#  Run marxan on APP of COR base
-#repetitions:
-#    generators:
-#        - key: cur_input_prob_idx         #seed
-#          generator_type: linear_step
-#          start: 1        #1020        #1                                  #1010
-#          step_size: 1
-#          count: 10
-
-    #---------------------------------------------------------------------------
-
-#  Run marxan on APP of WRAP base
+#  Run marxan on whatever set of input files is given
 repetitions:
     generators:
         - key: cur_input_prob_idx         #seed
           generator_type: linear_step
           start: 1        #1020        #1                                  #1010
           step_size: 1
-          count: 30
+          count: 110
 
     #---------------------------------------------------------------------------
 
