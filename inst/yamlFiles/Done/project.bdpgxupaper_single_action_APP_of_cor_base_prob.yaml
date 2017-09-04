@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpgxupaper_single_action_APP_of_cor_WRAP_prob
+project_name: bdpgxupaper_single_action_APP_of_cor_base_prob
 runner_class: RRunner
 
 #===============================================================================
@@ -29,10 +29,10 @@ base_params:
             #  If you don't want the newlines (i.e., you want one long string),
             #  then use a ">" in place of the "|".
     runset_description: |
-        Small set of APP versions for each current COR WRAP problem.
+        Small set of APP versions for each current COR problem.
 
     runset_name: $$runset$$
-    runset_abbrev: "bdpg_single_action_APP_on_WRAP"
+    runset_abbrev: "bdpg_single_action_APP_on_COR"
 
     run_id: $$run_id$$
 
@@ -71,11 +71,11 @@ base_params:
         #  bash command to find the COR file paths and save to input file.
         #  This command can be run from any directory.
         #  Note that the resulting input file is not sorted in any useful way.
-#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_WRAP_prob/default_runset | grep saved > /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_WRAP_rds_input_file_paths.txt
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_COR_prob/default_runset | grep saved > /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt
 
     gen_APP_prob: TRUE
     APP_input_prob_src: "rds_file_set_from_file"
-    APP_input_rds_file_set_path: "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_WRAP_rds_input_file_paths.txt"
+    APP_input_rds_file_set_path: "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt"
 
     #---------------------------------------------------------------------------
 
@@ -99,19 +99,19 @@ scenarios:
 
     #---------------------------------------------------------------------------
 
-#  APP (of COR WRAP) prob generation
+#  APP (of COR base) prob generation
 repetitions:
     generators:
         - key: cur_input_prob_idx
           generator_type: linear_step
           start: 1
           step_size: 1
-          count: 220                       #  number of WRAP problems
+          count: 110                       #  number of COR problems
         - key: rds_file_set_element_idx    #  current APP idx
           generator_type: linear_step
           start: 1
           step_size: 1
-          count: 2                         #  number of APPs per WRAP
+          count: 2                         #  number of APPs per COR
 
     #---------------------------------------------------------------------------
 

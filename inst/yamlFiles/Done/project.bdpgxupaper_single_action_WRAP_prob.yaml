@@ -1,12 +1,12 @@
 #===============================================================================
 
-project_name: bdpgxupaper_single_action_COR_prob
+project_name: bdpgxupaper_single_action_WRAP_prob
 runner_class: RRunner
 
 #===============================================================================
 
     #  Cloned from:
-    #  project.2017_08_24_09_11_am.full_with_section_for_each_action_type.yaml
+    #  project.2017_08_16_09_51_am.original_full.yaml
     #  in:
     #  /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/yamlFiles
 
@@ -29,10 +29,10 @@ base_params:
             #  If you don't want the newlines (i.e., you want one long string),
             #  then use a ">" in place of the "|".
     runset_description: |
-        Small set of runs of a Xu hard scenario?
+        Small set of WRAP problems for each current COR problem.
 
     runset_name: $$runset$$
-    runset_abbrev: "bdpg_single_action_COR"
+    runset_abbrev: "bdpg_single_action_WRAP"
 
     run_id: $$run_id$$
 
@@ -43,18 +43,7 @@ base_params:
 
     #--------------------
 
-            #  1 - num_groups = tot cost
-            #                   (when num_independent_nodes_per_group = 1),
-            #  so increase n to reduce cost
-            #      num_nodes_per_group = integerize (n__num_groups ^ alpha__)
-
-    num_independent_nodes_per_group: 1
-
-    #--------------------
-
     integerize_string: "round"
-
-    base_for_target_num_links_between_2_groups_per_round: "num_nodes_per_group"
 
     #---------------------------------------------------------------------------
 
@@ -73,63 +62,54 @@ base_params:
 #    bipartite_metrics_to_use:     "quick_test"
 
     #---------------------------------------------------------------------------
-
-        # Outputs
-
-#    summary_filename: prob_diff_results.csv
-#    summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
-
-    too_many_possible_links_error_flag_file_name: $$output_path$$too_many_possible_links_error_flag_file.txt
-
-    #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
     gen_4_basic_variants: FALSE
+
     single_action_using_tzar_reps: TRUE
 
-    gen_COR_prob: TRUE
+        #  bash command to find the COR file paths and save to input file.
+        #  This command can be run from any directory.
+        #  Note that the resulting input file is not sorted in any useful way.
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_COR_prob/default_runset | grep saved > /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt
+
+    gen_WRAP_prob: TRUE
+    WRAP_input_prob_src: "rds_file_set_from_file"
+    WRAP_input_rds_file_set_path: "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_rds_input_file_paths.txt"
 
     #---------------------------------------------------------------------------
 
 scenarios:
 
-            #-----------------------------------------------
-            #  Xu simple model hard case:
-            #      n in [8..100] while alpha = 0.52, r = 1
-            #-----------------------------------------------
-
-        #  Taken from v700 project.yaml scenario:
-        #  scen_Xu_simple_model_hard_case_1__based_on_N
-
-    - name: Xu_simple_model_hard_case
+    - name: wrap_around_COR_prob
       parameters:
-            derive_alpha_from_n__num_groups_and_opt_frac_0.5: TRUE
-
-            use_unif_rand_n__num_groups: TRUE
-            n__num_groups_lower_bound: 61
-            n__num_groups_upper_bound: 80
-
-            use_unif_rand_r__density: TRUE
-            r__density_lower_bound: 0.01
-            r__density_upper_bound: 5.0
-
-            use_unif_rand_p__prop_of_links_between_groups: TRUE
-            p__prop_of_links_between_groups_lower_bound: 0.01
-            p__prop_of_links_between_groups_upper_bound: 0.99
+            #  Parameters for building a multi-problem by wrapping a lognormal
+            #  distribution around a base Xu problem.
+#        gen_multi_bdproblem: TRUE
+        wrap_lognormal_dist_around_Xu: TRUE
+        desired_Xu_spp_frac_of_all_spp: 0.5
+        solution_frac_of_landscape: 0.3
+        desired_max_abundance_frac: 0.7
+        dep_set_PUs_eligible: FALSE
+        add_one_to_lognormal_abundances: FALSE
+#        seed_value_for_search: 11
+        max_search_iterations: 500
 
     #---------------------------------------------------------------------------
 
-            #-----------------------
-            #  COR prob generation
-            #-----------------------
-
+#  WRAP (of COR base) prob generation
 repetitions:
     generators:
-        - key: cur_input_prob_idx         #seed
+        - key: cur_input_prob_idx          #  current COR problem idx
           generator_type: linear_step
-          start: 1                                  #1010
+          start: 1
           step_size: 1
-          count: 1
+          count: 110                       #  number of COR problems
+        - key: rds_file_set_element_idx    #  current WRAP idx
+          generator_type: linear_step
+          start: 1
+          step_size: 1
+          count: 2                         #  number of WRAPs per COR
 
     #---------------------------------------------------------------------------
 

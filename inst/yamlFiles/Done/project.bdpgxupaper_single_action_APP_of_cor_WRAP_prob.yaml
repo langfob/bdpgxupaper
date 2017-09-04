@@ -99,7 +99,7 @@ scenarios:
 
     #---------------------------------------------------------------------------
 
-#  APP (of COR WRAP) prob generation
+#  APP (of COR base) prob generation
 repetitions:
     generators:
         - key: cur_input_prob_idx
