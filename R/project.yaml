@@ -79,30 +79,75 @@ base_params:
         #  parameters came up, so the yaml file could be changed to use 111
         #  instead of 701 if you want to induce a crash to test that error
         #  trapping.
-
 #    seed: 701
 
-
-    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
-
-#    bdpg_run_init_rand_seed: 0
-
-#    app_base_rsrun_rand_seed: 1
-#    app_wrap_rsrun_rand_seed: 2
-
-#    cor_base_rsrun_rand_seed: 3
-#    cor_wrap_rsrun_rand_seed: 4
-
-#    app_base_rsprob_rand_seed: 5
-#    app_wrap_rsprob_rand_seed: 6
-
-#    cor_base_rsprob_rand_seed: 7
-#    cor_wrap_rsprob_rand_seed: 8
-
-    #--------------------
+        #  2017 12 06 - BTL
+        #  Instead, you could just set the total number of links or spp
+        #  to some tiny amount that was sure to fail.
 
     max_allowed_possible_tot_num_links: 1500
     max_allowed_num_spp: 2000
+
+    #--------------------
+
+    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+
+#  tests for random seed setting routines
+
+#x1 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc")
+#    set_rand_seed_at_creation_of_all_new_major_objects: TRUE
+#    bdpg_run_init_rand_seed:   1
+#    cor_base_rsprob_rand_seed: 2
+#    cor_base_rsrun_rand_seed:  3
+#    app_base_rsprob_rand_seed: 4
+#    app_base_rsrun_rand_seed:  5
+#    cor_wrap_rsprob_rand_seed: 6
+#    cor_wrap_rsrun_rand_seed:  7
+#    app_wrap_rsprob_rand_seed: 8
+#    app_wrap_rsrun_rand_seed:  9
+
+#x2 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc", 123)
+#    set_rand_seed_at_creation_of_all_new_major_objects: TRUE
+##    bdpg_run_init_rand_seed:   10
+#    cor_base_rsprob_rand_seed: 20
+##    cor_base_rsrun_rand_seed:  30
+##    app_base_rsprob_rand_seed: 40
+##    app_base_rsrun_rand_seed:  50
+#    cor_wrap_rsprob_rand_seed: 60
+##    cor_wrap_rsrun_rand_seed:  70
+##    app_wrap_rsprob_rand_seed: 80
+#    app_wrap_rsrun_rand_seed:  90
+
+
+#x3 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc")
+#    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+#    bdpg_run_init_rand_seed:   100
+#    cor_base_rsprob_rand_seed: 200
+##    cor_base_rsrun_rand_seed:  300
+#    app_base_rsprob_rand_seed: 400
+#    app_base_rsrun_rand_seed:  500
+##    cor_wrap_rsprob_rand_seed: 600
+##    cor_wrap_rsrun_rand_seed:  700
+#    app_wrap_rsprob_rand_seed: 800
+#    app_wrap_rsrun_rand_seed:  900
+
+
+#x4 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc", 123)
+#    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+##    bdpg_run_init_rand_seed:   1000
+#    cor_base_rsprob_rand_seed: 2000
+##    cor_base_rsrun_rand_seed:  3000
+#    app_base_rsprob_rand_seed: 4000
+##    app_base_rsrun_rand_seed:  5000
+##    cor_wrap_rsprob_rand_seed: 6000
+#    cor_wrap_rsrun_rand_seed:  7000
+#    app_wrap_rsprob_rand_seed: 8000
+#    app_wrap_rsrun_rand_seed:  9000
+
+#  test of rerunning /Users/bill/tzar/outputdata/bdpgxupaper_4_variants_no_network_metrics/default_runset/30_marxan_simulated_annealing.completedTzarEmulation
+#  Comparing marxan output err_frac etc showed that it seemed to work in duplicating the outcomes of cor, app, cor wrap, and app wrap
+#    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+#    bdpg_run_init_rand_seed:   870880126
 
     #--------------------
 
