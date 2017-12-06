@@ -82,6 +82,23 @@ base_params:
 
 #    seed: 701
 
+
+    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+
+#    bdpg_run_init_rand_seed: 0
+
+#    app_base_rsrun_rand_seed: 1
+#    app_wrap_rsrun_rand_seed: 2
+
+#    cor_base_rsrun_rand_seed: 3
+#    cor_wrap_rsrun_rand_seed: 4
+
+#    app_base_rsprob_rand_seed: 5
+#    app_wrap_rsprob_rand_seed: 6
+
+#    cor_base_rsprob_rand_seed: 7
+#    cor_wrap_rsprob_rand_seed: 8
+
     #--------------------
 
     max_allowed_possible_tot_num_links: 1500
