@@ -91,10 +91,11 @@ base_params:
     #--------------------
 
     set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+    bdpg_run_init_rand_seed:   14329
 
 #  tests for random seed setting routines
 
-#x1 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc")
+##x1 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc")
 #    set_rand_seed_at_creation_of_all_new_major_objects: TRUE
 #    bdpg_run_init_rand_seed:   1
 #    cor_base_rsprob_rand_seed: 2
@@ -106,7 +107,7 @@ base_params:
 #    app_wrap_rsprob_rand_seed: 8
 #    app_wrap_rsrun_rand_seed:  9
 
-#x2 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc", 123)
+##x2 = set_new_or_forced_rand_seed_if_necessary (TRUE, "abc", 123)
 #    set_rand_seed_at_creation_of_all_new_major_objects: TRUE
 ##    bdpg_run_init_rand_seed:   10
 #    cor_base_rsprob_rand_seed: 20
@@ -119,7 +120,7 @@ base_params:
 #    app_wrap_rsrun_rand_seed:  90
 
 
-#x3 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc")
+##x3 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc")
 #    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
 #    bdpg_run_init_rand_seed:   100
 #    cor_base_rsprob_rand_seed: 200
@@ -132,7 +133,7 @@ base_params:
 #    app_wrap_rsrun_rand_seed:  900
 
 
-#x4 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc", 123)
+##x4 = set_new_or_forced_rand_seed_if_necessary (FALSE, "abc", 123)
 #    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
 ##    bdpg_run_init_rand_seed:   1000
 #    cor_base_rsprob_rand_seed: 2000
@@ -319,13 +320,16 @@ scenarios:
 
             gen_multi_bdproblem: TRUE
             wrap_lognormal_dist_around_Xu: TRUE
+            allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
             desired_Xu_spp_frac_of_all_spp: 0.5
             solution_frac_of_landscape: 0.3
             desired_max_abundance_frac: 0.7
             dep_set_PUs_eligible: FALSE
             add_one_to_lognormal_abundances: FALSE
-            seed_value_for_search: 11
+#            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
             max_search_iterations: 500
+
+            plot_rounded_abundances: TRUE
 
     #---------------------------------------------------------------------------
 
