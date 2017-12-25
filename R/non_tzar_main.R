@@ -101,8 +101,6 @@ local_build_parameters_list = function ()
 #' Neither non_tzar_main() nor get_parameters() are used in creating the paper
 #' described in this package, but both functions are provided here as examples.
 #'
-#' @param parameters  list of parameters built by tzar from project.yaml
-#'
 #' @export
 #'
 #' @examples \dontrun{
