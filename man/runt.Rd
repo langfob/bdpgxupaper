@@ -6,15 +6,6 @@
 \usage{
 runt()
 }
-\arguments{
-\item{main_function}{name of function to call to run under tzar or tzar emulation}
-
-\item{parameters_yaml_file_path}{Full path with file name for the
-project.yaml file}
-
-\item{tzar_emulation_yaml_file_path}{Full path with file name for the
-yaml file containing control values for tzar emulation}
-}
 \value{
 Returns nothing
 }

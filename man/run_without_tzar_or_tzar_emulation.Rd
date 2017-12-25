@@ -7,9 +7,6 @@ emulation}
 \usage{
 run_without_tzar_or_tzar_emulation()
 }
-\arguments{
-\item{parameters}{list of parameters built by tzar from project.yaml}
-}
 \description{
 All experiments for the paper described in this package are done under tzar
 or tzar emulation.  However, run_without_tzar_or_tzar_emulation() is provided

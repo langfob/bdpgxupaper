@@ -9,6 +9,9 @@ tzar_main(parameters, emulating_tzar = FALSE)
 \arguments{
 \item{parameters}{List of parameters controlling the current run (usually
 decoded from project.yaml by tzar)}
+
+\item{emulating_tzar}{boolean indicating whether to run tzar_emulator; TRUE
+implies run emulator, FALSE implies don't run under emulator}
 }
 \value{
 Returns nothing
