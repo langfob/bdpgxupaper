@@ -21,6 +21,8 @@
 #'
 #' @param parameters List of parameters controlling the current run (usually
 #'   decoded from project.yaml by tzar)
+#' @param emulating_tzar boolean indicating whether to run tzar_emulator; TRUE
+#'   implies run emulator, FALSE implies don't run under emulator
 #'
 #' @return returns nothing
 #'
