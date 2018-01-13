@@ -4,3 +4,5 @@ model.R.hold
 model.R
 echo_work_chunks_for_prototyping.R
 model.Ry
+temp.R.hold.txt
+fulloutput.hold.txt
