@@ -1,0 +1,117 @@
+#===============================================================================
+
+project_name: bdpgxupaper_single_action_APP_of_cor_WRAP_prob
+runner_class: RRunner
+
+#===============================================================================
+
+    #  Cloned from:
+    #  project.2017_08_16_09_51_am.original_full.yaml
+    #  in:
+    #  /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/yamlFiles
+
+    #--------------------
+
+base_params:
+
+        #  BTL - 2014 12 28
+        #  This variable captures the tzar output path to hand it to the
+        #  tzar emulation code.
+    full_output_dir_with_slash: $$output_path$$
+
+    #--------------------
+    #--------------------
+
+        #  SET THIS VALUE EVERY TIME...
+            #  Runset description to print in output since the runset name has
+            #  to be short and tends to be cryptic.  The "|" should force the
+            #  saved description string to include newlines in the string.
+            #  If you don't want the newlines (i.e., you want one long string),
+            #  then use a ">" in place of the "|".
+    runset_description: |
+        Small set of APP versions for each current COR WRAP problem.
+
+    runset_name: $$runset$$
+    runset_abbrev: "bdpg_single_action_APP_on_WRAP"
+
+    run_id: $$run_id$$
+
+    #--------------------
+
+    max_allowed_possible_tot_num_links: 1500
+    max_allowed_num_spp: 2000
+
+    #--------------------
+
+    integerize_string: "round"
+
+    #---------------------------------------------------------------------------
+
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
+
+    compute_network_metrics_COR: TRUE
+    compute_network_metrics_APP: TRUE
+    compute_network_metrics_wrapped_COR: TRUE
+    compute_network_metrics_wrapped_APP: TRUE
+
+    use_igraph_metrics:    TRUE
+
+    use_bipartite_metrics: TRUE
+    #bipartite_metrics_to_use:     "ALLBUTDD"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "quick_test"
+
+    #---------------------------------------------------------------------------
+    #---------------------------------------------------------------------------
+
+    gen_4_basic_variants: FALSE
+
+    single_action_using_tzar_reps: TRUE
+
+        #  bash command to find the COR file paths and save to input file.
+        #  This command can be run from any directory.
+        #  Note that the resulting input file is not sorted in any useful way.
+#find /Users/bill/tzar/outputdata/bdpgxupaper_single_action_WRAP_prob/default_runset | grep saved > /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_WRAP_rds_input_file_paths.txt
+
+    gen_APP_prob: TRUE
+    APP_input_prob_src: "rds_file_set_from_file"
+    APP_input_rds_file_set_path: "/Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/extdata/input_files/Tzar_input_files/COR_WRAP_rds_input_file_paths.txt"
+
+    #---------------------------------------------------------------------------
+
+scenarios:
+
+    - name: gen_const_err_on_COR
+      parameters:
+            apply_error_to_spp_occupancy_data: TRUE
+            match_error_counts: TRUE
+#            match_error_counts: FALSE
+
+            #--------------------
+
+                #  Constant errors
+
+            spp_occ_FP_error_type: "CONSTANT"
+            spp_occ_FP_const_rate: 0.1  #0.1
+
+            spp_occ_FN_error_type: "CONSTANT"
+            spp_occ_FN_const_rate: 0.1  #0.1
+
+    #---------------------------------------------------------------------------
+
+#  APP (of COR WRAP) prob generation
+repetitions:
+    generators:
+        - key: cur_input_prob_idx
+          generator_type: linear_step
+          start: 1
+          step_size: 1
+          count: 220                       #  number of WRAP problems
+        - key: rds_file_set_element_idx    #  current APP idx
+          generator_type: linear_step
+          start: 1
+          step_size: 1
+          count: 2                         #  number of APPs per WRAP
+
+    #---------------------------------------------------------------------------
+
