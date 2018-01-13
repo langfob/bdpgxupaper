@@ -62,12 +62,8 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #                   Initialize for use of bdpg package.
 #===============================================================================
 
-    params_and_error_codes <- bdpg::init_for_bdpg (parameters)
-
-    parameters             <- params_and_error_codes$parameters
-    bdpg_error_codes       <- params_and_error_codes$bdpg_error_codes
-
-    integerize             <- bdpg::get_integerize_function (parameters$integerize_string)
+    parameters <- bdpg::init_for_bdpg (parameters)
+    integerize <- bdpg::get_integerize_function (parameters$integerize_string)
 
 #===============================================================================
 #                       Do the main work.
@@ -82,7 +78,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
     if (gen_4_variants)
         {
-        bdpg::gen_4_basic_variants (parameters, bdpg_error_codes, integerize)
+        bdpg::gen_4_basic_variants (parameters, integerize)
 
         } else
         {
@@ -91,9 +87,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
         if (single_action)
             {
-            bdpg::single_action_using_tzar_reps (parameters,
-                                                 bdpg_error_codes,
-                                                 integerize)
+            bdpg::single_action_using_tzar_reps (parameters, integerize)
 
             } else
             {
