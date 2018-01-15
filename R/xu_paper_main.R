@@ -69,10 +69,6 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #                       Do the main work.
 #===============================================================================
 
-# cat ("\n\nAbout to crash tzar to test saving the console sink.\n")
-# stop ("Test crash of tzar and bdpgxupaper")
-# cat ("\n\nImmediately after crash tzar to test saving the console sink.  SHOULD NOT REACH THIS STATEMENT.\n")
-
     gen_4_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
 
