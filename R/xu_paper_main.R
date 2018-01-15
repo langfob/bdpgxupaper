@@ -96,7 +96,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #               Clean up tzar, console sink, etc.
 #===============================================================================
 
-    clean_up (tzar_emulation_flag_and_console_sink_information)
+    clean_up ()
 
     cat ("\n\n================================================================================")
     cat ("\n================================================================================\n\n")

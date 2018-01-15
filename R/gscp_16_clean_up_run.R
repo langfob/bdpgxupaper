@@ -4,7 +4,7 @@
 
 #===============================================================================
 
-clean_up <- function (tzar_emulation_flag_and_console_sink_information)
+clean_up <- function ()
     {
     cat ("\n\nIn clean_up, sessionInfo() =\n\n")
     print (sessionInfo())
