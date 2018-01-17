@@ -91,6 +91,7 @@ base_params:
     #--------------------
 
     set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+    bdpg_run_init_rand_seed: 1763688087
 #    bdpg_run_init_rand_seed:   14329
 
 #  tests for random seed setting routines
@@ -219,6 +220,10 @@ base_params:
     #---------------------------------------------------------------------------
 
     do_gurobi: TRUE
+    use_time_limit: FALSE
+    time_limit: 600
+    use_gap_limit: TRUE
+    gap_limit: 0.005
 
     #---------------------------------------------------------------------------
 
@@ -334,10 +339,10 @@ scenarios:
                 #  Constant errors
 
             spp_occ_FP_error_type: "CONSTANT"
-            spp_occ_FP_const_rate: 0.0  #0.1
+            spp_occ_FP_const_rate: 0.05  #0  #0.1
 
             spp_occ_FN_error_type: "CONSTANT"
-            spp_occ_FN_const_rate: 0.05  #0.1  #0.1
+            spp_occ_FN_const_rate: 0  #0.05  #0.1  #0.1
 
     #--------------------
 
