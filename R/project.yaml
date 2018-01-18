@@ -219,11 +219,15 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: TRUE
+    do_gurobi: FALSE
     use_time_limit: FALSE
     time_limit: 600
     use_gap_limit: TRUE
     gap_limit: 0.005
+
+    #---------------------------------------------------------------------------
+
+    run_marxan: TRUE
 
     #---------------------------------------------------------------------------
 
@@ -339,10 +343,10 @@ scenarios:
                 #  Constant errors
 
             spp_occ_FP_error_type: "CONSTANT"
-            spp_occ_FP_const_rate: 0.05  #0  #0.1
+            spp_occ_FP_const_rate: 0  #0.05  #0  #0.1
 
             spp_occ_FN_error_type: "CONSTANT"
-            spp_occ_FN_const_rate: 0  #0.05  #0.1  #0.1
+            spp_occ_FN_const_rate: 0.05  #0.1  #0.1
 
     #--------------------
 
