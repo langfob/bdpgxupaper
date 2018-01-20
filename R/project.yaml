@@ -221,7 +221,7 @@ base_params:
 
     do_gurobi: FALSE
 
-    use_time_limit: FALSE
+    use_given_time_as_limit: FALSE
     time_limit: 600
     use_marxan_time_as_limit: FALSE
 
