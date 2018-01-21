@@ -85,8 +85,8 @@ base_params:
         #  Instead, you could just set the total number of links or spp
         #  to some tiny amount that was sure to fail.
 
-    max_allowed_possible_tot_num_links: 1500
-    max_allowed_num_spp: 2000
+#    max_allowed_possible_tot_num_links: 1500    #  no longer used?  2018 01 21 - BTL
+    max_allowed_num_spp: 700  #2000
 
     #--------------------
 
@@ -219,10 +219,10 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: FALSE
+    do_gurobi: TRUE
 
-    use_given_time_as_limit: FALSE
-    time_limit: 600
+    use_given_time_as_limit: TRUE
+    time_limit: 22
     use_marxan_time_as_limit: FALSE
 
     use_gap_limit: TRUE
@@ -230,7 +230,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: TRUE
+    run_marxan: FALSE
 
     #---------------------------------------------------------------------------
 
@@ -346,10 +346,10 @@ scenarios:
                 #  Constant errors
 
             spp_occ_FP_error_type: "CONSTANT"
-            spp_occ_FP_const_rate: 0  #0.05  #0  #0.1
+            spp_occ_FP_const_rate: 0.05  #0  #0.1
 
             spp_occ_FN_error_type: "CONSTANT"
-            spp_occ_FN_const_rate: 0.05  #0.1  #0.1
+            spp_occ_FN_const_rate: 0  #0.1  #0.1
 
     #--------------------
 
