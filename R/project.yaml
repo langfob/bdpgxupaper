@@ -219,11 +219,11 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: TRUE
+    do_gurobi: FALSE
 
-    use_given_time_as_limit: TRUE
+    use_given_time_as_limit: FALSE
     time_limit: 22
-    use_marxan_time_as_limit: FALSE
+    use_marxan_time_as_limit: TRUE
 
     use_gap_limit: TRUE
     gap_limit: 0.005
@@ -231,6 +231,11 @@ base_params:
     #---------------------------------------------------------------------------
 
     run_marxan: FALSE
+
+    #---------------------------------------------------------------------------
+
+    do_simple_richness_forward: TRUE
+    do_simple_richness_backward: TRUE
 
     #---------------------------------------------------------------------------
 
