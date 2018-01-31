@@ -197,30 +197,12 @@ base_params:
 
 scenarios:
 
-    - name: easy    #hardestXu
+    - name: easy
       parameters:
-            derive_alpha_from_n__num_groups_and_opt_frac_0.5: FALSE
-            use_unif_rand_alpha__: FALSE
-            alpha__: 0.52
-
-            use_unif_rand_n__num_groups: TRUE
-            n__num_groups_lower_bound: 61
-            n__num_groups_upper_bound: 62
-
-#            n__num_groups_upper_bound: 80
-#            use_unif_rand_n__num_groups: TRUE
-#            n__num_groups_lower_bound: 8
-#            n__num_groups_upper_bound: 100
-
-            use_unif_rand_r__density: FALSE
-            r__density: 0.8
-#            use_unif_rand_r__density: TRUE
-#            r__density_lower_bound: 0.01
-#            r__density_upper_bound: 5.0
-
-            use_unif_rand_p__prop_of_links_between_groups: TRUE
-            p__prop_of_links_between_groups_lower_bound: 0.01
-            p__prop_of_links_between_groups_upper_bound: 0.99
+            n__num_groups: 5
+            alpha__: 0.8
+            p__prop_of_links_between_groups: 0.5
+            r__density: 0.5
 
             #--------------------
 
@@ -267,5 +249,4 @@ repetitions:
           count: 1  #00              #10
 
     #---------------------------------------------------------------------------
-
 
