@@ -187,12 +187,12 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
 
-    compute_network_metrics_COR: TRUE
-    compute_network_metrics_APP: TRUE
-    compute_network_metrics_wrapped_COR: TRUE
-    compute_network_metrics_wrapped_APP: TRUE
+    compute_network_metrics_base_COR: TRUE
+    compute_network_metrics_base_APP: TRUE
+    compute_network_metrics_wrapped_COR: FALSE
+    compute_network_metrics_wrapped_APP: FALSE
 
     use_igraph_metrics:    TRUE
 
