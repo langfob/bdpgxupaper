@@ -119,11 +119,11 @@ base_params:
     marxan_puvspr_file_name: "puvspr.dat"
 
 
-#            marxan_runmode: 1
-#            marxan_heurtype: -1
+    marxan_runmode: 1
+    marxan_heurtype: -1
 
 ##            marxan_num_reps: 2        #  TO SPEED UP SOME CURRENT TESTING
-#    marxan_num_reps: 100
+    marxan_num_reps: 100
     marxan_num_iterations: "1000000"
 
 #    marxan_num_reps: 1
@@ -199,13 +199,6 @@ scenarios:
 
     - name: easy    #hardestXu
       parameters:
-            marxan_runmode: 1
-            marxan_heurtype: -1
-#            marxan_num_reps: 2        #  TO SPEED UP SOME CURRENT TESTING
-            marxan_num_reps: 100
-
-            #--------------------
-
             derive_alpha_from_n__num_groups_and_opt_frac_0.5: FALSE
             use_unif_rand_alpha__: FALSE
             alpha__: 0.52
