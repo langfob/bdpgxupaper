@@ -177,7 +177,11 @@ base_params:
     marxan_puvspr_file_name: "puvspr.dat"
 
 
-    marxan_num_reps: 100
+#            marxan_runmode: 1
+#            marxan_heurtype: -1
+
+##            marxan_num_reps: 2        #  TO SPEED UP SOME CURRENT TESTING
+#    marxan_num_reps: 100
     marxan_num_iterations: "1000000"
 
 #    marxan_num_reps: 1
@@ -318,7 +322,7 @@ base_params:
 
 scenarios:
 
-    - name: hardestXu
+    - name: easy    #hardestXu
       parameters:
             marxan_runmode: 1
             marxan_heurtype: -1
