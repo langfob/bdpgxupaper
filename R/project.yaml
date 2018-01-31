@@ -235,7 +235,17 @@ base_params:
     #---------------------------------------------------------------------------
 
     do_simple_richness_forward: TRUE
-    do_simple_richness_backward: TRUE
+    do_simple_richness_backward: FALSE
+
+    #---------------------------------------------------------------------------
+
+    do_unprotected_richness_forward: FALSE
+    do_unprotected_richness_backward: FALSE
+
+    #---------------------------------------------------------------------------
+
+    do_zonation_like_forward: FALSE
+    do_zonation_like_backward: FALSE
 
     #---------------------------------------------------------------------------
 
