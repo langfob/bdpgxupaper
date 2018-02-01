@@ -154,8 +154,6 @@ base_params:
 #    summary_filename: prob_diff_results.csv
 #    summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
 
-    too_many_possible_links_error_flag_file_name: $$output_path$$too_many_possible_links_error_flag_file.txt
-
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
