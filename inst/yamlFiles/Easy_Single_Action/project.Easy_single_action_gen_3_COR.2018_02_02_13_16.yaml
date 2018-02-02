@@ -10,38 +10,34 @@ base_params:
     full_output_dir_with_slash: $$output_path$$
 
     runset_name:   $$runset$$
-    runset_abbrev: "Easy_3_NET_probs_paths_from_file"
+    runset_abbrev: "Easy_3_COR_probs"
     run_id:        $$run_id$$
 
     #--------------------
 
     single_action_using_tzar_reps: TRUE
-
-    run_network_metrics_on_prob: TRUE
-    prob_src: "rds_file_set_from_file"
-    rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+    gen_COR_prob: TRUE
 
 #===============================================================================
 
 scenarios:
-    - name: Easy_single_action_gen_3_NET_probs_paths_from_file
+    - name: Easy_single_action_gen_3_COR_prob
       parameters:
-            compute_network_metrics:          TRUE
-            compute_network_metrics_base_COR: TRUE
-            use_igraph_metrics:               TRUE
-            use_bipartite_metrics:            TRUE
-            bipartite_metrics_to_use:         "quick_test"
-
+            n__num_groups: 5
+            alpha__: 0.8
+            p__prop_of_links_between_groups: 0.5
+            r__density: 0.5
 
 #===============================================================================
 
 repetitions:
     generators:
-        - key: cur_input_prob_idx
+        - key: dummy_idx    #  Name doesn't matter here since only the counting
+                            #  is used in this example
           generator_type: linear_step
           start: 1
           step_size: 1
-          count: 3    #  Must match number of lines in rds file set
+          count: 3
 
 #===============================================================================
 

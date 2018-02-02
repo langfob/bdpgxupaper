@@ -1,0 +1,40 @@
+#===============================================================================
+
+project_name: Easy
+runner_class: RRunner
+
+#===============================================================================
+
+base_params:
+
+    full_output_dir_with_slash: $$output_path$$
+
+    runset_name:   $$runset$$
+    runset_abbrev: "Easy_1_APP_prob"
+    run_id:        $$run_id$$
+
+    #--------------------
+
+    single_action_using_tzar_reps: TRUE
+
+    gen_APP_prob: TRUE
+    prob_src: "rds_file"
+    rds_file_path: "/Users/bill/tzar/outputdata/Easy/default_runset/17_Easy_single_action_gen_3_COR_prob/RSprob-COR-Base.663cee25-c9e8-4913-bd75-0277cbf42a36/saved.RSprob-COR-Base.663cee25-c9e8-4913-bd75-0277cbf42a36.rds"
+
+#===============================================================================
+
+scenarios:
+    - name: Easy_single_action_gen_1_APP_prob
+      parameters:
+            apply_error_to_spp_occupancy_data: TRUE
+            match_error_counts: FALSE
+
+            spp_occ_FP_error_type: "CONSTANT"
+            spp_occ_FP_const_rate: 0.05
+
+            spp_occ_FN_error_type: "CONSTANT"
+            spp_occ_FN_const_rate: 0.05
+
+#===============================================================================
+
+

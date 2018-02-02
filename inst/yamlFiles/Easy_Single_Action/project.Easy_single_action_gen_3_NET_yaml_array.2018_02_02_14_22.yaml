@@ -10,7 +10,7 @@ base_params:
     full_output_dir_with_slash: $$output_path$$
 
     runset_name:   $$runset$$
-    runset_abbrev: "Easy_3_NET_probs_paths_from_file"
+    runset_abbrev: "Easy_3_NET_probs_yaml_array"
     run_id:        $$run_id$$
 
     #--------------------
@@ -18,13 +18,16 @@ base_params:
     single_action_using_tzar_reps: TRUE
 
     run_network_metrics_on_prob: TRUE
-    prob_src: "rds_file_set_from_file"
-    rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+    prob_src: "rds_file_set_from_yaml_array"
+    rds_file_set_yaml_array:
+        - "/Users/bill/tzar/outputdata/Easy/default_runset/15_Easy_single_action_gen_3_COR_prob/RSprob-COR-Base.c7616443-6357-4546-9e9e-51d43a0b9853/saved.RSprob-COR-Base.c7616443-6357-4546-9e9e-51d43a0b9853.rds"
+        - "/Users/bill/tzar/outputdata/Easy/default_runset/16_Easy_single_action_gen_3_COR_prob/RSprob-COR-Base.232ace05-a4c9-42b2-9c91-1d1cd1f125b6/saved.RSprob-COR-Base.232ace05-a4c9-42b2-9c91-1d1cd1f125b6.rds"
+        - "/Users/bill/tzar/outputdata/Easy/default_runset/17_Easy_single_action_gen_3_COR_prob/RSprob-COR-Base.663cee25-c9e8-4913-bd75-0277cbf42a36/saved.RSprob-COR-Base.663cee25-c9e8-4913-bd75-0277cbf42a36.rds"
 
 #===============================================================================
 
 scenarios:
-    - name: Easy_single_action_gen_3_NET_probs_paths_from_file
+    - name: Easy_single_action_gen_3_NET_prob_yaml_array
       parameters:
             compute_network_metrics:          TRUE
             compute_network_metrics_base_COR: TRUE
@@ -41,7 +44,7 @@ repetitions:
           generator_type: linear_step
           start: 1
           step_size: 1
-          count: 3    #  Must match number of lines in rds file set
+          count: 3
 
 #===============================================================================
 
