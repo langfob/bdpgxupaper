@@ -204,7 +204,9 @@ scenarios:
 
             #--------------------
 
-            apply_error_to_spp_occupancy_data: TRUE
+#####            apply_error_to_spp_occupancy_data: TRUE
+            apply_error_to_COR: TRUE
+
 #            match_error_counts: TRUE
             match_error_counts: FALSE
 
