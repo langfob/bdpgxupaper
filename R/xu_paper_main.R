@@ -72,7 +72,16 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     gen_4_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
 
-    if (gen_4_variants)
+    gen_20_variants =
+        bdpg::value_or_FALSE_if_null (parameters$gen_20_basic_variants)
+
+    if (gen_20_variants)
+        {
+        bdpg::gen_20_basic_variants_including_cost_error (parameters,
+                                                          integerize,
+                                                          err_amt = 0.05)
+
+        } else if (gen_4_variants)
         {
         bdpg::gen_4_basic_variants (parameters, integerize)
 
