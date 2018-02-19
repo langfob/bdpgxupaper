@@ -1,0 +1,48 @@
+#===============================================================================
+
+project_name: Easy
+runner_class: RRunner
+
+#===============================================================================
+
+base_params:
+
+    full_output_dir_with_slash: $$output_path$$
+
+    runset_name:   $$runset$$
+    runset_abbrev: "Easy_3_NET_probs_paths_from_file"
+    run_id:        $$run_id$$
+
+    #--------------------
+
+    single_action_using_tzar_reps: TRUE
+
+    run_network_metrics_on_prob: TRUE
+    prob_src: "rds_file_set_from_file"
+    rds_file_set_path: "/Users/bill/Downloads/Tzar_input_files/COR_rds_input_file_paths.txt"
+
+#===============================================================================
+
+scenarios:
+    - name: Easy_single_action_gen_3_NET_probs_paths_from_file
+      parameters:
+            compute_network_metrics:          TRUE
+            compute_network_metrics_base_COR: TRUE
+            use_igraph_metrics:               TRUE
+            use_bipartite_metrics:            TRUE
+            bipartite_metrics_to_use:         "quick_test"
+
+
+#===============================================================================
+
+repetitions:
+    generators:
+        - key: cur_input_prob_idx
+          generator_type: linear_step
+          start: 1
+          step_size: 1
+          count: 3    #  Must match number of lines in rds file set
+
+#===============================================================================
+
+

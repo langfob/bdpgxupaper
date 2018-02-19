@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpgxupaper_20_variants_easy
+project_name: bdpgxupaper_4_variants_no_network_metrics
 runner_class: RRunner
 
 #===============================================================================
@@ -61,8 +61,10 @@ base_params:
 
     read_Xu_problem_from_Xu_bench_file: FALSE
 
-#    Xu_bench_infile_name:  "/Users/bill/D/Projects/ProblemDifficulty/data/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
-#    given_correct_solution_cost: 420
+    Xu_bench_infile_name:  "/Users/bill/D/Projects/ProblemDifficulty/data/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
+#"/Users/bill/Desktop/Papers downloaded/Problem difficulty/Problem difficulty datasets/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
+
+    given_correct_solution_cost: 420
 
     #--------------------
 
@@ -131,7 +133,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
 
     compute_network_metrics_base_COR: TRUE
     compute_network_metrics_base_APP: TRUE
@@ -155,9 +157,7 @@ base_params:
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
 
-    gen_20_basic_variants: TRUE
-
-    gen_4_basic_variants: FALSE
+    gen_4_basic_variants: TRUE
 
     single_action_using_tzar_reps: FALSE    #TRUE
 
@@ -167,9 +167,9 @@ base_params:
 
     use_given_time_as_limit: FALSE
     time_limit: 22
-    use_marxan_time_as_limit: FALSE
+    use_marxan_time_as_limit: TRUE
 
-    use_gap_limit: FALSE
+    use_gap_limit: TRUE
     gap_limit: 0.005
 
     #---------------------------------------------------------------------------
