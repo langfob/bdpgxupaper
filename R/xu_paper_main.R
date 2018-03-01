@@ -78,8 +78,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     if (gen_20_variants)
         {
         bdpg::gen_20_basic_variants_including_cost_error (parameters,
-                                                          integerize,
-                                                          err_amt = 0.05)
+                                                          integerize)
 
         } else if (gen_4_variants)
         {

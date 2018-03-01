@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpg_20_variants_all_rs_but_gurobi_1_easy_base
+project_name: bdpgxupaper_20_variants_easy
 runner_class: RRunner
 
 #===============================================================================
@@ -44,12 +44,11 @@ base_params:
             #  If you don't want the newlines (i.e., you want one long string),
             #  then use a ">" in place of the "|".
     runset_description: |
-        Nectar test example with one run of 20 variants of a single easy
-        Xu problem and all reserve selectors except gurobi, since no nectar
-        licensing on that yet.
+        Small set of runs of a Xu hard scenario with error generation both
+        on and off plus running simulated annealing and richness heuristic.
 
     runset_name: $$runset$$
-    runset_abbrev: "bdpg20varAllRSbutGurobi"
+    runset_abbrev: "bdpgSingleRunForTestAndDebug"
 
     run_id: $$run_id$$
 
@@ -67,13 +66,30 @@ base_params:
 
     #--------------------
 
+        #  NOTE that the choice of random seed in the yaml file is important
+        #  for this single run test because the example creates a test problem
+        #  based on drawing the control parameters from a random distribution.
+        #  When the seed was 111, the test crashed with the message below.
+        #  When I changed it to 701, it ran to completion.
+        #       Failing:  max_possible_tot_num_links ( 3291 ) > maximum allowed ( 2000 ).
+        #       Save workspace image to ~/D/rdv-framework/projects/rdvPackages/biodivprobgen/.RData? [y/n/c]:
+        #  However, the fail was just what it was supposed to do when those
+        #  parameters came up, so the yaml file could be changed to use 111
+        #  instead of 701 if you want to induce a crash to test that error
+        #  trapping.
+#    seed: 701
+
+        #  2017 12 06 - BTL
+        #  Instead, you could just set the total number of links or spp
+        #  to some tiny amount that was sure to fail.
+
 #    max_allowed_possible_tot_num_links: 1500    #  no longer used?  2018 01 21 - BTL
     max_allowed_num_spp: 700  #2000
 
     #--------------------
 
     set_rand_seed_at_creation_of_all_new_major_objects: FALSE
-#XXX#    bdpg_run_init_rand_seed: 1763688087
+    bdpg_run_init_rand_seed: 1763688087
 
     #--------------------
 
@@ -140,7 +156,7 @@ base_params:
     #---------------------------------------------------------------------------
 
     gen_20_basic_variants: TRUE
-    gen_basic_variants_err_amt: 0.02    #0.05
+    gen_basic_variants_err_amt: 0.05
 
     gen_4_basic_variants: FALSE
 
@@ -159,11 +175,11 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: TRUE
+    run_marxan: FALSE
 
     #---------------------------------------------------------------------------
 
-    do_simple_richness_forward: FALSE
+    do_simple_richness_forward: TRUE
     do_simple_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
@@ -227,11 +243,11 @@ scenarios:
 
 repetitions:
     generators:
-        - key: idx        #rds_file_set_element_idx         #seed
+        - key: seed        #rds_file_set_element_idx         #seed
           generator_type: linear_step
           start: 1                                  #1010
           step_size: 1
-          count: 1    #100  #XXX#
+          count: 1  #00              #10
 
     #---------------------------------------------------------------------------
 
