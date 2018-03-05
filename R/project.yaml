@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpg_20_variants_all_rs_but_gurobi_1_easy_base
+project_name: bdpg_20_variants_all_rs_easy_base_10_err_amt
 runner_class: RRunner
 
 #===============================================================================
@@ -45,11 +45,10 @@ base_params:
             #  then use a ">" in place of the "|".
     runset_description: |
         Nectar test example with one run of 20 variants of a single easy
-        Xu problem and all reserve selectors except gurobi, since no nectar
-        licensing on that yet.
+        Xu problem and all reserve selectors.
 
     runset_name: $$runset$$
-    runset_abbrev: "bdpg20varAllRSbutGurobi"
+    runset_abbrev: "bdpg20varAllRS"
 
     run_id: $$run_id$$
 
@@ -115,7 +114,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
 
     compute_network_metrics_base_COR: TRUE
     compute_network_metrics_base_APP: TRUE
@@ -126,8 +125,8 @@ base_params:
 
     use_bipartite_metrics: TRUE
     #bipartite_metrics_to_use:     "ALLBUTDD"
-#    bipartite_metrics_to_use:     "all_except_slow_indices"
-    bipartite_metrics_to_use:     "quick_test"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "quick_test"
 
     #---------------------------------------------------------------------------
 
@@ -140,7 +139,7 @@ base_params:
     #---------------------------------------------------------------------------
 
     gen_20_basic_variants: TRUE
-    gen_basic_variants_err_amt: 0.02    #0.05
+    gen_basic_variants_err_amt: 0.10    #0.075    #0.05
 
     gen_4_basic_variants: FALSE
 
@@ -148,10 +147,10 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: FALSE
+    do_gurobi: TRUE
 
     use_given_time_as_limit: FALSE
-    time_limit: 22
+    time_limit: 30    #22
     use_marxan_time_as_limit: FALSE
 
     use_gap_limit: FALSE
@@ -163,18 +162,18 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_simple_richness_forward: FALSE
-    do_simple_richness_backward: FALSE
+    do_simple_richness_forward: TRUE
+    do_simple_richness_backward: TRUE
 
     #---------------------------------------------------------------------------
 
-    do_unprotected_richness_forward: FALSE
-    do_unprotected_richness_backward: FALSE
+    do_unprotected_richness_forward: TRUE
+    do_unprotected_richness_backward: TRUE
 
     #---------------------------------------------------------------------------
 
-    do_zonation_like_forward: FALSE
-    do_zonation_like_backward: FALSE
+    do_zonation_like_forward: TRUE
+    do_zonation_like_backward: TRUE
 
     #---------------------------------------------------------------------------
 
@@ -231,7 +230,7 @@ repetitions:
           generator_type: linear_step
           start: 1                                  #1010
           step_size: 1
-          count: 1    #100  #XXX#
+          count: 100  #XXX#
 
     #---------------------------------------------------------------------------
 
