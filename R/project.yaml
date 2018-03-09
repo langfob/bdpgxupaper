@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpg_20_variants_all_rs_easy_base_10_err_amt
+project_name: bdpg_20_variants_all_rs_easy_base_debugging
 runner_class: RRunner
 
 #===============================================================================
@@ -114,7 +114,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
 
     compute_network_metrics_base_COR: TRUE
     compute_network_metrics_base_APP: TRUE
@@ -139,7 +139,7 @@ base_params:
     #---------------------------------------------------------------------------
 
     gen_20_basic_variants: TRUE
-    gen_basic_variants_err_amt: 0.10    #0.075    #0.05
+    gen_basic_variants_err_amt: 0.02    #0.10    #0.075    #0.05
 
     gen_4_basic_variants: FALSE
 
@@ -147,7 +147,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: TRUE
+    do_gurobi: FALSE
 
     use_given_time_as_limit: FALSE
     time_limit: 30    #22
@@ -158,22 +158,22 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: TRUE
+    run_marxan: FALSE
 
     #---------------------------------------------------------------------------
 
     do_simple_richness_forward: TRUE
-    do_simple_richness_backward: TRUE
+    do_simple_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
 
-    do_unprotected_richness_forward: TRUE
-    do_unprotected_richness_backward: TRUE
+    do_unprotected_richness_forward: FALSE
+    do_unprotected_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
 
-    do_zonation_like_forward: TRUE
-    do_zonation_like_backward: TRUE
+    do_zonation_like_forward: FALSE
+    do_zonation_like_backward: FALSE
 
     #---------------------------------------------------------------------------
 
@@ -230,7 +230,7 @@ repetitions:
           generator_type: linear_step
           start: 1                                  #1010
           step_size: 1
-          count: 100  #XXX#
+          count: 1    #100  #XXX#
 
     #---------------------------------------------------------------------------
 
