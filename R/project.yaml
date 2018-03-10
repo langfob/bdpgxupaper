@@ -209,7 +209,7 @@ scenarios:
                 #  Parameters for building a multi-problem by wrapping a lognormal
                 #  distribution around a base Xu problem.
 
-#CRUFT REMOVAL#                gen_multi_bdproblem: TRUE
+#CRUFT REMOVAL#            gen_multi_bdproblem: TRUE
             wrap_lognormal_dist_around_Xu: TRUE
             allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
             desired_Xu_spp_frac_of_all_spp: 0.5
