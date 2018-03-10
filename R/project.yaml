@@ -147,7 +147,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    do_gurobi: FALSE
+    do_gurobi: TRUE
 
     use_given_time_as_limit: FALSE
     time_limit: 30    #22
@@ -158,22 +158,22 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: FALSE
+    run_marxan: TRUE
 
     #---------------------------------------------------------------------------
 
     do_simple_richness_forward: TRUE
-    do_simple_richness_backward: FALSE
+    do_simple_richness_backward: TRUE
 
     #---------------------------------------------------------------------------
 
-    do_unprotected_richness_forward: FALSE
-    do_unprotected_richness_backward: FALSE
+    do_unprotected_richness_forward: TRUE
+    do_unprotected_richness_backward: TRUE
 
     #---------------------------------------------------------------------------
 
-    do_zonation_like_forward: FALSE
-    do_zonation_like_backward: FALSE
+    do_zonation_like_forward: TRUE
+    do_zonation_like_backward: TRUE
 
     #---------------------------------------------------------------------------
 
@@ -188,28 +188,28 @@ scenarios:
 
             #--------------------
 
-#####            apply_error_to_spp_occupancy_data: TRUE
-            apply_error_to_COR: TRUE
+#CRUFT REMOVAL#    #####            apply_error_to_spp_occupancy_data: TRUE
+#CRUFT REMOVAL#                apply_error_to_COR: TRUE
 
-#            match_error_counts: TRUE
-            match_error_counts: FALSE
+#CRUFT REMOVAL#    #            match_error_counts: TRUE
+#CRUFT REMOVAL#                match_error_counts: FALSE
 
             #--------------------
 
                 #  Constant errors
 
-            spp_occ_FP_error_type: "CONSTANT"
-            spp_occ_FP_const_rate: 0.05  #0  #0.1
+#CRUFT REMOVAL#                spp_occ_FP_error_type: "CONSTANT"
+#CRUFT REMOVAL#                spp_occ_FP_const_rate: 0.05  #0  #0.1
 
-            spp_occ_FN_error_type: "CONSTANT"
-            spp_occ_FN_const_rate: 0  #0.1  #0.1
+#CRUFT REMOVAL#                spp_occ_FN_error_type: "CONSTANT"
+#CRUFT REMOVAL#                spp_occ_FN_const_rate: 0  #0.1  #0.1
 
     #--------------------
 
                 #  Parameters for building a multi-problem by wrapping a lognormal
                 #  distribution around a base Xu problem.
 
-            gen_multi_bdproblem: TRUE
+#CRUFT REMOVAL#                gen_multi_bdproblem: TRUE
             wrap_lognormal_dist_around_Xu: TRUE
             allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
             desired_Xu_spp_frac_of_all_spp: 0.5
@@ -217,9 +217,8 @@ scenarios:
             desired_max_abundance_frac: 0.7
             dep_set_PUs_eligible: FALSE
             add_one_to_lognormal_abundances: FALSE
-#            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
+#CRUFT REMOVAL#    #            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
             max_search_iterations: 500
-
             plot_rounded_abundances: TRUE
 
     #---------------------------------------------------------------------------
