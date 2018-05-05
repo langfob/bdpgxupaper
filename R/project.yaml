@@ -1,6 +1,6 @@
 #===============================================================================
 
-project_name: bdpg_20_variants_all_rs_easy_base_10_err_amt_2nd_try
+project_name: bdpg_20_variants_all_rs_easy_base_15_err_amt_2nd_try
 runner_class: RRunner
 
 #===============================================================================
@@ -139,7 +139,7 @@ base_params:
     #---------------------------------------------------------------------------
 
     gen_20_basic_variants: TRUE
-    gen_basic_variants_err_amt: 0.10
+    gen_basic_variants_err_amt: 0.15    #0.10
 
     gen_4_basic_variants: FALSE
 
