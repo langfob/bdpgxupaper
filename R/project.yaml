@@ -1,235 +1,34 @@
 #===============================================================================
 
-project_name: bdpg_20_variants_all_rs_easy_base_15_err_amt_2nd_try
+project_name: Easy
 runner_class: RRunner
 
 #===============================================================================
 
-libraries:
+base_params:
 
-#---------------------------------------
+    full_output_dir_with_slash: $$output_path$$
 
-    -  name: marxanLibrary
+    runset_name:   $$runset$$
+    runset_abbrev: "Easy_1_COR_prob"
+    run_id:        $$run_id$$
 
-#       repo_type: local_file
-#       url: file:////Users/bill/D/Marxan
+    #--------------------
 
-       repo_type: http_zip
-       url: http://glass.eres.rmit.edu.au/tzar_input/biodivprobgen/Marxan.zip
-       download_mode: ONCE
+    bdpg_run_init_rand_seed: 1763688087
+
+    #--------------------
+
+    single_action_using_tzar_reps: TRUE
+    gen_COR_prob: TRUE
+
+    #--------------------
+
+    n__num_groups: 5
+    alpha__: 0.8
+    p__prop_of_links_between_groups: 0.5
+    r__density: 0.5
 
 #===============================================================================
 
-    #  Cloned from:
-    #  project.2017_08_16_09_51_am.original_full.yaml
-    #  in:
-    #  /Users/bill/D/Projects/ProblemDifficulty/pkgs/bdpgxupaper/inst/yamlFiles
-
-    #--------------------
-
-base_params:
-
-        #  BTL - 2014 12 28
-        #  This variable captures the tzar output path to hand it to the
-        #  tzar emulation code.
-    full_output_dir_with_slash: $$output_path$$
-
-    #--------------------
-    #--------------------
-
-        #  SET THIS VALUE EVERY TIME...
-            #  Runset description to print in output since the runset name has
-            #  to be short and tends to be cryptic.  The "|" should force the
-            #  saved description string to include newlines in the string.
-            #  If you don't want the newlines (i.e., you want one long string),
-            #  then use a ">" in place of the "|".
-    runset_description: |
-        Nectar test example with one run of 20 variants of a single easy
-        Xu problem and all reserve selectors.
-
-    runset_name: $$runset$$
-    runset_abbrev: "bdpg20varAllRS"
-
-    run_id: $$run_id$$
-
-    #--------------------
-
-        #  If you're reading the Xu problem from a file in Xu's benchmark
-        #  problem file format instead of
-        #  generating it, you need to give the input file name and the
-        #  cost of the correct solution (since it's not specified in the file).
-
-    read_Xu_problem_from_Xu_bench_file: FALSE
-
-#    Xu_bench_infile_name:  "/Users/bill/D/Projects/ProblemDifficulty/data/Xu - problem difficulty datasets/frb30-15-msc with MSC 420/frb30-15-1.msc"
-#    given_correct_solution_cost: 420
-
-    #--------------------
-
-#    max_allowed_possible_tot_num_links: 1500    #  no longer used?  2018 01 21 - BTL
-    max_allowed_num_spp: 700  #2000
-
-    #--------------------
-
-    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
-#XXX#    bdpg_run_init_rand_seed: 1763688087
-
-    #--------------------
-
-    integerize_string: "round"
-
-    #---------------------------------------------------------------------------
-        #  marxan control parameters
-        #
-        #  If marxan_use_default_input_parameters is TRUE, then all of these
-        #  marxan_... parameters set in this file are ignored and marxan's
-        #  default values are used instead.
-        #  The one exception to this is the variable marxan_spf_const,
-        #  which is a bit different from all the other parameters and is set
-        #  in the just below the marxan_... parameters in this file.
-    marxan_use_default_input_parameters: FALSE
-
-#    marxan_input_parameters_file_name: "/Users/bill/D/Marxan/input.dat"
-    marxan_input_parameters_file_name: "$$library_path(marxanLibrary)$$input.dat"
-
-    marxan_dir: "$$library_path(marxanLibrary)$$"
-#    marxan_input_dir: "$$library_path(marxanLibrary)$$input/"
-#    marxan_output_dir: "$$library_path(marxanLibrary)$$output/"
-    marxan_pu_file_name: "pu.dat"
-    marxan_spec_file_name: "spec.dat"
-    marxan_puvspr_file_name: "puvspr.dat"
-
-
-    marxan_runmode: 1
-    marxan_heurtype: -1
-
-##            marxan_num_reps: 2        #  TO SPEED UP SOME CURRENT TESTING
-    marxan_num_reps: 100
-    marxan_num_iterations: "1000000"
-
-#    marxan_num_reps: 1
-#    marxan_num_iterations: "10000"
-
-    marxan_spf_rule: "POWER_OF_10"
-
-    #---------------------------------------------------------------------------
-
-    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
-
-    compute_network_metrics_base_COR: TRUE
-    compute_network_metrics_base_APP: TRUE
-    compute_network_metrics_wrapped_COR: TRUE
-    compute_network_metrics_wrapped_APP: TRUE
-
-    use_igraph_metrics:    TRUE
-
-    use_bipartite_metrics: TRUE
-    #bipartite_metrics_to_use:     "ALLBUTDD"
-    bipartite_metrics_to_use:     "all_except_slow_indices"
-#    bipartite_metrics_to_use:     "quick_test"
-
-    #---------------------------------------------------------------------------
-
-        # Outputs
-
-#    summary_filename: prob_diff_results.csv
-#    summary_without_run_id_filename: prob_diff_results_with_0_run_id.csv
-
-    #---------------------------------------------------------------------------
-    #---------------------------------------------------------------------------
-
-    gen_20_basic_variants: TRUE
-    gen_basic_variants_err_amt: 0.15    #0.10
-
-    gen_4_basic_variants: FALSE
-
-    single_action_using_tzar_reps: FALSE    #TRUE
-
-    #---------------------------------------------------------------------------
-
-    do_gurobi: TRUE
-
-    use_given_time_as_limit: FALSE
-    time_limit: 30    #22
-    use_marxan_time_as_limit: FALSE
-
-    use_gap_limit: FALSE
-    gap_limit: 0.005
-
-    #---------------------------------------------------------------------------
-
-    run_marxan: TRUE
-
-    #---------------------------------------------------------------------------
-
-    do_simple_richness_forward: TRUE
-    do_simple_richness_backward: TRUE
-
-    #---------------------------------------------------------------------------
-
-    do_unprotected_richness_forward: TRUE
-    do_unprotected_richness_backward: TRUE
-
-    #---------------------------------------------------------------------------
-
-    do_zonation_like_forward: TRUE
-    do_zonation_like_backward: TRUE
-
-    #---------------------------------------------------------------------------
-
-scenarios:
-
-    - name: easy
-      parameters:
-            n__num_groups: 5
-            alpha__: 0.8
-            p__prop_of_links_between_groups: 0.5
-            r__density: 0.5
-
-            #--------------------
-
-#CRUFT REMOVAL#    #####            apply_error_to_spp_occupancy_data: TRUE
-#CRUFT REMOVAL#                apply_error_to_COR: TRUE
-
-#CRUFT REMOVAL#    #            match_error_counts: TRUE
-#CRUFT REMOVAL#                match_error_counts: FALSE
-
-            #--------------------
-
-                #  Constant errors
-
-#CRUFT REMOVAL#                spp_occ_FP_error_type: "CONSTANT"
-#CRUFT REMOVAL#                spp_occ_FP_const_rate: 0.05  #0  #0.1
-
-#CRUFT REMOVAL#                spp_occ_FN_error_type: "CONSTANT"
-#CRUFT REMOVAL#                spp_occ_FN_const_rate: 0  #0.1  #0.1
-
-    #--------------------
-
-                #  Parameters for building a multi-problem by wrapping a lognormal
-                #  distribution around a base Xu problem.
-
-#CRUFT REMOVAL#            gen_multi_bdproblem: TRUE
-            wrap_lognormal_dist_around_Xu: TRUE
-            allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
-            desired_Xu_spp_frac_of_all_spp: 0.5
-            solution_frac_of_landscape: 0.3
-            desired_max_abundance_frac: 0.7
-            dep_set_PUs_eligible: FALSE
-            add_one_to_lognormal_abundances: FALSE
-#CRUFT REMOVAL#    #            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
-            max_search_iterations: 500
-            plot_rounded_abundances: TRUE
-
-    #---------------------------------------------------------------------------
-
-repetitions:
-    generators:
-        - key: idx        #rds_file_set_element_idx         #seed
-          generator_type: linear_step
-          start: 1                                  #1010
-          step_size: 1
-          count: 100  #XXX#
-
-    #---------------------------------------------------------------------------
 
