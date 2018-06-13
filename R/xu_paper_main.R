@@ -62,6 +62,15 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     options (bdpg.emulating_tzar = emulating_tzar)
 
 #===============================================================================
+#                   Print out system environment.
+#===============================================================================
+
+    cat ("\nSystem environment variables at start of xu_paper_main():\n\n")
+    sys_vars = Sys.getenv()
+    print (sys_vars)
+    cat ("\n\n")
+
+#===============================================================================
 #                   Initialize for use of bdpg package.
 #===============================================================================
 
