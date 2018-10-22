@@ -5,7 +5,24 @@ runner_class: RRunner
 
 #===============================================================================
 
+libraries:
+
+#---------------------------------------
+
+    -  name: runs_to_load
+
+#       repo_type: local_file
+#       url: file:////Users/bill/D/Marxan
+
+       repo_type: http_file
+       url: http://glass.eres.rmit.edu.au/tzar_output/bdpg_nectar/TEST_loading_old/dirs.txt
+       download_mode: FORCE
+
+#===============================================================================
+
 base_params:
+
+    file_of_runs_to_load: $$library_path(runs_to_load)$$
 
     full_output_dir_with_slash: $$output_path$$
 
@@ -28,6 +45,19 @@ base_params:
     alpha__: 0.8
     p__prop_of_links_between_groups: 0.5
     r__density: 0.5
+
+    #---------------------------------------------------------------------------
+
+repetitions:
+    generators:
+        - key: prev_run_idx
+          generator_type: linear_step
+          start: 2
+          step_size: 1
+          count: 1
+
+    #---------------------------------------------------------------------------
+
 
 #===============================================================================
 

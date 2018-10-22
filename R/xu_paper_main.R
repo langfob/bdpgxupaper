@@ -81,18 +81,27 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #                       Do the main work.
 #===============================================================================
 
-#  Start testing the loading of and action on previous runs from another machine.
+    cat ("\n\nAt START of main work in xu_paper_main(), current dir = '",
+         getwd(), "'\n\n")
 
-cat ("\n\nAt START of main work in xu_paper_main(), current dir = '", getwd(), "'\n\n")
+#=======================================
 
-    bdpg::load_existing_tzar_run_from_glass()
+        #  Start testing the loading of and action on previous runs
+        #  from another machine.
 
-cat ("\n\nAt END of main work in xu_paper_main(), current dir = '", getwd(), "'\n\n")
+    cat ("\nAbout to call load_existing_tzar_run_from_glass().\n")
+
+    bdpg::load_existing_tzar_run_from_glass (
+        file_of_runs_to_load = parameters$file_of_runs_to_load,
+        prev_run_idx = parameters$prev_run_idx,
+        tgt_filename_or_dirname_for_scp = parameters$fullOutputDir_NO_slash
+        )
+    cat ("\nBack from calling load_existing_tzar_run_from_glass().\n")
 
 if(FALSE)
 {
 
-#-------------------------------------------------------------------------------
+#=======================================
 
     gen_4_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
@@ -128,6 +137,8 @@ if(FALSE)
 #-------------------------------------------------------------------------------
 
 }
+
+    cat ("\n\nAt END of main work in xu_paper_main(), current dir = '", getwd(), "'\n\n")
 
 #===============================================================================
 #               Clean up tzar, console sink, etc.
