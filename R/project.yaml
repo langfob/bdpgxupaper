@@ -32,19 +32,7 @@ base_params:
 
     #--------------------
 
-    bdpg_run_init_rand_seed: 1763688087
-
-    #--------------------
-
-    single_action_using_tzar_reps: TRUE
-    gen_COR_prob: TRUE
-
-    #--------------------
-
-    n__num_groups: 5
-    alpha__: 0.8
-    p__prop_of_links_between_groups: 0.5
-    r__density: 0.5
+    run_rs_on_COR_prob:  TRUE
 
     #---------------------------------------------------------------------------
 
