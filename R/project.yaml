@@ -32,7 +32,8 @@ base_params:
 
     #--------------------
 
-    run_rs_on_COR_prob:  TRUE
+#    run_rs_on_COR_prob:  TRUE
+    run_rs_on_APP_prob:  TRUE
 
     #---------------------------------------------------------------------------
 
