@@ -92,6 +92,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     cat ("\nAbout to call load_existing_tzar_run_from_glass().\n")
 
     bdpg::load_existing_tzar_run_from_glass (
+        parameters,
         file_of_runs_to_load = parameters$file_of_runs_to_load,
         prev_run_idx = parameters$prev_run_idx,
         tgt_filename_or_dirname_for_scp = parameters$fullOutputDir_NO_slash
