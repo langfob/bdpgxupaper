@@ -36,6 +36,8 @@ base_params:
 #    run_rs_on_APP_prob:  TRUE
     run_rs_on_ALL_prob:  TRUE
 
+    do_simple_richness_forward: TRUE
+
     #---------------------------------------------------------------------------
 
 repetitions:
