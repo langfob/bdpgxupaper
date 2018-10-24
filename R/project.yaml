@@ -34,9 +34,31 @@ base_params:
 
 #    run_rs_on_COR_prob:  TRUE
 #    run_rs_on_APP_prob:  TRUE
-    run_rs_on_ALL_prob:  TRUE
+#    run_rs_on_ALL_prob:  TRUE
 
-    do_simple_richness_forward: TRUE
+#    do_simple_richness_forward: TRUE
+
+    #--------------------
+
+#    run_network_metrics_on_COR_prob: TRUE
+    run_network_metrics_on_APP_prob: TRUE
+#    run_network_metrics_on_ALL_prob: TRUE
+
+    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
+
+    compute_network_metrics_base_COR: TRUE
+    compute_network_metrics_base_APP: TRUE
+    compute_network_metrics_wrapped_COR: TRUE
+    compute_network_metrics_wrapped_APP: TRUE
+
+#    use_igraph_metrics:    TRUE
+
+    use_bipartite_metrics: TRUE
+    #bipartite_metrics_to_use:     "ALLBUTDD"
+#    bipartite_metrics_to_use:     "all_except_slow_indices"
+    bipartite_metrics_to_use:     "quick_test"
+
+
 
     #---------------------------------------------------------------------------
 
