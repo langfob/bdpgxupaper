@@ -42,8 +42,8 @@ base_params:
     #--------------------
 
 #    run_network_metrics_on_COR_prob: TRUE
-    run_network_metrics_on_APP_prob: TRUE
-#    run_network_metrics_on_ALL_prob: TRUE
+#    run_network_metrics_on_APP_prob: TRUE
+    run_network_metrics_on_ALL_prob: TRUE
 
     compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
 
@@ -52,12 +52,12 @@ base_params:
     compute_network_metrics_wrapped_COR: TRUE
     compute_network_metrics_wrapped_APP: TRUE
 
-#    use_igraph_metrics:    TRUE
+    use_igraph_metrics:    TRUE
 
     use_bipartite_metrics: TRUE
     #bipartite_metrics_to_use:     "ALLBUTDD"
-#    bipartite_metrics_to_use:     "all_except_slow_indices"
-    bipartite_metrics_to_use:     "quick_test"
+    bipartite_metrics_to_use:     "all_except_slow_indices"
+#    bipartite_metrics_to_use:     "quick_test"
 
 
 
