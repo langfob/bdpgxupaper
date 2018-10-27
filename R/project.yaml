@@ -16,7 +16,8 @@ libraries:
 
        repo_type: http_file
        url: http://glass.eres.rmit.edu.au/tzar_output/bdpg_nectar/TEST_loading_old/dirs.txt
-       download_mode: FORCE
+#       download_mode: FORCE
+       download_mode: ONCE
 
 #===============================================================================
 
