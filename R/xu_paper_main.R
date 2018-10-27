@@ -84,25 +84,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     cat ("\n\nAt START of main work in xu_paper_main(), current dir = '",
          getwd(), "'\n\n")
 
-#=======================================
-
-        #  Start testing the loading of and action on previous runs
-        #  from another machine.
-
-    cat ("\nAbout to call load_existing_tzar_run_from_glass().\n")
-
-    bdpg::load_existing_tzar_run_from_glass (
-        parameters,
-        file_of_runs_to_load = parameters$file_of_runs_to_load,
-        prev_run_idx = parameters$prev_run_idx,
-        tgt_filename_or_dirname_for_scp = parameters$fullOutputDir_NO_slash
-        )
-    cat ("\nBack from calling load_existing_tzar_run_from_glass().\n")
-
-if(FALSE)
-{
-
-#=======================================
+#-------------------------------------------------------------------------------
 
     gen_4_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
@@ -110,34 +92,51 @@ if(FALSE)
     gen_20_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_20_basic_variants)
 
+    act_on_loaded_existing_tzar_run =
+        bdpg::value_or_FALSE_if_null (parameters$act_on_loaded_existing_tzar_run)
+
+    single_action_using_tzar_reps =
+        bdpg::value_or_FALSE_if_null (parameters$single_action_using_tzar_reps)
+
+#----------------------------------------
+
     if (gen_20_variants)
-        {
-        bdpg::gen_20_basic_variants_including_cost_error (parameters,
-                                                          integerize)
+    {
+    bdpg::gen_20_basic_variants_including_cost_error (parameters,
+                                                      integerize)
 
-        } else if (gen_4_variants)
-        {
-        bdpg::gen_4_basic_variants (parameters, integerize)
+#----------------------------------------
 
-        } else
-        {
-        single_action =
-            bdpg::value_or_FALSE_if_null (parameters$single_action_using_tzar_reps)
+    } else if (gen_4_variants)
+    {
+    bdpg::gen_4_basic_variants (parameters, integerize)
 
-        if (single_action)
-            {
-            bdpg::single_action_using_tzar_reps (parameters, integerize)
+#----------------------------------------
 
-            } else
-            {
-            }
-        }
+    } else if (act_on_loaded_existing_tzar_run)
+    {
+    bdpg::load_existing_tzar_run_from_glass (
+        parameters,
+        file_of_runs_to_load = parameters$file_of_runs_to_load,
+        prev_run_idx = parameters$prev_run_idx,
+        tgt_filename_or_dirname_for_scp = parameters$fullOutputDir_NO_slash
+        )
+
+#----------------------------------------
+
+    } else if (single_action_using_tzar_reps)
+    {
+    bdpg::single_action_using_tzar_reps (parameters, integerize)
+
+#----------------------------------------
+
+    } else
+    {
     cat ("\n\n----->>>>>  In xu_paper_main.R, no matching actions found, ",
          "so, doing nothing...  <<<<<-----\n\n")
+    }
 
 #-------------------------------------------------------------------------------
-
-}
 
     cat ("\n\nAt END of main work in xu_paper_main(), current dir = '", getwd(), "'\n\n")
 

@@ -33,6 +33,10 @@ base_params:
 
     #--------------------
 
+#    act_on_loaded_existing_tzar_run: TRUE
+
+    #--------------------
+
 #    run_rs_on_COR_prob:  TRUE
 #    run_rs_on_APP_prob:  TRUE
 #    run_rs_on_ALL_prob:  TRUE
@@ -58,8 +62,6 @@ base_params:
     #bipartite_metrics_to_use:     "ALLBUTDD"
     bipartite_metrics_to_use:     "all_except_slow_indices"
 #    bipartite_metrics_to_use:     "quick_test"
-
-
 
     #---------------------------------------------------------------------------
 
