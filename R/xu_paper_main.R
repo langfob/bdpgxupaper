@@ -130,10 +130,10 @@ if(FALSE)
 
             } else
             {
-            cat ("\n\nIn xu_paper_main.R, no matching actions found, ",
-                 "so, doing nothing...\n\n")
             }
         }
+    cat ("\n\n----->>>>>  In xu_paper_main.R, no matching actions found, ",
+         "so, doing nothing...  <<<<<-----\n\n")
 
 #-------------------------------------------------------------------------------
 
