@@ -33,7 +33,7 @@ base_params:
 
     #--------------------
 
-#    act_on_loaded_existing_tzar_run: TRUE
+    act_on_loaded_existing_tzar_run: TRUE
 
     #--------------------
 
