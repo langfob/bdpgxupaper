@@ -1,55 +1,29 @@
 #===============================================================================
 
-project_name: LoadExistingTzarRuns
+project_name: TestGen6basicVariants
 runner_class: RRunner
-
-#===============================================================================
-
-libraries:
-
-#---------------------------------------
-
-    -  name: runs_to_load
-
-#       repo_type: local_file
-#       url: file:////Users/bill/D/Marxan
-
-       repo_type: http_file
-       url: http://glass.eres.rmit.edu.au/tzar_output/bdpg_nectar/TEST_loading_old/dirs.txt
-#       download_mode: FORCE
-       download_mode: ONCE
 
 #===============================================================================
 
 base_params:
 
-    file_of_runs_to_load: $$library_path(runs_to_load)$$
-
     full_output_dir_with_slash: $$output_path$$
 
     runset_name:   $$runset$$
-    runset_abbrev: "Easy_1_COR_prob"
+    runset_abbrev: "Test_gen_6"
     run_id:        $$run_id$$
 
     #--------------------
 
-    act_on_loaded_existing_tzar_run: TRUE
+    gen_6_variants: TRUE
 
     #--------------------
 
-#    run_rs_on_COR_prob:  TRUE
-#    run_rs_on_APP_prob:  TRUE
-#    run_rs_on_ALL_prob:  TRUE
-
-#    do_simple_richness_forward: TRUE
+    do_simple_richness_forward: TRUE
 
     #--------------------
 
-#    run_network_metrics_on_COR_prob: TRUE
-#    run_network_metrics_on_APP_prob: TRUE
-    run_network_metrics_on_ALL_prob: TRUE
-
-    compute_network_metrics: TRUE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
 
     compute_network_metrics_base_COR: TRUE
     compute_network_metrics_base_APP: TRUE
@@ -67,9 +41,9 @@ base_params:
 
 repetitions:
     generators:
-        - key: prev_run_idx
+        - key: cur_run_idx
           generator_type: linear_step
-          start: 2
+          start: 1
           step_size: 1
           count: 1
 
