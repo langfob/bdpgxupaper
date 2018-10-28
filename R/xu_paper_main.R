@@ -86,10 +86,10 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
 #-------------------------------------------------------------------------------
 
-    gen_4_variants =
+    gen_4_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
 
-    gen_20_variants =
+    gen_20_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_20_basic_variants)
 
     act_on_loaded_existing_tzar_run =
@@ -100,14 +100,14 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
 #----------------------------------------
 
-    if (gen_20_variants)
+    if (gen_20_basic_variants)
     {
     bdpg::gen_20_basic_variants_including_cost_error (parameters,
                                                       integerize)
 
 #----------------------------------------
 
-    } else if (gen_4_variants)
+    } else if (gen_4_basic_variants)
     {
     bdpg::gen_4_basic_variants (parameters, integerize)
 
