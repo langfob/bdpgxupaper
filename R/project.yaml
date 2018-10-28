@@ -15,7 +15,9 @@ base_params:
 
     #--------------------
 
-    gen_6_variants: TRUE
+    gen_basic_variants_err_amt: 0.01    #0.10
+
+    gen_6_basic_variants: TRUE
 
     #--------------------
 
