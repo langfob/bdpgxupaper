@@ -41,6 +41,34 @@ base_params:
 
     #---------------------------------------------------------------------------
 
+scenarios:
+
+    - name: easy
+      parameters:
+            n__num_groups: 5
+            alpha__: 0.8
+            p__prop_of_links_between_groups: 0.5
+            r__density: 0.5
+
+    #--------------------
+
+                #  Parameters for building a multi-problem by wrapping a lognormal
+                #  distribution around a base Xu problem.
+
+#CRUFT REMOVAL#            gen_multi_bdproblem: TRUE
+            wrap_lognormal_dist_around_Xu: TRUE
+            allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
+            desired_Xu_spp_frac_of_all_spp: 0.5
+            solution_frac_of_landscape: 0.3
+            desired_max_abundance_frac: 0.7
+            dep_set_PUs_eligible: FALSE
+            add_one_to_lognormal_abundances: FALSE
+#CRUFT REMOVAL#    #            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
+            max_search_iterations: 500
+            plot_rounded_abundances: TRUE
+
+    #---------------------------------------------------------------------------
+
 repetitions:
     generators:
         - key: cur_run_idx
