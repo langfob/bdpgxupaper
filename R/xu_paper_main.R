@@ -118,7 +118,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
     } else if (gen_6_basic_variants)
     {
-    bdpg::gen_4_basic_variants (parameters, integerize)
+    bdpg::gen_6_basic_variants (parameters, integerize)
 
 #----------------------------------------
 
