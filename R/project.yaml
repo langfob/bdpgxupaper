@@ -9,25 +9,39 @@ base_params:
 
     full_output_dir_with_slash: $$output_path$$
 
+        #---------------------------------
+        #  Run identification parameters
+        #---------------------------------
+
     runset_name:   $$runset$$
     runset_abbrev: "Test_gen_6"
     run_id:        $$run_id$$
 
-    #--------------------
+        #----------------------------------------
+        #  Problem variants selector parameters
+        #----------------------------------------
+
+    gen_6_basic_variants: TRUE
+
+        #--------------------------
+        #  Error model parameters
+        #--------------------------
 
     use_unif_rand_err_amt: TRUE
     err_amt_lower_bound: 0
     err_amt_upper_bound: 0.10
 
-    gen_6_basic_variants: TRUE
-
-    #--------------------
+        #-------------------------------
+        #  Reserve selector parameters
+        #-------------------------------
 
     do_simple_richness_forward: TRUE
 
-    #--------------------
+        #-----------------------------
+        #  Network metric parameters
+        #-----------------------------
 
-    compute_network_metrics: FALSE    #  if FALSE, overrides all other network flags below
+    compute_network_metrics: FALSE    #  FALSE overrides all other network flags below
 
     compute_network_metrics_base_COR: TRUE
     compute_network_metrics_base_APP: TRUE
@@ -37,37 +51,30 @@ base_params:
     use_igraph_metrics:    TRUE
 
     use_bipartite_metrics: TRUE
-#    bipartite_metrics_to_use:     "ALLBUTDD"
-    bipartite_metrics_to_use:     "all_except_slow_indices"
-#    bipartite_metrics_to_use:     "quick_test"
+    bipartite_metrics_to_use: "all_except_slow_indices"    #  "quick_test"    #  "ALLBUTDD"
 
-    #---------------------------------------------------------------------------
+        #---------------------------------
+        #  Xu problem control parameters
+        #---------------------------------
 
-scenarios:
+    n__num_groups: 5
+    alpha__: 0.8
+    p__prop_of_links_between_groups: 0.5
+    r__density: 0.5
 
-    - name: easy
-      parameters:
-            n__num_groups: 5
-            alpha__: 0.8
-            p__prop_of_links_between_groups: 0.5
-            r__density: 0.5
+        #-------------------------------
+        #  Problem wrapping parameters
+        #-------------------------------
 
-    #--------------------
-
-                #  Parameters for building a multi-problem by wrapping a lognormal
-                #  distribution around a base Xu problem.
-
-#CRUFT REMOVAL#            gen_multi_bdproblem: TRUE
-            wrap_lognormal_dist_around_Xu: TRUE
-            allow_imperfect_wrap: TRUE    #  new variable - BTL - 2017 12 13
-            desired_Xu_spp_frac_of_all_spp: 0.5
-            solution_frac_of_landscape: 0.3
-            desired_max_abundance_frac: 0.7
-            dep_set_PUs_eligible: FALSE
-            add_one_to_lognormal_abundances: FALSE
-#CRUFT REMOVAL#    #            seed_value_for_search: 11    #  no longer set this way - BTL - 2017 12 13
-            max_search_iterations: 500
-            plot_rounded_abundances: TRUE
+    wrap_lognormal_dist_around_Xu: TRUE
+    allow_imperfect_wrap: TRUE
+    desired_Xu_spp_frac_of_all_spp: 0.5
+    solution_frac_of_landscape: 0.3
+    desired_max_abundance_frac: 0.7
+    dep_set_PUs_eligible: FALSE
+    add_one_to_lognormal_abundances: FALSE
+    max_search_iterations: 500
+    plot_rounded_abundances: TRUE
 
     #---------------------------------------------------------------------------
 
