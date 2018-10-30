@@ -15,7 +15,9 @@ base_params:
 
     #--------------------
 
-    gen_basic_variants_err_amt: 0.01    #0.10
+    use_unif_rand_err_amt: TRUE
+    err_amt_lower_bound: 0
+    err_amt_upper_bound: 0.10
 
     gen_6_basic_variants: TRUE
 
@@ -35,7 +37,7 @@ base_params:
     use_igraph_metrics:    TRUE
 
     use_bipartite_metrics: TRUE
-    #bipartite_metrics_to_use:     "ALLBUTDD"
+#    bipartite_metrics_to_use:     "ALLBUTDD"
     bipartite_metrics_to_use:     "all_except_slow_indices"
 #    bipartite_metrics_to_use:     "quick_test"
 
