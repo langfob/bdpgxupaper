@@ -57,6 +57,9 @@ base_params:
         #  Xu problem control parameters
         #---------------------------------
 
+    max_allowed_num_spp: 700  #2000
+    num_prob_size_retries_allowed: 3
+
     n__num_groups: 80
     alpha__: 1.5
     p__prop_of_links_between_groups: 1
