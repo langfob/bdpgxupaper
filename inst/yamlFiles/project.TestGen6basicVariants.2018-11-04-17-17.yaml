@@ -39,16 +39,17 @@ base_params:
             #  If you don't want the newlines (i.e., you want one long string),
             #  then use a ">" in place of the "|".
     runset_description: |
-        Nectar test example with 3 runs of 20 variants of a single HARD
-        Xu problem and ALL reserve selectors including gurobi (with NO time limit)
-        and network metrics, plus setting random seed at creation of all new
-        major objects.  Error amount is 0.10.
+        Nectar test example with 1 run of 6 variants of a random Xu problem,
+        random amount of error, no network metrics, no gurobi but all other
+        reserve selectors.
 
-    yaml_file_stored_as: "project.TestGen6basicVariants.2018-11-03-14-25.yaml"
+    yaml_file_stored_as: "project.TestGen6basicVariants.2018-11-04-17-17.yaml"
 
     #---------------------------------------------------------------------------
 
-    set_rand_seed_at_creation_of_all_new_major_objects: TRUE    #FALSE
+    set_rand_seed_at_creation_of_all_new_major_objects: FALSE
+#    bdpg_run_init_rand_seed: ???
+
     integerize_string: "round"
     duplicate_links_allowed: FALSE    #TRUE
 
@@ -84,7 +85,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: TRUE
+    run_marxan: FALSE
 
         #  marxan control parameters
         #
@@ -113,17 +114,17 @@ base_params:
     #---------------------------------------------------------------------------
 
     do_simple_richness_forward: TRUE
-    do_simple_richness_backward: TRUE
+    do_simple_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
 
-    do_unprotected_richness_forward: TRUE
-    do_unprotected_richness_backward: TRUE
+    do_unprotected_richness_forward: FALSE
+    do_unprotected_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
 
-    do_zonation_like_forward: TRUE
-    do_zonation_like_backward: TRUE
+    do_zonation_like_forward: FALSE
+    do_zonation_like_backward: FALSE
 
     #---------------------------------------------------------------------------
 
@@ -150,7 +151,7 @@ base_params:
         #---------------------------------
 
     max_allowed_num_spp: 700  #2000
-    num_prob_size_retries_allowed: 3
+    num_prob_size_retries_allowed: 20
 
 ##                n__num_groups: 80
 ##                alpha__: 1.5
