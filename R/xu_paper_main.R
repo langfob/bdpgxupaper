@@ -86,6 +86,8 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
 #-------------------------------------------------------------------------------
 
+    starting_dir = parameters$fullOutputDir_NO_slash
+
     gen_4_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_4_basic_variants)
 
@@ -106,19 +108,20 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     if (gen_20_basic_variants)
     {
     bdpg::gen_20_basic_variants_including_cost_error (parameters,
+                                                      starting_dir,
                                                       integerize)
 
 #----------------------------------------
 
     } else if (gen_4_basic_variants)
     {
-    bdpg::gen_4_basic_variants (parameters, integerize)
+    bdpg::gen_4_basic_variants (parameters, starting_dir, integerize)
 
 #----------------------------------------
 
     } else if (gen_6_basic_variants)
     {
-    bdpg::gen_6_basic_variants (parameters, integerize)
+    bdpg::gen_6_basic_variants (parameters, starting_dir, integerize)
 
 #----------------------------------------
 
@@ -135,7 +138,7 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 
     } else if (single_action_using_tzar_reps)
     {
-    bdpg::single_action_using_tzar_reps (parameters, integerize)
+    bdpg::single_action_using_tzar_reps (parameters, starting_dir, integerize)
 
 #----------------------------------------
 
