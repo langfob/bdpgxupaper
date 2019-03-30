@@ -54,7 +54,8 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
 #2018 06 12 temporarily turning this off to try to get something
 #           working on nectar that is crashing because of a warning
 #           becoming an error.  See daily log for details of the warning.
-#options (warn=2)
+#2018 12 26 Turning it back on, at least for ensemble testing
+    options (warn=2)
 
         #  Sometimes, for debugging, bdpg needs to know if we're
         #  emulating tzar, so record the value as a global option.

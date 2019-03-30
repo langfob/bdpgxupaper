@@ -48,7 +48,7 @@ base_params:
     #---------------------------------------------------------------------------
 
     set_rand_seed_at_creation_of_all_new_major_objects: FALSE
-#    bdpg_run_init_rand_seed: 1228514194
+    bdpg_run_init_rand_seed: 12345
 
     integerize_string: "round"
     duplicate_links_allowed: FALSE    #TRUE
@@ -74,6 +74,12 @@ base_params:
 
     #---------------------------------------------------------------------------
 
+    do_ensemble: TRUE    #TRUE
+
+    num_probs_in_ensemble: 3
+
+    #---------------------------------------------------------------------------
+
     do_gurobi: FALSE    #TRUE
 
     use_given_time_as_limit: FALSE    #TRUE
@@ -85,7 +91,7 @@ base_params:
 
     #---------------------------------------------------------------------------
 
-    run_marxan: FALSE
+    run_marxan: TRUE
 
         #  marxan control parameters
         #
@@ -106,14 +112,19 @@ base_params:
     marxan_puvspr_file_name: "puvspr.dat"
     marxan_runmode: 1
     marxan_heurtype: -1
-    marxan_num_reps: 100
+
+        #  TEMPORARY 2018 12 16 - TO SPEED UP EARLY TESTING OF CONTROL LOGIC
+        #                         RATHER THAN ACTUAL RESULTS
+#    marxan_num_reps: 100
+    marxan_num_reps: 2
+
     marxan_num_iterations: "1000000"
 #    marxan_num_iterations: "10000"
     marxan_spf_rule: "POWER_OF_10"
 
     #---------------------------------------------------------------------------
 
-    do_simple_richness_forward: TRUE
+    do_simple_richness_forward: FALSE
     do_simple_richness_backward: FALSE
 
     #---------------------------------------------------------------------------
@@ -158,21 +169,35 @@ base_params:
 ##                p__prop_of_links_between_groups: 1
 ##                r__density: 5
 
-    use_unif_rand_alpha__: TRUE
-    alpha___lower_bound: 0.2    #0
-    alpha___upper_bound: 0.7    #0.6    #1    #1.5
+#  Xu easy parameters
+    n__num_groups: 5
+    alpha__: 0.8
+    p__prop_of_links_between_groups: 0.5
+    r__density: 0.5
 
-    use_unif_rand_n__num_groups: TRUE
-    n__num_groups_lower_bound: 10    #8    #2
-    n__num_groups_upper_bound: 40    #15    #70
 
-    use_unif_rand_r__density: TRUE
-    r__density_lower_bound: 0.8    #0.01
-    r__density_upper_bound: 3.0   #1.6    #3.0
+#  Parameters from Gen 6 variants tests
+#  Commenting out for the moment and replacing with Xu easy parameters
+#  while I start testing the ensemble code.
+#2018 12 23#        use_unif_rand_alpha__: TRUE
+#2018 12 23#    alpha___lower_bound: 0.2    #0
+#2018 12 23##2018 12 15#    alpha___upper_bound: 0.7    #0.6    #1    #1.5
+#2018 12 23#    alpha___upper_bound: 0.4    #0.6    #1    #1.5
 
-    use_unif_rand_p__prop_of_links_between_groups: TRUE
-    p__prop_of_links_between_groups_lower_bound: 0.14    #0.01
-    p__prop_of_links_between_groups_upper_bound: 0.36    #0.99
+#2018 12 23#    use_unif_rand_n__num_groups: TRUE
+#2018 12 23#    n__num_groups_lower_bound: 10    #8    #2
+#2018 12 23##2018 12 15#    n__num_groups_upper_bound: 40    #15    #70
+#2018 12 23#    n__num_groups_upper_bound: 11    #15    #70
+
+#2018 12 23#    use_unif_rand_r__density: TRUE
+#2018 12 23#    r__density_lower_bound: 0.8    #0.01
+#2018 12 23##2018 12 15#    r__density_upper_bound: 3.0   #1.6    #3.0
+#2018 12 23#    r__density_upper_bound: 1.6    #3.0   #1.6    #3.0
+
+#2018 12 23#    use_unif_rand_p__prop_of_links_between_groups: TRUE
+#2018 12 23#    p__prop_of_links_between_groups_lower_bound: 0.14    #0.01
+#2018 12 23##2018 12 15#    p__prop_of_links_between_groups_upper_bound: 0.36    #0.99
+#2018 12 23#    p__prop_of_links_between_groups_upper_bound: 0.20    #0.36    #0.99
 
         #-------------------------------
         #  Problem wrapping parameters
@@ -180,7 +205,9 @@ base_params:
 
     wrap_lognormal_dist_around_Xu: TRUE
     allow_imperfect_wrap: TRUE
-    desired_Xu_spp_frac_of_all_spp: 0.25    #0.5
+#2018 12 23#    desired_Xu_spp_frac_of_all_spp: 0.25    #0.5
+    desired_Xu_spp_frac_of_all_spp: 0.5
+
     solution_frac_of_landscape: 0.15    #0.3
     desired_max_abundance_frac: 0.7
     dep_set_PUs_eligible: FALSE
