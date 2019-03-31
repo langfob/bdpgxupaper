@@ -1,6 +1,6 @@
 Package: bdpgxupaper
 Title: Package for experiments for Xu biodiversity problem generation paper
-Version: 0.0.0.9000
+Version: 0.0.0.9011
 Authors@R: 'Bill Langford <bill.langford@rmit.edu.au> [aut, cre]'
 Description: This package bundles together the code for running experiments 
     demonstrating the Xu biodiversity problem generator.
@@ -17,6 +17,6 @@ Suggests:
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 URL: https://github.com/langfob/bdpgxupaper
 BugReports: https://github.com/langfob/bdpgxupaper/issues
