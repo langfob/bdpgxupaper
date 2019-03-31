@@ -92,6 +92,9 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     gen_6_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_6_basic_variants)
 
+    gen_11_variants =
+        bdpg::value_or_FALSE_if_null (parameters$gen_11_variants)
+
     gen_20_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_20_basic_variants)
 
@@ -113,6 +116,13 @@ xu_paper_main = function (parameters, emulating_tzar=FALSE)
     } else if (gen_4_basic_variants)
     {
     bdpg::gen_4_basic_variants (parameters, integerize)
+
+#----------------------------------------
+
+    } else if (gen_11_variants)
+    {
+
+    bdpg::gen_11_variants_mixing_FP_FN_and_cost_error (parameters, integerize)
 
 #----------------------------------------
 
