@@ -5,7 +5,7 @@
         #  These might go away in the future if River adds emulation
         #  directly inside of tzar with a "dry run" command.
 
-emulating_tzar:                         TRUE
+emulating_tzar:                         FALSE
 
 echo_console_to_temp_file:              TRUE
 console_out_file_name_with_path:        "./console_sink_output.tzar_em.txt"
