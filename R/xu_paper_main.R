@@ -99,8 +99,6 @@ cat ("\n>>>>> gen_4_simple_random_variants = '", gen_4_simple_random_variants, "
 
     gen_11_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_11_variants)
-cat ("\n>>>>> parameters$gen_11_variants = '", parameters$gen_11_variants, "'")
-cat ("\n>>>>> gen_11_variants = '", gen_11_variants, "'\n")
 
     gen_20_basic_variants =
         bdpg::value_or_FALSE_if_null (parameters$gen_20_basic_variants)
